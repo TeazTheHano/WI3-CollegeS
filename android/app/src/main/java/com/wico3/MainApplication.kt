@@ -1,4 +1,4 @@
-package com.wico3
+package com.WICO3
 
 import android.app.Application
 import com.facebook.react.PackageList

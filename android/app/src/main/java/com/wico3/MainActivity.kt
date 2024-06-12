@@ -1,4 +1,4 @@
-package com.wico3
+package com.WICO3
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
