@@ -11,10 +11,10 @@ import Svg, { SvgXml } from 'react-native-svg';
 
 // SVG import
 import { searchIcon, leftArrow, shareIcon, rightArrow, backArrow, } from "./svgXml";
-import colorStyle, { Gradient1, Gradient2, componentStyle } from "./componentStyleSheet";
+import colorStyle, { Gradient1, componentStyle } from "./componentStyleSheet";
 
 // font import 
-import { Nunito14Reg, Nunito16Bold, Nunito18Bold, Signika20Bold } from "./Class";
+import { Nunito14Reg, Nunito16Bold, Nunito18Bold, Roboto20Med, Signika20Bold } from "./Class";
 import { clearExerciseAllData } from "../data/storageFunc";
 
 // ____________________END OF IMPORT_______________________
@@ -28,7 +28,7 @@ export const marginBottomForScrollView = (time?: number) => {
     )
 }
 
-export const statusBarTransparency = (lightContent: boolean = true) => {
+export const statusBarTransparency = (lightContent: boolean = true, margin: boolean = false) => {
     let statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 0
     return (
         <View>
@@ -36,7 +36,7 @@ export const statusBarTransparency = (lightContent: boolean = true) => {
                 backgroundColor='rgba(0,0,0,0)'
                 translucent={true}
             />
-            <View style={{ width: vw(100), height: statusBarHeight }}></View>
+            {margin ? <View style={{ width: vw(100), height: statusBarHeight }}></View> : null}
         </View>
     )
 }
@@ -63,34 +63,6 @@ export const onShare = async () => {
     }
 };
 
-
-export const HomeNameBar = (userName: string, editable?: boolean) => {
-    let date = new Date();
-    const navigation = useNavigation()
-
-    function showInfoBtn() {
-        navigation.navigate('User')
-    }
-
-    return (
-        <View style={[styles.flexRowBetweenCenter, styles.gap3vw, styles.padding3vw, styles.w90, styles.alignSelfCenter, styles.borderRadius100, styles.marginBottom4vw, styles.shadowW0H1Black, { backgroundColor: 'rgba(239, 239, 239, 0.2)' }]}>
-            <View style={[styles.w10vw, styles.h10vw, styles.borderRadius100, styles.overflowHidden, { backgroundColor: colorStyle.main1 }]}>
-                {/* img here */}
-            </View>
-            <View style={[styles.flexCol, styles.gap1vw, styles.flex1]}>
-                <Nunito16Bold style={[{ color: colorStyle.main3 }]}>Hello, {userName}</Nunito16Bold>
-                <Nunito14Reg style={[{ color: colorStyle.main3 }]}>{date.toDateString()}</Nunito14Reg>
-            </View>
-            {!editable ? <TouchableOpacity style={[componentStyle.outerGlowL1T1White, { borderRadius: vw(5.5) }]}
-                onPress={() => { showInfoBtn() }}>
-                <Gradient2 style={[{ padding: vw(1.5), borderRadius: vw(5.5) }]}>
-                    <SvgXml xml={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 7.00999V7M20 13V9.5M6.5 21.0001H17.5C18.8807 21.0001 20 19.8808 20 18.5001C20 14.4194 14 14.5001 12 14.5001C10 14.5001 4 14.4194 4 18.5001C4 19.8808 5.11929 21.0001 6.5 21.0001ZM16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#FBFBFB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} width={vw(6)} height={vw(6)} />
-                </Gradient2>
-            </TouchableOpacity> : <></>}
-        </View>
-    )
-}
-
 export const NavNavigation = (title: string) => {
     const navigation = useNavigation()
 
@@ -104,7 +76,7 @@ export const NavNavigation = (title: string) => {
     )
 }
 
-export const UlList = (data: string | Array<string | string[]>, FontClass1st: ComponentType<any>, FontClass2nd: ComponentType<any> = FontClass1st, bullet1st: string = '1', bullet2nd: string = '-', textIndent2nd: any = 0) => {
+export const ListGen = (data: string | Array<string | string[]>, FontClass1st: ComponentType<any>, FontClass2nd: ComponentType<any> = FontClass1st, bullet1st: string = '1', bullet2nd: string = '-', textIndent2nd: any = 0) => {
     function bulletMark(bullet: string, index: number) {
         let i = index == 0 ? 0 : index % 2 == 0 ? index / 2 : index
         if (bullet === 'a') {
