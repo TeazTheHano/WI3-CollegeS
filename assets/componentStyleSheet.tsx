@@ -3,11 +3,11 @@ import { vw, vh, vmax, vmin } from './stylesheet';
 import { Component, ReactNode } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-const colorStyle = StyleSheet.create<any>({
+const clrStyle = StyleSheet.create<any>({
     white: '#FCFCFC',
-    gray1: '#CCCED5',
-    gray2: '#808797',
-    gray3: '#4C4C4C',
+    grey1: '#CCCED5',
+    grey2: '#808797',
+    grey3: '#4C4C4C',
     black: '#272727',
     main1: '#2490DA',
     main2: '#BAE1FC',
@@ -21,7 +21,7 @@ const colorStyle = StyleSheet.create<any>({
     fillBlur: 'rgba(135,135,135,0.3)',
 });
 
-export default colorStyle;
+export default clrStyle;
 
 export const componentStyle = StyleSheet.create<any>({
     outerGlowL1T1White: {

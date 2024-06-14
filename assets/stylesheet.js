@@ -1122,6 +1122,46 @@ const styles = StyleSheet.create({
         fontSize: vw(7),
     },
 
+    textUnderline: {
+        textDecorationLine: 'underline',
+    },
+
+    textLineThrough: {
+        textDecorationLine: 'line-through',
+    },
+
+    textNoUnderline: {
+        textDecorationLine: 'none',
+    },
+
+    textLineSolid: {
+        textDecorationStyle: 'solid',
+    },
+
+    textLineDotted: {
+        textDecorationStyle: 'dotted',
+    },
+
+    textLineDashed: {
+        textDecorationStyle: 'dashed',
+    },
+
+    textAlignVerticalTop: {
+        textAlignVertical: 'top',
+    },
+
+    textAlignVerticalCenter: {
+        textAlignVertical: 'center',
+    },
+
+    textAlignVerticalBottom: {
+        textAlignVertical: 'bottom',
+    },
+
+    textAlignVerticalAuto: {
+        textAlignVertical: 'auto', 
+    },
+
     lineHeight20: {
         lineHeight: vw(5),
     },
@@ -1230,19 +1270,22 @@ const styles = StyleSheet.create({
         shadowColor: 'black',
         shadowOffset: { width: vw(0), height: vw(1) },
         shadowOpacity: 0.25,
-        elevation: vw(2),
+        shadowRadius: vw(1),
+        elevation: vw(1),
     },
 
     shadowW0H05Black: {
         shadowColor: 'black',
         shadowOffset: { width: vw(0), height: vw(0.5) },
         shadowOpacity: 0.125,
+        shadowRadius: vw(0.5),
         elevation: vw(1),
     },
 
     shadowW0H1Color: {
         shadowOffset: { width: vw(0), height: vw(1) },
         shadowOpacity: 0.25,
+        shadowRadius: vw(1),
         elevation: vw(2),
     },
 

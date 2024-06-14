@@ -1,11 +1,12 @@
-import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import styles, { vw } from '../assets/stylesheet'
 import { LowBtn } from '../assets/Class'
 import { statusBarTransparency } from '../assets/component'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Onboard() {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={[styles.flex1]}>
             {statusBarTransparency(false)}
@@ -13,7 +14,7 @@ export default function Onboard() {
                 <Image source={require('../assets/photos/onboard.png')} style={[styles.w80vw, styles.h50vh, { resizeMode: 'contain' }] as ImageStyle} />
             </View>
             <LowBtn title='Get Started'
-                onPress={() => { }}
+                onPress={() => { navigation.navigate('DataCollect') }}
                 CustomStyle={[styles.marginBottom4vw]}
             />
         </SafeAreaView>

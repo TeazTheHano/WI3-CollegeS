@@ -11,7 +11,7 @@ import Svg, { SvgXml } from 'react-native-svg';
 
 // SVG import
 import { searchIcon, leftArrow, shareIcon, rightArrow, backArrow, } from "./svgXml";
-import colorStyle, { Gradient1, componentStyle } from "./componentStyleSheet";
+import clrStyle, { Gradient1, componentStyle } from "./componentStyleSheet";
 
 // font import 
 import { Nunito14Reg, Nunito16Bold, Nunito18Bold, Roboto20Med, Signika20Bold } from "./Class";
@@ -71,7 +71,7 @@ export const NavNavigation = (title: string) => {
             <TouchableOpacity onPress={() => { navigation.goBack() }}>
                 {backArrow(vw(6), vw(6))}
             </TouchableOpacity>
-            <Signika20Bold style={{ color: colorStyle.white }}>{title}</Signika20Bold>
+            <Signika20Bold style={{ color: clrStyle.white }}>{title}</Signika20Bold>
         </View>
     )
 }
@@ -144,14 +144,14 @@ export const ListGen = (data: string | Array<string | string[]>, FontClass1st: C
         <View>
             {typeof data == 'string' ?
 
-                <FontClass1st style={{ color: colorStyle.white }}>{data}</FontClass1st>
+                <FontClass1st style={{ color: clrStyle.white }}>{data}</FontClass1st>
 
                 : data.map((item, index) => {
                     if (typeof item === 'string') {
                         return (
                             <View key={index} style={[styles.flexRow, styles.w100]}>
-                                <FontClass1st style={{ color: colorStyle.white }}>{bulletMark(bullet1st, index)} </FontClass1st>
-                                <FontClass1st style={{ color: colorStyle.white }}>{item}</FontClass1st>
+                                <FontClass1st style={{ color: clrStyle.white }}>{bulletMark(bullet1st, index)} </FontClass1st>
+                                <FontClass1st style={{ color: clrStyle.white }}>{item}</FontClass1st>
                             </View>
                         )
                     } else if (Array.isArray(item)) {
@@ -160,8 +160,8 @@ export const ListGen = (data: string | Array<string | string[]>, FontClass1st: C
                                 {item.map((subItem, subIndex) => {
                                     return (
                                         <View key={subIndex} style={[styles.flexRow]}>
-                                            <FontClass2nd style={{ color: colorStyle.white }}>{bulletMark(bullet2nd, subIndex)} </FontClass2nd>
-                                            <FontClass2nd style={{ color: colorStyle.white }}>{subItem}</FontClass2nd>
+                                            <FontClass2nd style={{ color: clrStyle.white }}>{bulletMark(bullet2nd, subIndex)} </FontClass2nd>
+                                            <FontClass2nd style={{ color: clrStyle.white }}>{subItem}</FontClass2nd>
                                         </View>
                                     )
                                 })}
@@ -172,3 +172,4 @@ export const ListGen = (data: string | Array<string | string[]>, FontClass1st: C
         </View>
     )
 }
+
