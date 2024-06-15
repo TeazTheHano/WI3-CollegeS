@@ -9,13 +9,13 @@ export default function Onboard() {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={[styles.flex1]}>
-            {statusBarTransparency(false)}
+            {statusBarTransparency(false, true)}
             <View style={[styles.flex1, styles.w100vw, styles.flexColCenter]}>
                 <Image source={require('../assets/photos/onboard.png')} style={[styles.w80vw, styles.h50vh, { resizeMode: 'contain' }] as ImageStyle} />
             </View>
             <LowBtn title='Get Started'
                 onPress={() => { navigation.navigate('DataCollect') }}
-                CustomStyle={[styles.marginBottom4vw]}
+                CustomStyle={[styles.marginBottom8vw]}
             />
         </SafeAreaView>
     )

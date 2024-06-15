@@ -1094,6 +1094,14 @@ const styles = StyleSheet.create({
         textAlign: 'justify',
     },
 
+    textUpperCase: {
+        textTransform: 'uppercase',
+    },
+
+    textLowerCase: {
+        textTransform: 'lowercase',
+    },
+
     fontSize1vw: {
         fontSize: vw(1),
     },

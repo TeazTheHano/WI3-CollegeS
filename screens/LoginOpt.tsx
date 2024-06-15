@@ -13,7 +13,7 @@ export default function LoginOpt() {
 
     return (
         <SafeAreaView style={[styles.flex1, { backgroundColor: clrStyle.white }]}>
-            {statusBarTransparency(false)}
+            {statusBarTransparency(false, true)}
             <View style={[styles.flex1, styles.w100vw, styles.flexColEndCenter, styles.gap1vw]}>
                 <Image source={require('../assets/photos/onboard.png')} style={[styles.w80vw, styles.h40vh, { resizeMode: 'contain' }] as ImageStyle} />
                 <LowBtn title='Sign In'

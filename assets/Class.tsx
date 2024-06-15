@@ -1,8 +1,8 @@
-// system import
 import React, { Component, ComponentType, useState } from 'react';
+// system import
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Text, ScrollView, useColorScheme, TouchableOpacity, ImageBackground, Image, Animated, TextInput, } from 'react-native';
+import { View, Text, ScrollView, useColorScheme, TouchableOpacity, ImageBackground, Image, Animated, TextInput, Easing, } from 'react-native';
 
 // style import
 import styles from './stylesheet';
@@ -403,16 +403,29 @@ export class LowBtn extends Component<{
 
 export class BoardingInput extends Component<{
     title: string,
+    supFncTitle?: string,
+    supFnc?: () => void,
+    subTitle?: string,
     placeholder?: string,
     value: string | number,
     isNumber?: boolean,
     onChgText: (value: string | number) => void,
-    secureTextEntry?: boolean,
-    CustomStyle?: any,
+    CustomStyleClass?: any,
+    CustomStyleText?: any,
+    CustomStyleInput?: any,
+    required?: boolean,
+    contentType?: string
 }> {
+    state = {
+        secure: false, // Initial state
+        cType: 'none'
+    };
+
     render() {
-        const { title, placeholder, value, onChgText, secureTextEntry, CustomStyle } = this.props;
+        const { title, placeholder, value, onChgText, CustomStyleClass, CustomStyleInput, CustomStyleText, contentType, subTitle, supFnc, supFncTitle } = this.props;
         const isNumber = this.props.isNumber ? this.props.isNumber : false;
+        const { secure, cType } = this.state;
+
         function changFnc(value: string | number) {
             if (isNumber) {
                 onChgText(parseInt(value as string));
@@ -420,17 +433,55 @@ export class BoardingInput extends Component<{
                 onChgText(value);
             }
         }
+
+        switch (contentType) {
+            case 'password':
+                this.state.cType = 'password';
+                this.state.secure = true;
+                break;
+            case 'emailAddress':
+                this.state.cType = 'emailAddress';
+                this.state.secure = false;
+                break;
+            case 'username':
+                this.state.cType = 'username';
+                this.state.secure = false;
+                break;
+            default:
+                this.state.cType = 'none';
+                this.state.secure = false;
+                break;
+        }
+
         return (
-            <View style={[styles.flexColCenter, styles.gap4vw,]}>
-                <Nunito24Bold style={[{ color: clrStyle.main5 }]}>{title}</Nunito24Bold>
+            <View style={[styles.flexColCenter, styles.gap4vw, styles.positionRelative, CustomStyleClass]}>
+                {title ?
+                    <Nunito24Bold style={[{ color: clrStyle.main5 }, CustomStyleText]}>{title}</Nunito24Bold>
+                    : null}
                 <TextInput
                     placeholder={placeholder ? placeholder : 'Type here'}
                     value={value ? value.toString() : ''}
                     onChangeText={changFnc}
                     placeholderTextColor={clrStyle.grey2}
-                    secureTextEntry={secureTextEntry}
+                    secureTextEntry={secure}
                     keyboardType={isNumber ? 'numeric' : 'default'}
-                    style={[styles.w100, styles.border1, styles.textCenter, { borderColor: value ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: value ? 'Nunito-Bold' : 'Nunito-Regular', fontSize: vw(4.5), borderRadius: vw(2), color: value ? clrStyle.main5 : clrStyle.grey2 }]} />
+                    textContentType={cType}
+                    style={[styles.w100, styles.border1, styles.textCenter, { borderColor: value ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: value ? 'Nunito-Bold' : 'Nunito-Regular', fontSize: vw(4.5), borderRadius: vw(2), color: value ? clrStyle.main5 : clrStyle.grey2 }, CustomStyleInput]} />
+                {cType === 'password' ?
+                    <TouchableOpacity
+                        onPress={() => { this.setState({ secure: !secure }) }}
+                        style={[styles.padding2vw, styles.positionAbsolute, { bottom: -vw(12) }]}>
+                        <Nunito14Reg style={{ color: clrStyle.grey3 }}>{secure ? 'Show password' : 'Hide password'}</Nunito14Reg>
+                    </TouchableOpacity>
+                    : null}
+                    <Nunito16Reg>{secure? 'true' : 'f' }</Nunito16Reg>
+                {subTitle ?
+                    <View style={[styles.flexRowCenter]}>
+                        <Nunito16Reg style={[{ color: clrStyle.grey2 }]}>{subTitle}</Nunito16Reg>
+                        <TouchableOpacity onPress={supFnc}><Nunito16Reg style={[styles.textUnderline, { color: clrStyle.grey3 }]}>{supFncTitle}</Nunito16Reg></TouchableOpacity>
+                    </View>
+                    : null
+                }
             </View>
         );
     }
@@ -464,8 +515,9 @@ export class ProcessBarSelfMade extends Component<{
         function extendAnimate() {
             Animated.timing(animation, {
                 toValue: process,
-                duration: 500,
+                duration: 1000,
                 useNativeDriver: false,
+                easing: Easing.inOut(Easing.ease),
             }).start()
         }
         extendAnimate()
@@ -495,7 +547,7 @@ export class BoardingNavigation extends Component<{
                     onPress={() => { fnc(false) }}>
                     <View style={[styles.borderRadius100, styles.wfit, { padding: vw(2.5), backgroundColor: currentStep > 0 ? clrStyle.main6 : clrStyle.grey1 }]}>
                         {showGoBack ?
-                            <Nunito18Bold style={{ color: clrStyle.grey3 }}>{leftTitle}</Nunito18Bold>
+                            <Nunito16Reg style={[styles.textUpperCase, styles.paddingH2vw, { color: clrStyle.grey3 }]}>{leftTitle}</Nunito16Reg>
                             :
                             sharpLeftArrow(vw(6), vw(6), currentStep > 0 ? clrStyle.main5 : clrStyle.grey2)}
                     </View>
@@ -506,7 +558,7 @@ export class BoardingNavigation extends Component<{
                         {currentStep < dataLength - 1 ?
                             sharpRightArrow(vw(6), vw(6), currentStep < dataLength - 1 ? clrStyle.main5 : clrStyle.grey2)
                             :
-                            <Nunito18Bold style={{ color: clrStyle.white }}>{rightTitle}</Nunito18Bold>
+                            <Nunito16Bold style={[styles.textUpperCase, styles.paddingH2vw, { color: clrStyle.white }]}>{rightTitle}</Nunito16Bold>
                         }
                     </View>
                 </TouchableOpacity>

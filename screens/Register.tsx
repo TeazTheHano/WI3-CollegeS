@@ -52,6 +52,7 @@ export default function Register() {
                         title='Your Name'
                         value={accountName}
                         onChgText={setAccountName as React.Dispatch<React.SetStateAction<string | number>>}
+                        contentType='username'
                     />)
                 break;
             case 1:
@@ -60,6 +61,7 @@ export default function Register() {
                         title='Email'
                         value={email}
                         onChgText={setEmail as React.Dispatch<React.SetStateAction<string | number>>}
+                        contentType='emailAddress'
                     />)
                 break;
             case 2:
@@ -68,6 +70,7 @@ export default function Register() {
                         title='Password'
                         value={password}
                         onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
+                        contentType='password'
                     />)
                 break;
             case 3:
@@ -76,6 +79,7 @@ export default function Register() {
                         title='Confirm Password'
                         value={confirmPassword}
                         onChgText={setConfirmPassword as React.Dispatch<React.SetStateAction<string | number>>}
+                        contentType='username'
                     />)
                 break;
         }
@@ -83,7 +87,7 @@ export default function Register() {
 
     return (
         <SafeAreaView style={[styles.flex1]}>
-            {statusBarTransparency(false)}
+            {statusBarTransparency(false, true)}
             <View style={[styles.flexCol, styles.flex1, styles.justifyContentSpaceBetween, styles.paddingH5vw]}>
                 <Nunito24Reg style={[styles.w60vw, { color: clrStyle.main5 }]}>Sign you up</Nunito24Reg>
 

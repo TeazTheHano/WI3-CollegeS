@@ -46,6 +46,7 @@ export default function Login() {
                     <BoardingInput
                         title='Email'
                         value={email}
+                        contentType='emailAddress'
                         onChgText={setEmail as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
@@ -54,6 +55,7 @@ export default function Login() {
                     <BoardingInput
                         title='Password'
                         value={password}
+                        contentType='password'
                         onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
@@ -62,7 +64,7 @@ export default function Login() {
 
     return (
         <SafeAreaView style={[styles.flex1]}>
-            {statusBarTransparency(false)}
+            {statusBarTransparency(false, true)}
             <View style={[styles.flexCol, styles.flex1, styles.justifyContentSpaceBetween, styles.paddingH5vw]}>
                 <Nunito24Reg style={[styles.w60vw, { color: clrStyle.main5 }]}>Let's sign you in</Nunito24Reg>
 

@@ -1,8 +1,8 @@
 
-import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Linking } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import styles, { vw } from '../assets/stylesheet'
-import { BoardingInput, BoardingNavigation, LowBtn, Nunito18Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
+import { BoardingInput, BoardingNavigation, LowBtn, Nunito14Reg, Nunito18Bold, Nunito20Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
 import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
@@ -12,13 +12,14 @@ export default function DataCollect() {
     const navigation = useNavigation();
 
     const [currentStep, setCurrentStep] = React.useState(0)
-    const [accountName, setAccountName] = React.useState<string>('')
-    const [email, setEmail] = React.useState<string>('')
-    const [password, setPassword] = React.useState<string>('')
-    const [confirmPassword, setConfirmPassword] = React.useState<string>('')
     const [showGoBack, setShowGoBack] = React.useState(false)
+    const [age, setAge] = React.useState<number>(0)
+    const [persona, setPersona] = React.useState<string>('')
+    const [interest, setInterest] = React.useState<string[]>([])
+    const [favorite, setFavorite] = React.useState<string[]>([])
+    const [goal, setGoal] = React.useState<string>('')
 
-    const list = [accountName, email, password, confirmPassword]
+    const list = [age, persona, interest, favorite, goal]
 
     function currentStepAdjust(act: boolean) {
         if (act && currentStep < list.length - 1) {
@@ -46,41 +47,61 @@ export default function DataCollect() {
             case 0:
                 return (
                     <BoardingInput
-                        title='Your Name'
-                        value={accountName}
-                        onChgText={setAccountName as React.Dispatch<React.SetStateAction<string | number>>}
+                        title='Your age'
+                        value={age}
+                        onChgText={setAge as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
             case 1:
                 return (
                     <BoardingInput
-                        title='Email'
-                        value={email}
-                        onChgText={setEmail as React.Dispatch<React.SetStateAction<string | number>>}
+                        title='Your personality'
+                        subTitle={`Don't know yet ? `}
+                        supFncTitle='Test here'
+                        supFnc={() => {
+                            // TODO: Link to personality test
+                            Linking.openURL('https://www.google.com').catch(err => console.error('An error occurred', err))
+                        }}
+                        value={persona}
+                        onChgText={setPersona as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
             case 2:
                 return (
-                    <BoardingInput
-                        title='Password'
-                        value={password}
-                        onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
-                    />)
+                    <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
+                        <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
+                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                    </View>
+                )
                 break;
             case 3:
                 return (
-                    <BoardingInput
-                        title='Confirm Password'
-                        value={confirmPassword}
-                        onChgText={setConfirmPassword as React.Dispatch<React.SetStateAction<string | number>>}
-                    />)
+                    <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
+                        <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
+                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                    </View>
+                )
+                break;
+            case 4:
+                return (
+                    <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
+                        <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
+                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                        <BoardingInput
+                            CustomStyleClass={[styles.margin2vw]}
+                            title=''
+                            value={goal}
+                            onChgText={setGoal as React.Dispatch<React.SetStateAction<string | number>>}
+                        />
+                    </View>
+                )
                 break;
         }
     }
 
     return (
         <SafeAreaView style={[styles.flex1]}>
-            {statusBarTransparency(false)}
+            {statusBarTransparency(false, true)}
             <View style={[styles.flexCol, styles.flex1, styles.justifyContentSpaceBetween, styles.paddingH5vw]}>
                 <Nunito24Reg style={[styles.w60vw, { color: clrStyle.main5 }]}>Before jumping in, let's know each orther</Nunito24Reg>
 
