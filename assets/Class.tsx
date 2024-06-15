@@ -415,16 +415,13 @@ export class BoardingInput extends Component<{
     CustomStyleInput?: any,
     required?: boolean,
     contentType?: string
+    hideContent?: boolean,
+    hideContentFnc?: (value: boolean) => void,
 }> {
-    state = {
-        secure: false, // Initial state
-        cType: 'none'
-    };
 
     render() {
-        const { title, placeholder, value, onChgText, CustomStyleClass, CustomStyleInput, CustomStyleText, contentType, subTitle, supFnc, supFncTitle } = this.props;
+        const { title, placeholder, value, onChgText, CustomStyleClass, CustomStyleInput, CustomStyleText, contentType, subTitle, supFnc, supFncTitle, hideContent, hideContentFnc } = this.props;
         const isNumber = this.props.isNumber ? this.props.isNumber : false;
-        const { secure, cType } = this.state;
 
         function changFnc(value: string | number) {
             if (isNumber) {
@@ -432,25 +429,6 @@ export class BoardingInput extends Component<{
             } else {
                 onChgText(value);
             }
-        }
-
-        switch (contentType) {
-            case 'password':
-                this.state.cType = 'password';
-                this.state.secure = true;
-                break;
-            case 'emailAddress':
-                this.state.cType = 'emailAddress';
-                this.state.secure = false;
-                break;
-            case 'username':
-                this.state.cType = 'username';
-                this.state.secure = false;
-                break;
-            default:
-                this.state.cType = 'none';
-                this.state.secure = false;
-                break;
         }
 
         return (
@@ -463,18 +441,17 @@ export class BoardingInput extends Component<{
                     value={value ? value.toString() : ''}
                     onChangeText={changFnc}
                     placeholderTextColor={clrStyle.grey2}
-                    secureTextEntry={secure}
+                    secureTextEntry={hideContent}
                     keyboardType={isNumber ? 'numeric' : 'default'}
-                    textContentType={cType}
+                    textContentType={contentType}
                     style={[styles.w100, styles.border1, styles.textCenter, { borderColor: value ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: value ? 'Nunito-Bold' : 'Nunito-Regular', fontSize: vw(4.5), borderRadius: vw(2), color: value ? clrStyle.main5 : clrStyle.grey2 }, CustomStyleInput]} />
-                {cType === 'password' ?
+                {hideContentFnc ?
                     <TouchableOpacity
-                        onPress={() => { this.setState({ secure: !secure }) }}
+                        onPress={() => { hideContentFnc && hideContentFnc(!hideContent) }}
                         style={[styles.padding2vw, styles.positionAbsolute, { bottom: -vw(12) }]}>
-                        <Nunito14Reg style={{ color: clrStyle.grey3 }}>{secure ? 'Show password' : 'Hide password'}</Nunito14Reg>
+                        <Nunito14Reg style={{ color: clrStyle.grey3 }}>{hideContent ? `Show ${contentType}` : `Hide ${contentType}`}</Nunito14Reg>
                     </TouchableOpacity>
                     : null}
-                    <Nunito16Reg>{secure? 'true' : 'f' }</Nunito16Reg>
                 {subTitle ?
                     <View style={[styles.flexRowCenter]}>
                         <Nunito16Reg style={[{ color: clrStyle.grey2 }]}>{subTitle}</Nunito16Reg>

@@ -18,6 +18,9 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = React.useState<string>('')
     const [showGoBack, setShowGoBack] = React.useState(false)
 
+    // tf this state is for the hidden password
+    const [hidePassword, setHidePassword] = React.useState(true)
+
     const list = [accountName, email, password, confirmPassword]
 
     function currentStepAdjust(act: boolean) {
@@ -71,6 +74,8 @@ export default function Register() {
                         value={password}
                         onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
                         contentType='password'
+                        hideContent={hidePassword}
+                        hideContentFnc={setHidePassword as React.Dispatch<React.SetStateAction<boolean>>}
                     />)
                 break;
             case 3:
@@ -79,7 +84,9 @@ export default function Register() {
                         title='Confirm Password'
                         value={confirmPassword}
                         onChgText={setConfirmPassword as React.Dispatch<React.SetStateAction<string | number>>}
-                        contentType='username'
+                        contentType='password'
+                        hideContent={hidePassword}
+                        hideContentFnc={setHidePassword as React.Dispatch<React.SetStateAction<boolean>>}
                     />)
                 break;
         }

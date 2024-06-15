@@ -16,6 +16,9 @@ export default function Login() {
     const [password, setPassword] = React.useState<string>('')
     const [showGoBack, setShowGoBack] = React.useState(false)
 
+    // tf this state is for the hidden password
+    const [hidePassword, setHidePassword] = React.useState(true)
+
     const list = [email, password,]
 
     function currentStepAdjust(act: boolean) {
@@ -57,6 +60,8 @@ export default function Login() {
                         value={password}
                         contentType='password'
                         onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
+                        hideContent={hidePassword}
+                        hideContentFnc={setHidePassword as React.Dispatch<React.SetStateAction<boolean>>}
                     />)
                 break;
         }
