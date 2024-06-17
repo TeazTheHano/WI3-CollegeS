@@ -222,6 +222,18 @@ export class Nunito24Bold extends Component<{ children: React.ReactNode, style?:
     }
 }
 
+export class Nunito14ExBold extends Component<{ children: React.ReactNode, style?: any }> {
+    render() {
+        const { children, style } = this.props;
+
+        return (
+            <Text style={[{ fontFamily: 'Nunito-ExtraBold', fontSize: vw(3.5) }, style]}>
+                {children}
+            </Text>
+        );
+    }
+}
+
 export class Signika20Bold extends Component<{ children: React.ReactNode, style?: any }> {
     render() {
         const { children, style } = this.props;
@@ -539,6 +551,44 @@ export class BoardingNavigation extends Component<{
                         }
                     </View>
                 </TouchableOpacity>
+            </View>
+        )
+    }
+}
+
+export class BoardingPicking extends Component<{
+    data: string[],
+    selected: string[],
+    setSelected: (value: string[]) => void,
+    maxLength?: number | undefined,
+}> {
+    render() {
+        const { data, selected, setSelected, maxLength } = this.props;
+        const length = maxLength ? maxLength : data.length;
+        return (
+            <View style={[styles.flexRowStartCenter, styles.flexWrap, styles.gap4vw]}>
+                {data.map((item, index) => {
+                    return (
+                        <TouchableOpacity
+                            key={index}
+                            onPress={() => {
+                                if (selected.includes(item)) {
+                                    setSelected(selected.filter((value) => value !== item))
+                                } else {
+                                    if (selected.length < length!) {
+                                        setSelected([...selected, item])
+                                    }
+                                }
+                            }}
+                            style={[styles.wfit, styles.paddingV2vw, styles.paddingH4vw, styles.border1, { borderColor: selected.includes(item) ? clrStyle.main5 : clrStyle.grey2, borderRadius: vw(2), }]}>
+                            {selected.includes(item) ?
+                                <Nunito14ExBold style={[{ color: clrStyle.main5 }]}>{item}</Nunito14ExBold>
+                                :
+                                <Nunito14Reg style={[{ color: clrStyle.grey3 }]}>{item}</Nunito14Reg>
+                            }
+                        </TouchableOpacity>
+                    )
+                })}
             </View>
         )
     }

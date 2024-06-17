@@ -6,10 +6,6 @@ export const vmin = number => Math.min(Dimensions.get('window').width * (number 
 export const vmax = number => Math.max(Dimensions.get('window').width * (number / 100), Dimensions.get('window').height * (number / 100));
 
 const styles = StyleSheet.create({
-    boxsizingBorderBox: {
-        boxSizing: 'border-box',
-    },
-
     wfit: {
         alignSelf: 'flex-start'
     },

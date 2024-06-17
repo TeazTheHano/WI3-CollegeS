@@ -1,21 +1,25 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
 
-export default function data() {
-    let x = {};
-    interface userInfo {
-        name: string;
-        age: number;
-        loginMethod: string;
-        email?: string;
-        password?: string;
-        dataCollect: boolean;
-        data: {
-            persona: string;
-            interest: string[];
-            favorite: string[];
-            goal?: string;
-        }
+export interface UserInfo {
+    userID: string;
+    synced?: boolean;
+    name?: string;
+    age?: number;
+    loginMethod: string;
+    email?: string;
+    password?: string;
+    dataCollect?: boolean;
+    data?: {
+        persona: string;
+        interest: string[];
+        favorite: string[];
+        goal?: string;
     }
-    return { x }
+}
+
+export default function defaultData() {
+    let ListFavSubject: string[] = ['Math', 'Physics', 'Language', 'Biology', 'Geography', 'Literature', 'Music', 'History', 'Chemistry'];
+    let listIntersts: string[] = ['Singing', 'Movie', 'Hangout', 'Cooking', 'Board game', 'Video game', 'Sports', 'Reading', 'Writing']
+    return { ListFavSubject, listIntersts, }
 }

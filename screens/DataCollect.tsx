@@ -2,11 +2,13 @@
 import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Linking } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import styles, { vw } from '../assets/stylesheet'
-import { BoardingInput, BoardingNavigation, LowBtn, Nunito14Reg, Nunito18Bold, Nunito20Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
+import { BoardingInput, BoardingNavigation, BoardingPicking, LowBtn, Nunito14Reg, Nunito18Bold, Nunito20Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
 import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import { shareIcon, sharpLeftArrow, sharpRightArrow } from '../assets/svgXml'
+import data from '../data/data'
+import { saveUserInfo } from '../data/storageFunc'
 
 export default function DataCollect() {
     const navigation = useNavigation();
@@ -28,9 +30,8 @@ export default function DataCollect() {
         } else if (!act && currentStep > 0) {
             setCurrentStep(currentStep - 1);
         } else if (act && currentStep === list.length - 1) {
-            // TODO: firebase auth
-            // TODO: after auth, navigate to Onboard
-            // TODO: check if have other data to collect
+           
+
             navigation.navigate('Home');
         } else if (!act && currentStep === 0) {
             setShowGoBack(true);
@@ -41,6 +42,14 @@ export default function DataCollect() {
     }
 
     // TODO: firebase auth
+
+
+    // list of interest and favorite subject
+    const interestList = data().listIntersts;
+    const favoriteList = data().ListFavSubject;
+    useEffect(() => {
+        console.log(interest);
+    }, [interest])
 
     function inputBox() {
         switch (currentStep) {
@@ -71,6 +80,12 @@ export default function DataCollect() {
                     <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
                         <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
                         <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                        <BoardingPicking
+                            data={interestList}
+                            selected={interest}
+                            maxLength={3}
+                            setSelected={setInterest as React.Dispatch<React.SetStateAction<string[]>>}
+                        />
                     </View>
                 )
                 break;
@@ -78,7 +93,13 @@ export default function DataCollect() {
                 return (
                     <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
                         <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
-                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Favorite subject <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                        <BoardingPicking
+                            data={favoriteList}
+                            selected={favorite}
+                            maxLength={3}
+                            setSelected={setFavorite as React.Dispatch<React.SetStateAction<string[]>>}
+                        />
                     </View>
                 )
                 break;
@@ -86,7 +107,7 @@ export default function DataCollect() {
                 return (
                     <View style={[styles.flexCol, styles.gap4vw, styles.justifyContentCenter, styles.alignContentStart]}>
                         <Nunito24Bold style={[{ color: clrStyle.main5 }]}>Tell us about</Nunito24Bold>
-                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Interest <Nunito14Reg style={{ color: clrStyle.grey2 }}>/up to three option</Nunito14Reg></Nunito20Bold>
+                        <Nunito20Bold style={[{ color: clrStyle.grey3 }]}>Your GOAL <Nunito14Reg style={{ color: clrStyle.grey2 }}>/optional</Nunito14Reg></Nunito20Bold>
                         <BoardingInput
                             CustomStyleClass={[styles.margin2vw]}
                             title=''

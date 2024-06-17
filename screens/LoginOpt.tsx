@@ -1,14 +1,28 @@
 import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, Platform } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles, { vw } from '../assets/stylesheet'
 import { Helvetica19Bold, LowBtn, Nunito16Reg, Nunito18Reg, Nunito20Bold, Roboto20Med, SFproDisplay20Med } from '../assets/Class'
 import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { appleLogo, fbLogo, googleLogo } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
+import storage, { getUserInfo } from '../data/storageFunc'
 
 export default function LoginOpt() {
     const navigation = useNavigation();
+
+    useEffect(() => {
+        getUserInfo().then((res) => {
+            if (res?.synced && res?.dataCollect) {
+                console.log(res.userID);
+                navigation.navigate('Home');
+            } else if (res?.synced && !res?.dataCollect) {
+                console.log(res.userID); 
+                navigation.navigate('DataCollect');
+            }
+        })
+    }, [])
+
     // TODO: Login Functionality
 
     return (
@@ -17,7 +31,7 @@ export default function LoginOpt() {
             <View style={[styles.flex1, styles.w100vw, styles.flexColEndCenter, styles.gap1vw]}>
                 <Image source={require('../assets/photos/onboard.png')} style={[styles.w80vw, styles.h40vh, { resizeMode: 'contain' }] as ImageStyle} />
                 <LowBtn title='Sign In'
-                    onPress={() => { navigation.navigate('Login')}}
+                    onPress={() => { navigation.navigate('Login') }}
                     CustomStyle={[styles.marginBottom4vw]}
                     FontElement={Nunito20Bold}
                 />
@@ -34,7 +48,7 @@ export default function LoginOpt() {
                     </View>
                 </View>
                 <LowBtn title='Continue with Google'
-                    onPress={() => { 
+                    onPress={() => {
                         // TODO: Google Sign In
                     }}
                     fontColor='rgba(0, 0, 0, 0.54)'
@@ -46,7 +60,7 @@ export default function LoginOpt() {
                 {
                     Platform.OS === 'ios' ?
                         <LowBtn title='Continue with Apple'
-                            onPress={() => { 
+                            onPress={() => {
                                 // TODO: Apple Sign In
                             }}
                             bgColor='#000000'
@@ -57,7 +71,7 @@ export default function LoginOpt() {
                         <LowBtn title='Continue with Facebook'
                             onPress={() => {
                                 // TODO: Facebook Sign In
-                             }}
+                            }}
                             bgColor='rgba(24, 119, 242, 1)'
                             FontElement={Helvetica19Bold}
                             CustomStyle={[styles.marginBottom8vw]}

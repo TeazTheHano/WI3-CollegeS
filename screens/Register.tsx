@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Alert, ActivityIndicator } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import styles, { vw } from '../assets/stylesheet'
 import { BoardingInput, BoardingNavigation, LowBtn, Nunito18Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
@@ -7,6 +7,7 @@ import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import { shareIcon, sharpLeftArrow, sharpRightArrow } from '../assets/svgXml'
+import { saveUserInfo } from '../data/storageFunc'
 
 export default function Register() {
     const navigation = useNavigation();
@@ -17,6 +18,8 @@ export default function Register() {
     const [password, setPassword] = React.useState<string>('')
     const [confirmPassword, setConfirmPassword] = React.useState<string>('')
     const [showGoBack, setShowGoBack] = React.useState(false)
+
+    const [saveStatus, setSaveStatus] = React.useState<0 | 1 | 2 | 3>(0)
 
     // tf this state is for the hidden password
     const [hidePassword, setHidePassword] = React.useState(true)
@@ -34,9 +37,39 @@ export default function Register() {
                 Alert.alert('Password and Confirm Password must be the same');
                 return;
             }
-            // TODO: firebase auth
-            // TODO: after auth, navigate to Onboard
-            navigation.navigate('Onboard');
+
+            saveUserInfo({
+                userID: `${accountName}+${email}`,
+                synced: false,
+                name: accountName,
+                age: 0,
+                loginMethod: 'email',
+                email: email,
+                password: password,
+                dataCollect: false,
+            }).then((res) => {
+                setSaveStatus(res ? 2 : 1);
+                if (res) {
+                    // TODO: firebase auth
+                    // TODO: after auth, navigate to Onboard
+                    // TODO: set status = 3 if firebase success
+                    // TODO: save userInfo sync status
+                    saveUserInfo({
+                        userID: `${accountName}-${email}`,
+                        synced: true,
+                        name: accountName,
+                        age: 0,
+                        loginMethod: 'email',
+                        email: email,
+                        password: password,
+                        dataCollect: false,
+                    }).then((res) => {
+                        setSaveStatus(res ? 3 : 2);
+                    })
+                    navigation.navigate('Onboard');
+                }
+            })
+
         } else if (!act && currentStep === 0) {
             setShowGoBack(true);
             if (!act && showGoBack) {
@@ -44,6 +77,13 @@ export default function Register() {
             }
         }
     }
+
+    useEffect(() => {
+        console.log(saveStatus);
+        if (saveStatus == 3) {
+            // navigation.navigate('Onboard');
+        }
+    }, [saveStatus])
 
     // TODO: firebase auth
 
@@ -99,7 +139,7 @@ export default function Register() {
                 <Nunito24Reg style={[styles.w60vw, { color: clrStyle.main5 }]}>Sign you up</Nunito24Reg>
 
                 {/* input box */}
-                {inputBox()}
+                {saveStatus == 2 ? <ActivityIndicator /> : inputBox()}
 
                 <View style={[styles.flexCol, styles.gap2vw]}>
                     <ProcessBarSelfMade
