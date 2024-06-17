@@ -10,7 +10,7 @@ import storage, { getUserInfo } from '../data/storageFunc'
 
 export default function LoginOpt() {
     const navigation = useNavigation();
-
+// hhhhhh
     useEffect(() => {
         getUserInfo().then((res) => {
             if (res?.synced && res?.dataCollect) {
