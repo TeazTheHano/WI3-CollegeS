@@ -6,7 +6,7 @@ export interface UserInfo {
     synced?: boolean;
     name?: string;
     age?: number;
-    loginMethod: string;
+    loginMethod?: string;
     email?: string;
     password?: string;
     dataCollect?: boolean;

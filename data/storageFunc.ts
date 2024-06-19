@@ -42,7 +42,6 @@ export async function saveUserInfo(
     await storage.save({
       key: 'userInfo',
       data: data,
-      id: data.userID,
     });
     return true;
   } catch (error) {

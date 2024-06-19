@@ -10,14 +10,12 @@ import storage, { getUserInfo } from '../data/storageFunc'
 
 export default function LoginOpt() {
     const navigation = useNavigation();
-// hhhhhh
     useEffect(() => {
         getUserInfo().then((res) => {
+            console.log(res);
             if (res?.synced && res?.dataCollect) {
-                console.log(res.userID);
                 navigation.navigate('Home');
             } else if (res?.synced && !res?.dataCollect) {
-                console.log(res.userID); 
                 navigation.navigate('DataCollect');
             }
         })

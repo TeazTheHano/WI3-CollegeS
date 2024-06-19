@@ -7,8 +7,8 @@ import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import { shareIcon, sharpLeftArrow, sharpRightArrow } from '../assets/svgXml'
-import data from '../data/data'
-import { saveUserInfo } from '../data/storageFunc'
+import data, { UserInfo } from '../data/data'
+import storage, { getUserInfo, saveUserInfo } from '../data/storageFunc'
 
 export default function DataCollect() {
     const navigation = useNavigation();
@@ -21,7 +21,15 @@ export default function DataCollect() {
     const [favorite, setFavorite] = React.useState<string[]>([])
     const [goal, setGoal] = React.useState<string>('')
 
+    const [userInfo, setUserInfo] = React.useState<UserInfo | undefined>(undefined)
+
     const list = [age, persona, interest, favorite, goal]
+
+    useEffect(() => {
+        getUserInfo().then((res) => {
+            setUserInfo(res);
+        })
+    }, [currentStep])
 
     function currentStepAdjust(act: boolean) {
         if (act && currentStep < list.length - 1) {
@@ -30,9 +38,35 @@ export default function DataCollect() {
         } else if (!act && currentStep > 0) {
             setCurrentStep(currentStep - 1);
         } else if (act && currentStep === list.length - 1) {
-           
+            if (userInfo?.userID) {
+                saveUserInfo({
+                    userID: userInfo.userID,
+                    synced: userInfo.synced,
+                    name: userInfo.name,
+                    age: age,
+                    loginMethod: userInfo.loginMethod,
+                    email: userInfo.email,
+                    password: userInfo.password,
+                    dataCollect: true,
+                    data: {
+                        persona: persona,
+                        interest: interest,
+                        favorite: favorite,
+                        goal: goal
+                    }
+                }).then((res) => {
+                    if (res) {
+                        console.log('Data saved');
+                        getUserInfo().then((res) => {
+                            console.log(res);
+                        })
+                        navigation.navigate('Home');
 
-            navigation.navigate('Home');
+                    }
+                })
+            }
+            // TODO: firebase save
+
         } else if (!act && currentStep === 0) {
             setShowGoBack(true);
             if (!act && showGoBack) {
@@ -40,9 +74,6 @@ export default function DataCollect() {
             }
         }
     }
-
-    // TODO: firebase auth
-
 
     // list of interest and favorite subject
     const interestList = data().listIntersts;
