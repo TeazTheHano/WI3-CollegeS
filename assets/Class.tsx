@@ -1,8 +1,8 @@
-import React, { Component, ComponentType, useState } from 'react';
+import React, { Children, Component, ComponentType, useState } from 'react';
 // system import
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { View, Text, ScrollView, useColorScheme, TouchableOpacity, ImageBackground, Image, Animated, TextInput, Easing, } from 'react-native';
+import { View, Text, ScrollView, useColorScheme, TouchableOpacity, ImageBackground, Image, Animated, TextInput, Easing, SafeAreaView, StatusBar, FlatList, } from 'react-native';
 
 // style import
 import styles from './stylesheet';
@@ -16,6 +16,96 @@ import { searchIcon, sharpLeftArrow, sharpRightArrow } from './svgXml';
 import clrStyle from './componentStyleSheet';
 
 // ____________________END OF IMPORT_______________________
+
+// UNIVESAL CLASS SECTION
+
+
+/**
+ * Component that renders a view with a colored status bar.
+ *
+ * @component
+ * @example
+ * // Usage:
+ * <SaveViewWithColorStatusBar
+ *   StatusBarColor="#FF0000"
+ *   StatusBarLightContent={true}
+ *   SameColorBottom={true}
+ *   StatusBarMargin={true}
+ *   bgColor="#FFFFFF"
+ *   StatusBarTranslucent={false}
+ * >
+ *   // Content goes here
+ * </SaveViewWithColorStatusBar>
+ *
+ * @param {React.ReactNode} children - The content to be rendered inside the component.
+ * @param {string} StatusBarColor - The color of the status bar.
+ * @param {boolean} StatusBarLightContent - Determines if the status bar content should be light or dark.
+ * @param {boolean} SameColorBottom - Determines if the bottom of the view should have the same color as the status bar.
+ * @param {boolean} StatusBarMargin - Determines if a margin should be added to the top of the view to accommodate the status bar.
+ * @param {string} bgColor - The background color of the view.
+ * @param {boolean} StatusBarTranslucent - Determines if the status bar should be translucent.
+ *
+ * @returns {React.ReactNode} The rendered component.
+ */
+export class SaveViewWithColorStatusBar extends Component<{ children?: React.ReactNode, StatusBarColor?: string, StatusBarLightContent?: boolean, SameColorBottom?: boolean, StatusBarMargin?: boolean, bgColor?: string, StatusBarTranslucent?: boolean }> {
+    render() {
+        const { children, bgColor, SameColorBottom, StatusBarColor, StatusBarLightContent, StatusBarMargin, StatusBarTranslucent } = this.props;
+        let statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight : 0
+        return (
+            <SafeAreaView style={[styles.flex1, { backgroundColor: SameColorBottom ? StatusBarColor : 'transparent' }]}>
+                {StatusBarColor ? <View style={[styles.w100vw, styles.h50vh, styles.positionAbsolute, { backgroundColor: StatusBarColor }]} /> : null}
+                <View>
+                    <StatusBar barStyle={StatusBarLightContent ? 'light-content' : 'dark-content'}
+                        backgroundColor={StatusBarColor ? StatusBarColor : 'rgba(0,0,0,0)'}
+                        translucent={StatusBarTranslucent ? true : false}
+                    />
+                    {StatusBarMargin ? <View style={{ width: vw(100), height: statusBarHeight }}></View> : null}
+                </View>
+                <View style={[styles.flex1, { backgroundColor: bgColor ? bgColor : 'rgb(242,242,242)' }]}>
+                    {children}
+                </View>
+            </SafeAreaView>
+        )
+    }
+}
+
+export class BannerSliderWithCenter extends Component<{
+    data: any[],
+    renderBanner: ({ item, index }: { item: any, index: number }) => React.ReactNode,
+    currentIndex: number,
+    setCurrentIndex: (value: number) => void,
+    itemWidth?: number,
+    snapToCenter?: boolean,
+    customStyle?: any,
+    customContainerStyle?: any,
+}> {
+    render() {
+        const { data, renderBanner, currentIndex, setCurrentIndex, itemWidth, snapToCenter, customStyle, customContainerStyle } = this.props;
+        const width = itemWidth ?? 1;
+        return (
+            <FlatList
+                data={data}
+                renderItem={renderBanner}
+                snapToInterval={width}
+                snapToAlignment={snapToCenter ? 'center' : 'start'}
+                // time to snap to the center
+                decelerationRate='fast'
+                keyExtractor={(item, index) => index.toString()}
+                horizontal={true}
+                // pagingEnabled={false}
+                showsHorizontalScrollIndicator={false}
+                onScroll={(event) => {
+                    setCurrentIndex(Math.round(event.nativeEvent.contentOffset.x / width))
+                }}
+
+                contentContainerStyle={customContainerStyle}
+                style={customStyle}
+            />
+        )
+    }
+}
+
+// END OF UNIVERSAL CLASS SECTION
 
 // FONT SECTION
 export class Nunito12Med extends Component<{ children: React.ReactNode, style?: any }> {
@@ -590,6 +680,43 @@ export class BoardingPicking extends Component<{
                     )
                 })}
             </View>
+        )
+    }
+}
+
+export class TopNav extends Component<{
+    children?: React.ReactNode,
+    title: string,
+    returnPreScreen?: boolean,
+    returnPreScreenFnc?: () => void,
+    rightIcon?: any,
+    rightFnc?: () => void,
+}> {
+    render() {
+        const { children, title, returnPreScreen, returnPreScreenFnc, rightIcon, rightFnc } = this.props;
+        return (
+            <View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, { backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6) }]}>
+                <View style={[styles.paddingV2vw, styles.w100, styles.flexRowBetweenCenter]}>
+                    {returnPreScreen ?
+                        <TouchableOpacity
+                            style={[styles.padding2vw]}
+                            onPress={returnPreScreenFnc}>
+                            {sharpLeftArrow(vw(6), vw(6), 'white')}
+                        </TouchableOpacity>
+                        : <View style={[{ width: vw(10), height: vw(10), }]} />
+                    }
+                    <Nunito20Bold style={[styles.textCenter, styles.alignSelfCenter, { color: 'white' }]}>{title}</Nunito20Bold>
+                    {rightIcon ?
+                        <TouchableOpacity
+                            style={[styles.padding2vw]}
+                            onPress={rightFnc}>
+                            {rightIcon}
+                        </TouchableOpacity>
+                        : <View style={[{ width: vw(10), height: vw(10), }]} />
+                    }
+                </View>
+                {children}
+            </View >
         )
     }
 }

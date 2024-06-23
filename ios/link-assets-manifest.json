@@ -2,6 +2,10 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Helvetica.ttc",
+      "sha1": "72674ba8e77aa1e013f75a0b2241069fba539ba3"
+    },
+    {
       "path": "assets/fonts/Nunito-Black.ttf",
       "sha1": "01abc1142e597b9a7748eb2d14ff823d65a54f01"
     },

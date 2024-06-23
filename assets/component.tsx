@@ -10,12 +10,11 @@ import { vw, vh, vmax, vmin } from './stylesheet';
 import Svg, { SvgXml } from 'react-native-svg';
 
 // SVG import
-import { searchIcon, leftArrow, shareIcon, rightArrow, backArrow, } from "./svgXml";
+import { searchIcon, shareIcon, } from "./svgXml";
 import clrStyle, { Gradient1, componentStyle } from "./componentStyleSheet";
 
 // font import 
 import { Nunito14Reg, Nunito16Bold, Nunito18Bold, Roboto20Med, Signika20Bold } from "./Class";
-import { clearExerciseAllData } from "../data/storageFunc";
 
 // ____________________END OF IMPORT_______________________
 
@@ -62,19 +61,6 @@ export const onShare = async () => {
         Alert.alert(error.message);
     }
 };
-
-export const NavNavigation = (title: string) => {
-    const navigation = useNavigation()
-
-    return (
-        <View style={[styles.flexRowStartCenter, styles.gap2vw, styles.padding3vw, styles.w90, styles.alignSelfCenter, styles.borderRadius100, styles.marginBottom4vw, styles.shadowW0H1Black, { backgroundColor: 'rgba(239, 239, 239, 0.2)' }]}>
-            <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                {backArrow(vw(6), vw(6))}
-            </TouchableOpacity>
-            <Signika20Bold style={{ color: clrStyle.white }}>{title}</Signika20Bold>
-        </View>
-    )
-}
 
 export const ListGen = (data: string | Array<string | string[]>, FontClass1st: ComponentType<any>, FontClass2nd: ComponentType<any> = FontClass1st, bullet1st: string = '1', bullet2nd: string = '-', textIndent2nd: any = 0) => {
     function bulletMark(bullet: string, index: number) {
