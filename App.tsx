@@ -9,6 +9,9 @@ import Register from './screens/Register'
 import Onboard from './screens/Onboard'
 import DataCollect from './screens/DataCollect'
 import Home from './screens/Home'
+import User from './screens/User'
+import Compare from './screens/Compare'
+import Setting from './screens/Setting'
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -21,6 +24,9 @@ export default function App() {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="DataCollect" component={DataCollect} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="User" component={User} />
+        <Stack.Screen name="Compare" component={Compare} />
+        <Stack.Screen name="Setting" component={Setting} />
       </Stack.Navigator>
     </NavigationContainer>
   )

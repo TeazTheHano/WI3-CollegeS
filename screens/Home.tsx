@@ -1,12 +1,19 @@
-import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView, ImageBackground } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserInfo } from '../data/storageFunc'
-import { BannerSliderWithCenter, Nunito12Bold, Nunito14Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
+import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle, { componentStyle } from '../assets/componentStyleSheet'
 import styles, { vh, vw } from '../assets/stylesheet'
-import { searchIcon } from '../assets/svgXml'
+import { curveRightArrow, searchIcon } from '../assets/svgXml'
+import defaultData from '../data/data'
+import LinearGradient from 'react-native-linear-gradient'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Home() {
+  const navigation = useNavigation();
+
+  const { bannerList, suitableForYou } = defaultData();
+
   const [userInfo, setUserInfo] = useState<any>(null)
   const [currentBanner, setCurrentBanner] = useState<number>(0)
 
@@ -16,24 +23,7 @@ export default function Home() {
     })
   }, [userInfo])
 
-  // Banner Section
-  const itemWidth = vw(60);
-  const itemHeight = vh(18);
-  const itemMargin = vw(20);
-
-  interface Banner {
-    id: number,
-    img: any,
-    title: string,
-    naviTo: string
-  }
-  const bannerList: Banner[] = [
-    { id: 1, img: require('../assets/photos/homeBanner1.png'), title: 'Shitttt1111 asdkjhfaskdjhf askfjhasdkjfh  kjashdfkjasf aksdjfh askj askj', naviTo: '' },
-    { id: 2, img: require('../assets/photos/homeBanner2.png'), title: 'Shitttt2222', naviTo: '' },
-    { id: 3, img: require('../assets/photos/homeBanner3.png'), title: 'Shitttt3333', naviTo: '' },
-    { id: 4, img: require('../assets/photos/homeBanner4.png'), title: 'Shitttt4444', naviTo: '' },
-  ]
-
+  // Animation generator
   function renderAnimation(itemIndex: number, currentIndex: number) {
     const animation = new Animated.Value(0); // Initialize animation value
     const scaleAnimation = animation.interpolate({
@@ -68,7 +58,13 @@ export default function Home() {
 
     return { scaleAnimation, scaleSliderDotAnimation, bgSliderDotAnimation };
   }
+  // End of Animation generator
 
+  // Banner Section
+  const itemWidth = vw(60);
+  const itemHeight = vh(18);
+  const itemMargin = vw(20);
+  // Render item fomat for the banner
   const renderBanner = ({ item, index }: { item: any, index: number }) => {
     const { scaleAnimation } = renderAnimation(index, currentBanner); // Pass the required arguments to the renderAnimation function
     return (
@@ -85,11 +81,34 @@ export default function Home() {
       </Animated.View>
     );
   };
+  // End of Banner Section
+
+  // Suitable for you Section
+  // Render item format for suitable for you
+  const renderSuitableForYou = ({ item, index }: { item: any, index: number }) => {
+    return (
+      <View style={[styles.borderRadius10, styles.overflowHidden, styles.shadowW0H1Black, { width: vw(53), height: vw(58), backgroundColor: 'white', marginLeft: index == 0 ? vw(4) : 0, marginRight: index == suitableForYou.length - 1 ? vw(4) : 0 }]}>
+        <ImageBackground source={item.img} style={[styles.flex1]}>
+          <LinearGradient colors={['rgba(255,255,255,0.0)', 'rgba(255,255,255,1)']} start={{ x: 0, y: 0.9 }} end={{ x: 0, y: 1 }} style={[styles.flex1, styles.justifyContentEnd, styles.padding2vw]} />
+        </ImageBackground>
+        <View style={[styles.bgcolorWhite, styles.padding3vw, styles.flexCol, styles.gap1vw]}>
+          <Nunito16Bold lineNumber={1}>{item.title}</Nunito16Bold>
+          <View style={[styles.flexRow, styles.gap1vw]}>
+            <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(1.5), backgroundColor: clrStyle.main2 }]}><Nunito12Bold style={{ color: clrStyle.main1 }}>Score {item.minScore}+</Nunito12Bold></View>
+            <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(1.5), backgroundColor: clrStyle.main8 }]}><Nunito12Bold style={{ color: clrStyle.main7 }}>{item.majorNum} Majors</Nunito12Bold></View>
+          </View>
+          <Nunito16Bold lineNumber={1} style={[{ color: clrStyle.main3 }]}>{item.unitFee}{item.minFee}~{item.maxFee}<Nunito14Reg style={{ color: clrStyle.grey2 }}>/{item.yearOrSemForFee}</Nunito14Reg></Nunito16Bold>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <SaveViewWithColorStatusBar
       StatusBarColor={clrStyle.main5}
       StatusBarLightContent={true}
+      bgColor={clrStyle.white}
+
     >
       {/* HomeNameBar */}
       <TopNav
@@ -108,8 +127,8 @@ export default function Home() {
         </View>
       </TopNav>
 
-      {/* banner */}
       <ScrollView style={[styles.flex1]}>
+        {/* banner */}
         <BannerSliderWithCenter
           data={bannerList}
           renderBanner={renderBanner}
@@ -118,19 +137,43 @@ export default function Home() {
           itemWidth={itemWidth}
           customStyle={[styles.marginTop8vw, { height: itemHeight * 1.25 }]}
         />
-        <View style={[styles.w80vw, styles.borderRadius10, styles.alignSelfCenter, { paddingVertical: vw(2.5), paddingHorizontal: vw(5), backgroundColor: clrStyle.main5, transform: [{ translateY: -vw(2) }] }]}>
+        <View style={[styles.w80vw, styles.borderRadius10, styles.alignSelfCenter, styles.shadowW0H05Black, { paddingVertical: vw(2.5), paddingHorizontal: vw(5), backgroundColor: clrStyle.main5, transform: [{ translateY: -vw(2) }] }]}>
           <Nunito14Bold lineNumber={2} style={[styles.flex1, { color: clrStyle.white }]}>{bannerList[currentBanner].title}</Nunito14Bold>
         </View>
-        <View style={[styles.flexRowCenter, styles.gap2vw]}>
+        <View style={[styles.flexRowCenter, styles.gap2vw,]}>
           {bannerList.map((item, index) => {
             const { scaleSliderDotAnimation, bgSliderDotAnimation } = renderAnimation(index, currentBanner);
             return (
-              <Animated.View key={index} style={[styles.marginTop2vw, styles.borderRadius100, { width: scaleSliderDotAnimation, height: vw(1.5), backgroundColor: bgSliderDotAnimation }]} />
+              <Animated.View key={index} style={[styles.borderRadius100, { width: scaleSliderDotAnimation, height: vw(1.5), backgroundColor: bgSliderDotAnimation }]} />
             )
           })}
         </View>
-      </ScrollView>
+        {/* end of banner */}
 
+        {/* suitable for you */}
+        <View style={[styles.marginTop6vw]}>
+          <View style={[styles.flexRowBetweenCenter, styles.paddingH4vw, styles.marginBottom6vw]}>
+            <Nunito16Bold>Suitable for you</Nunito16Bold>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('see all');
+                // TODO: do something
+              }}>
+              {curveRightArrow(vw(6), vw(6))}
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={suitableForYou}
+            horizontal
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={renderSuitableForYou}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={[styles.gap4vw, styles.paddingBottom2vw]}
+          />
+        </View>
+
+      </ScrollView>
+      <BottomBar navFnc={() => navigation} currentScreen='Home' bgColor={clrStyle.white} shadow={true} />
     </SaveViewWithColorStatusBar >
   )
 }
