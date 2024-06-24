@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
+import { bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon } from '../assets/svgXml';
 
 export interface UserInfo {
     userID: string;
@@ -37,6 +38,12 @@ export interface SuitableForYou {
     capacity: number,
     // those above just for the home card, add more below
 }
+export interface BestOfSubject {
+    icon?: any,
+    description: string,
+    title: string,
+    navTo: string,
+}
 
 
 export default function defaultData() {
@@ -56,5 +63,18 @@ export default function defaultData() {
         { id: 2, img: require(`../assets/photos/homeBanner1.png`), title: `National 2 Economics University`, minScore: 18, majorNum: 22, minFee: 1000, maxFee: 2200, unitFee: `$`, yearOrSemForFee: `Semester`, location: `Hanoi`, capacity: 1110 },
         { id: 3, img: require(`../assets/photos/homeBanner1.png`), title: `National 3 Economics University`, minScore: 18, majorNum: 22, minFee: 1000, maxFee: 2200, unitFee: `$`, yearOrSemForFee: `Semester`, location: `Hanoi`, capacity: 1110 },
     ]
-    return { ListFavSubject, listIntersts, bannerList, suitableForYou }
+
+    let bestOfScience: BestOfSubject[] = [
+        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Computer science`, title: `HUST`, navTo: `` },
+        { icon: bestOfScBiIcon(vw(20), vw(20)), description: `Biology`, title: `HMU`, navTo: `` },
+        { icon: bestOfScMaIcon(vw(20), vw(20)), description: `Mathematics`, title: `VNU`, navTo: `` },
+    ]
+
+    let bestOfEconomic: BestOfSubject[] = [
+        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Business analysis`, title: `NEU`, navTo: `` },
+        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Social marketing`, title: `AJC`, navTo: `` },
+        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Money analysis`, title: `FTU`, navTo: `` },
+    ]
+
+    return { ListFavSubject, listIntersts, bannerList, suitableForYou, bestOfScience, bestOfEconomic }
 }

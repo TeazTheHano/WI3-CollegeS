@@ -1,18 +1,19 @@
 import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView, ImageBackground } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getUserInfo } from '../data/storageFunc'
-import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
+import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito12Reg, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle, { componentStyle } from '../assets/componentStyleSheet'
 import styles, { vh, vw } from '../assets/stylesheet'
 import { curveRightArrow, searchIcon } from '../assets/svgXml'
 import defaultData from '../data/data'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
+import { marginBottomForScrollView } from '../assets/component'
 
 export default function Home() {
   const navigation = useNavigation();
 
-  const { bannerList, suitableForYou } = defaultData();
+  const { bannerList, suitableForYou, bestOfEconomic, bestOfScience } = defaultData();
 
   const [userInfo, setUserInfo] = useState<any>(null)
   const [currentBanner, setCurrentBanner] = useState<number>(0)
@@ -151,8 +152,8 @@ export default function Home() {
         {/* end of banner */}
 
         {/* suitable for you */}
-        <View style={[styles.marginTop6vw]}>
-          <View style={[styles.flexRowBetweenCenter, styles.paddingH4vw, styles.marginBottom6vw]}>
+        <View style={[styles.marginTop6vw, styles.flexCol, styles.gap4vw]}>
+          <View style={[styles.flexRowBetweenCenter, styles.paddingH4vw]}>
             <Nunito16Bold>Suitable for you</Nunito16Bold>
             <TouchableOpacity
               onPress={() => {
@@ -171,7 +172,52 @@ export default function Home() {
             contentContainerStyle={[styles.gap4vw, styles.paddingBottom2vw]}
           />
         </View>
+        {/* end of Suitable */}
 
+        <View style={[styles.paddingV2vw, styles.paddingH4vw]}>
+
+          <View style={[styles.paddingV1vw, styles.marginLeft4vw, styles.wfit, { backgroundColor: clrStyle.white, top: vw(3), zIndex: 1 }]}>
+            <Nunito16Bold style={[styles.paddingH2vw, { color: clrStyle.main1, }]}>Best of science</Nunito16Bold>
+          </View>
+          <View style={[styles.flexRowBetweenCenter, styles.borderRadius4vw, { borderWidth: 2, borderColor: clrStyle.main2 }]}>
+            {bestOfScience.map((item, index) => {
+              return (
+                <TouchableOpacity key={index}
+                  onPress={() => {
+                    // TODO: do something
+                  }}
+                  style={[styles.flexColStartCenter, styles.paddingV4vw, { width: vw(90) / 3 }]}>
+                  {item.icon && item.icon}
+                  <Nunito12Reg lineNumber={1} style={[styles.paddingTop1vw, { color: clrStyle.grey2 }]}>{item.description}</Nunito12Reg>
+                  <Nunito18Bold lineNumber={1} style={{ color: clrStyle.main1 }}>{item.title}</Nunito18Bold>
+                </TouchableOpacity>
+              )
+            })
+            }
+          </View>
+
+          <View style={[styles.paddingV1vw, styles.marginLeft4vw, styles.wfit, { backgroundColor: clrStyle.white, top: vw(3), zIndex: 1 }]}>
+            <Nunito16Bold style={[styles.paddingH2vw, { color: clrStyle.main7, }]}>Best of Economic</Nunito16Bold>
+          </View>
+          <View style={[styles.flexRowBetweenCenter, styles.borderRadius4vw, { borderWidth: 2, borderColor: clrStyle.main8 }]}>
+            {bestOfScience.map((item, index) => {
+              return (
+                <TouchableOpacity key={index}
+                  onPress={() => {
+                    // TODO: do something
+                  }}
+                  style={[styles.flexColStartCenter, styles.paddingV4vw, { width: vw(90) / 3 }]}>
+                  {item.icon && item.icon}
+                  <Nunito12Reg lineNumber={1} style={[styles.paddingTop1vw, { color: clrStyle.grey2 }]}>{item.description}</Nunito12Reg>
+                  <Nunito18Bold lineNumber={1} style={{ color: clrStyle.main7 }}>{item.title}</Nunito18Bold>
+                </TouchableOpacity>
+              )
+            })
+            }
+          </View>
+        </View>
+
+        {marginBottomForScrollView()}
       </ScrollView>
       <BottomBar navFnc={() => navigation} currentScreen='Home' bgColor={clrStyle.white} shadow={true} />
     </SaveViewWithColorStatusBar >

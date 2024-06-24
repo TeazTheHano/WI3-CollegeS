@@ -11,7 +11,7 @@ import DataCollect from './screens/DataCollect'
 import Home from './screens/Home'
 import User from './screens/User'
 import Compare from './screens/Compare'
-import Setting from './screens/Setting'
+import Settings from './screens/Settings'
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -26,7 +26,7 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="User" component={User} />
         <Stack.Screen name="Compare" component={Compare} />
-        <Stack.Screen name="Setting" component={Setting} />
+        <Stack.Screen name="Settings" component={Settings} />
       </Stack.Navigator>
     </NavigationContainer>
   )
