@@ -97,9 +97,8 @@ export class BannerSliderWithCenter extends Component<{
                 onScroll={(event) => {
                     setCurrentIndex(Math.round(event.nativeEvent.contentOffset.x / width))
                 }}
-
-                contentContainerStyle={customContainerStyle}
                 style={customStyle}
+                contentContainerStyle={[styles.flexRowStartCenter, customContainerStyle]}
             />
         )
     }
@@ -108,372 +107,372 @@ export class BannerSliderWithCenter extends Component<{
 // END OF UNIVERSAL CLASS SECTION
 
 // FONT SECTION
-export class Nunito12Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito12Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(3) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(3) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito14Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito14Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(3.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(3.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito16Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito16Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(4) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(4) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito18Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito18Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(4.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Medium', fontSize: vw(4.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito10Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito10Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(2.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(2.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito12Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito12Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(3) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(3) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito14Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito14Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(3.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(3.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito16Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito16Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(4) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(4) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito24Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito24Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(6) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(6) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito18Reg extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito18Reg extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(4.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Regular', fontSize: vw(4.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito12Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito12Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(3) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(3) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito14Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito14Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(3.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(3.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito16Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito16Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(4) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(4) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito18Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito18Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(4.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(4.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito20Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito20Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito22Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito22Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(5.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(5.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito24Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito24Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(6) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-Bold', fontSize: vw(6) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Nunito14ExBold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Nunito14ExBold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Nunito-ExtraBold', fontSize: vw(3.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Nunito-ExtraBold', fontSize: vw(3.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika20Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika20Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-Bold', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-Bold', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika22Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika22Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-Bold', fontSize: vw(5.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-Bold', fontSize: vw(5.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika24Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika24Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-Bold', fontSize: vw(6) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-Bold', fontSize: vw(6) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika28Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika28Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-Bold', fontSize: vw(7) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-Bold', fontSize: vw(7) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class SonsieOne100 extends Component<{ children: React.ReactNode, style?: any }> {
+export class SonsieOne100 extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'SonsieOne-Regular', fontSize: vw(25), color: '#85C5C9' }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'SonsieOne-Regular', fontSize: vw(25), color: '#85C5C9' }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika20SemiBold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika20SemiBold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika22SemiBold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika22SemiBold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(5.5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(5.5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Signika24SemiBold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Signika24SemiBold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(6) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Signika-SemiBold', fontSize: vw(6) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Roboto20Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class Roboto20Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Roboto-Medium', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Roboto-Medium', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Roboto16Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Roboto16Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Roboto-Bold', fontSize: vw(4) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Roboto-Bold', fontSize: vw(4) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Roboto20Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Roboto20Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Roboto-Bold', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Roboto-Bold', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class SFproDisplay20Med extends Component<{ children: React.ReactNode, style?: any }> {
+export class SFproDisplay20Med extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'SF-Pro-Display-Medium', fontSize: vw(5) }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'SF-Pro-Display-Medium', fontSize: vw(5) }, style]}>
                 {children}
             </Text>
         );
     }
 }
 
-export class Helvetica19Bold extends Component<{ children: React.ReactNode, style?: any }> {
+export class Helvetica19Bold extends Component<{ children: React.ReactNode, style?: any, lineNumber?: number }> {
     render() {
-        const { children, style } = this.props;
+        const { children, style, lineNumber } = this.props;
 
         return (
-            <Text style={[{ fontFamily: 'Helvetica', fontSize: vw(4.75), fontWeight: 'bold' }, style]}>
+            <Text numberOfLines={lineNumber} style={[{ fontFamily: 'Helvetica', fontSize: vw(4.75), fontWeight: 'bold' }, style]}>
                 {children}
             </Text>
         );
