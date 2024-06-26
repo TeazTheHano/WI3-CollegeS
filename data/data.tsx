@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
-import { bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon } from '../assets/svgXml';
+import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon } from '../assets/svgXml';
 
 export interface UserInfo {
     userID: string;
@@ -71,9 +71,9 @@ export default function defaultData() {
     ]
 
     let bestOfEconomic: BestOfSubject[] = [
-        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Business analysis`, title: `NEU`, navTo: `` },
-        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Social marketing`, title: `AJC`, navTo: `` },
-        { icon: bestOfScCoIcon(vw(20), vw(20)), description: `Money analysis`, title: `FTU`, navTo: `` },
+        { icon: bestOfEcoMo(vw(20), vw(20)), description: `Money analysis`, title: `FTU`, navTo: `` },
+        { icon: bestOfEcoSo(vw(20), vw(20)), description: `Social marketing`, title: `AJC`, navTo: `` },
+        { icon: bestOfEcoBu(vw(20), vw(20)), description: `Business analysis`, title: `NEU`, navTo: `` },
     ]
 
     return { ListFavSubject, listIntersts, bannerList, suitableForYou, bestOfScience, bestOfEconomic }

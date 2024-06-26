@@ -15,8 +15,8 @@ export default function Home() {
 
   const { bannerList, suitableForYou, bestOfEconomic, bestOfScience } = defaultData();
 
-  const [userInfo, setUserInfo] = useState<any>(null)
   const [currentBanner, setCurrentBanner] = useState<number>(0)
+  const [userInfo, setUserInfo] = useState<any>(null)
 
   useEffect(() => {
     getUserInfo().then((res) => {
@@ -103,19 +103,26 @@ export default function Home() {
       </View>
     )
   }
+  // End of Suitable for you Section
+
+  // Track the Y position of the ScrollView
+  const [startY, setStartY] = useState<number>(0);
+  const [showTopNav, setShowTopNav] = useState<boolean>(false);
+  const topNavHeight = vh(20);
+
 
   return (
     <SaveViewWithColorStatusBar
       StatusBarColor={clrStyle.main5}
       StatusBarLightContent={true}
       bgColor={clrStyle.white}
-
     >
       {/* HomeNameBar */}
       <TopNav
         title='College Search'
         rightIcon={searchIcon(vw(6), vw(6), 'white')}
         rightFnc={() => console.log('search')}
+        hideChildren={showTopNav}
       >
         <View style={[styles.flexRowBetweenCenter, styles.paddingBottom2vw, styles.paddingH2vw]}>
           <View style={[styles.flexCol, styles.gap1vw]}>
@@ -128,7 +135,26 @@ export default function Home() {
         </View>
       </TopNav>
 
-      <ScrollView style={[styles.flex1]}>
+      <ScrollView
+        // onTouchStart={(e) => setStartY(e.nativeEvent.pageY)}
+        // onTouchEnd={(e) => {
+        //   console.log(e.nativeEvent.pageY - startY);
+
+        //   if (e.nativeEvent.pageY - startY > topNavHeight) {
+        //     setShowTopNav(false);
+        //   } else {
+        //     setShowTopNav(true);
+        //   }
+        // }}
+        onScroll={(e) => {
+          if (e.nativeEvent.contentOffset.y > topNavHeight) {
+            setShowTopNav(true);
+          } else {
+            setShowTopNav(false);
+          }
+        }
+        }
+        style={[styles.flex1]}>
         {/* banner */}
         <BannerSliderWithCenter
           data={bannerList}
@@ -192,15 +218,14 @@ export default function Home() {
                   <Nunito18Bold lineNumber={1} style={{ color: clrStyle.main1 }}>{item.title}</Nunito18Bold>
                 </TouchableOpacity>
               )
-            })
-            }
+            })}
           </View>
 
           <View style={[styles.paddingV1vw, styles.marginLeft4vw, styles.wfit, { backgroundColor: clrStyle.white, top: vw(3), zIndex: 1 }]}>
             <Nunito16Bold style={[styles.paddingH2vw, { color: clrStyle.main7, }]}>Best of Economic</Nunito16Bold>
           </View>
           <View style={[styles.flexRowBetweenCenter, styles.borderRadius4vw, { borderWidth: 2, borderColor: clrStyle.main8 }]}>
-            {bestOfScience.map((item, index) => {
+            {bestOfEconomic.map((item, index) => {
               return (
                 <TouchableOpacity key={index}
                   onPress={() => {
@@ -212,9 +237,9 @@ export default function Home() {
                   <Nunito18Bold lineNumber={1} style={{ color: clrStyle.main7 }}>{item.title}</Nunito18Bold>
                 </TouchableOpacity>
               )
-            })
-            }
+            })}
           </View>
+          
         </View>
 
         {marginBottomForScrollView()}

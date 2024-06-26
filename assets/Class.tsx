@@ -756,32 +756,39 @@ export class TopNav extends Component<{
     returnPreScreenFnc?: () => void,
     rightIcon?: any,
     rightFnc?: () => void,
+    hideChildren?: boolean,
 }> {
     render() {
-        const { children, title, returnPreScreen, returnPreScreenFnc, rightIcon, rightFnc } = this.props;
+        const { children, title, returnPreScreen, returnPreScreenFnc, rightIcon, rightFnc, hideChildren } = this.props;
+        let animation = new Animated.Value(0);
+
         return (
-            <View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, { backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6) }]}>
-                <View style={[styles.paddingV2vw, styles.w100, styles.flexRowBetweenCenter]}>
-                    {returnPreScreen ?
-                        <TouchableOpacity
-                            style={[styles.padding2vw]}
-                            onPress={returnPreScreenFnc}>
-                            {sharpLeftArrow(vw(6), vw(6), 'white')}
-                        </TouchableOpacity>
-                        : <View style={[{ width: vw(10), height: vw(10), }]} />
-                    }
-                    <Nunito20Bold style={[styles.textCenter, styles.alignSelfCenter, { color: 'white' }]}>{title}</Nunito20Bold>
-                    {rightIcon ?
-                        <TouchableOpacity
-                            style={[styles.padding2vw]}
-                            onPress={rightFnc}>
-                            {rightIcon}
-                        </TouchableOpacity>
-                        : <View style={[{ width: vw(10), height: vw(10), }]} />
-                    }
-                </View>
-                {children}
-            </View >
+            <>
+                <Animated.View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, styles.overflowHidden, { backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }]}>
+                    <View style={[styles.paddingV2vw, styles.w100, styles.flexRowBetweenCenter]}>
+                        {returnPreScreen ?
+                            <TouchableOpacity
+                                style={[styles.padding2vw]}
+                                onPress={returnPreScreenFnc}>
+                                {sharpLeftArrow(vw(6), vw(6), 'white')}
+                            </TouchableOpacity>
+                            : <View style={[{ width: vw(10), height: vw(10), }]} />
+                        }
+                        <Nunito20Bold style={[styles.textCenter, styles.alignSelfCenter, { color: 'white' }]}>{title}</Nunito20Bold>
+                        {rightIcon ?
+                            <TouchableOpacity
+                                style={[styles.padding2vw]}
+                                onPress={rightFnc}>
+                                {rightIcon}
+                            </TouchableOpacity>
+                            : <View style={[{ width: vw(10), height: vw(10), }]} />
+                        }
+                    </View>
+                    <Animated.View style={{ display: hideChildren ? 'none' : undefined }}>
+                        {children}
+                    </Animated.View>
+                </Animated.View >
+            </>
         )
     }
 }
