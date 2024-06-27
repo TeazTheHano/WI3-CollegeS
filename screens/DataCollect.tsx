@@ -60,7 +60,7 @@ export default function DataCollect() {
                         getUserInfo().then((res) => {
                             console.log(res);
                         })
-                        navigation.navigate('Home');
+                        navigation.navigate('BottomTab');
 
                     }
                 })

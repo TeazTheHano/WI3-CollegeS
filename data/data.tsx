@@ -17,6 +17,7 @@ export interface UserInfo {
         favorite: string[];
         goal?: string;
     }
+    createTime?: any;
 }
 export interface Banner {
     id: number,

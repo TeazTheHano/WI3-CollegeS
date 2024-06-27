@@ -106,7 +106,6 @@ export default function Home() {
   // End of Suitable for you Section
 
   // Track the Y position of the ScrollView
-  const [startY, setStartY] = useState<number>(0);
   const [showTopNav, setShowTopNav] = useState<boolean>(false);
   const topNavHeight = vh(20);
 
@@ -136,24 +135,7 @@ export default function Home() {
       </TopNav>
 
       <ScrollView
-        // onTouchStart={(e) => setStartY(e.nativeEvent.pageY)}
-        // onTouchEnd={(e) => {
-        //   console.log(e.nativeEvent.pageY - startY);
-
-        //   if (e.nativeEvent.pageY - startY > topNavHeight) {
-        //     setShowTopNav(false);
-        //   } else {
-        //     setShowTopNav(true);
-        //   }
-        // }}
-        onScroll={(e) => {
-          if (e.nativeEvent.contentOffset.y > topNavHeight) {
-            setShowTopNav(true);
-          } else {
-            setShowTopNav(false);
-          }
-        }
-        }
+        onScroll={(e) => { setShowTopNav(e.nativeEvent.contentOffset.y > topNavHeight ? true : false) }}
         style={[styles.flex1]}>
         {/* banner */}
         <BannerSliderWithCenter
@@ -239,12 +221,12 @@ export default function Home() {
               )
             })}
           </View>
-          
+
         </View>
 
         {marginBottomForScrollView()}
       </ScrollView>
-      <BottomBar navFnc={() => navigation} currentScreen='Home' bgColor={clrStyle.white} shadow={true} />
+      {/* <BottomBar navFnc={() => navigation} currentScreen='Home' bgColor={clrStyle.white} shadow={true} /> */}
     </SaveViewWithColorStatusBar >
   )
 }

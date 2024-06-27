@@ -14,7 +14,7 @@ export default function LoginOpt() {
         getUserInfo().then((res) => {
             console.log(res);
             if (res?.synced && res?.dataCollect) {
-                navigation.navigate('Home');
+                navigation.navigate('BottomTab');
             } else if (res?.synced && !res?.dataCollect) {
                 navigation.navigate('DataCollect');
             }

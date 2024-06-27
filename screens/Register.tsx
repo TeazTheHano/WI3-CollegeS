@@ -47,6 +47,7 @@ export default function Register() {
                 email: email,
                 password: password,
                 dataCollect: false,
+                createTime: new Date().getTime(),
             }).then((res) => {
                 setSaveStatus(res ? 2 : 1);
                 if (res) {

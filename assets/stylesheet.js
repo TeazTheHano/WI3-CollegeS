@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
     margin1vw: {
         margin: vw(1),
     },
-    
+
     margin2vw: {
         margin: vw(2),
     },
@@ -657,6 +657,18 @@ const styles = StyleSheet.create({
 
     paddingV1vw: {
         paddingVertical: vw(1),
+    },
+
+    paddingV1vh: {
+        paddingVertical: vh(1),
+    },
+
+    paddingV2vh: {
+        paddingVertical: vh(2),
+    },
+
+    paddingV10vh: {
+        paddingVertical: vh(10),
     },
 
     paddingV10H20: {
@@ -1163,7 +1175,7 @@ const styles = StyleSheet.create({
     },
 
     textAlignVerticalAuto: {
-        textAlignVertical: 'auto', 
+        textAlignVertical: 'auto',
     },
 
     lineHeight20: {
