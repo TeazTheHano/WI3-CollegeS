@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs';
 import Home from './Home'

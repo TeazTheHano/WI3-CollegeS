@@ -123,7 +123,7 @@ export default function Home() {
         rightFnc={() => console.log('search')}
         hideChildren={showTopNav}
       >
-        <View style={[styles.flexRowBetweenCenter, styles.paddingBottom2vw, styles.paddingH2vw]}>
+        <View style={[styles.flexRowBetweenCenter, styles.paddingBottom2vw, styles.paddingH2vw, styles.paddingTop2vw]}>
           <View style={[styles.flexCol, styles.gap1vw]}>
             <Nunito18Bold style={[{ color: 'white' }]}>Hello, {userInfo?.name}</Nunito18Bold>
             <Nunito14Bold style={[{ color: clrStyle.main6 }]}>Welcome back!</Nunito14Bold>

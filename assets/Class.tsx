@@ -749,6 +749,7 @@ export class BoardingPicking extends Component<{
     }
 }
 
+
 export class TopNav extends Component<{
     children?: React.ReactNode,
     title: string,
@@ -765,7 +766,7 @@ export class TopNav extends Component<{
         return (
             <>
                 <Animated.View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, styles.overflowHidden, { backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }]}>
-                    <View style={[styles.paddingV2vw, styles.w100, styles.flexRowBetweenCenter]}>
+                    <View style={[styles.paddingTop2vw, styles.w100, styles.flexRowBetweenCenter]}>
                         {returnPreScreen ?
                             <TouchableOpacity
                                 style={[styles.padding2vw]}

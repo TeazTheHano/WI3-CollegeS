@@ -7,6 +7,7 @@ import styles, { vw } from '../assets/stylesheet'
 import { bestOfScCoIcon, curveRightArrow, MBTIIcon, wishListIcon } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
 import defaultData from '../data/data'
+import { marginBottomForScrollView } from '../assets/component'
 
 export default function User() {
   const navigation = useNavigation()
@@ -20,10 +21,17 @@ export default function User() {
     })
   }, [userInfo])
 
-  let userTarget = [
-    { title: 'MBTI', icon: MBTIIcon(), data: userInfo?.data?.persona },
-    { title: 'Goal', icon: bestOfScCoIcon(), data: userInfo?.data?.goal },
-    { title: 'Wishlist', icon: wishListIcon(), data: userInfo?.data?.favorite },
+
+  interface UserTarget {
+    title: string,
+    icon: any,
+    data: string
+    navTo: string
+  }
+  let userTarget: UserTarget[] = [
+    { title: 'MBTI', icon: MBTIIcon(), data: userInfo?.data?.persona, navTo: 'Persona' },
+    { title: 'Goal', icon: bestOfScCoIcon(), data: userInfo?.data?.goal, navTo: 'Persona' },
+    { title: 'Wishlist', icon: wishListIcon(), data: userInfo?.data?.goal, navTo: 'Persona' },
   ]
 
   return (
@@ -51,11 +59,13 @@ export default function User() {
           {
             userTarget.map((item, index) => {
               return (
-                <View key={index} style={[styles.flexCol, styles.alignItemsCenter, styles.w30, styles.shadowW0H1Black, styles.borderRadius4vw, styles.padding2vw, { backgroundColor: clrStyle.white }]}>
+                <TouchableOpacity
+                  onPress={() => { navigation.navigate(item.navTo, { data: userInfo }) }}
+                  key={index} style={[styles.flexCol, styles.alignItemsCenter, styles.w30, styles.shadowW0H1Black, styles.borderRadius4vw, styles.padding2vw, { backgroundColor: clrStyle.white }]}>
                   <Nunito14Bold style={[styles.paddingTop2vw, styles.textCenter, { color: clrStyle.grey3 }]}>{item.title}</Nunito14Bold>
                   <View style={[{ width: '100%', height: vw(28), borderTopWidth: 2, borderTopColor: clrStyle.grey1 }]}>{item.icon}</View>
                   <Nunito14Bold style={[styles.paddingTop1vw, { color: clrStyle.grey2 }]}>{item.data}</Nunito14Bold>
-                </View>
+                </TouchableOpacity>
               )
             })
           }
@@ -92,6 +102,8 @@ export default function User() {
             })
           }
         </View>
+
+        {marginBottomForScrollView()}
       </ScrollView>
       {/* <BottomBar navFnc={() => navigation} currentScreen='User' bgColor={clrStyle.white} shadow={true} /> */}
     </SaveViewWithColorStatusBar>

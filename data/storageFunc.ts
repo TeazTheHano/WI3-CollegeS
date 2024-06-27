@@ -68,15 +68,9 @@ export async function getUserInfo(
   }
 }
 
-// remove user info by id
-export async function removeUserInfoById(id: string): Promise<void> {
+// remove user info
+export async function removeAllUserInfo(): Promise<void> {
   await storage.remove({
     key: 'userInfo',
-    id: id,
   });
-}
-
-// remove all user info
-export async function removeAllUserInfo(): Promise<void> {
-  await storage.clearMapForKey('userInfo');
 }

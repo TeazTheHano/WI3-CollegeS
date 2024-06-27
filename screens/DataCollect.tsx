@@ -61,7 +61,6 @@ export default function DataCollect() {
                             console.log(res);
                         })
                         navigation.navigate('BottomTab');
-
                     }
                 })
             }
