@@ -1,6 +1,6 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { Nunito14Bold, SaveViewWithColorStatusBar, TopNav } from '../../assets/Class'
+import { LowBtn, Nunito14Bold, SaveViewWithColorStatusBar, TopNav } from '../../assets/Class'
 import clrStyle from '../../assets/componentStyleSheet'
 import styles from '../../assets/stylesheet'
 import defaultData, { MBTI } from '../../data/data'
@@ -35,7 +35,17 @@ export default function Persona({ navigation, route }) {
                 style={[styles.flex1]}>
                 <Text>{personaData?.description}</Text>
                 <Text>{personaData?.name}</Text>
+
             </ScrollView>
+            <View>
+                <LowBtn
+                    round={false}
+                    title='Explore other personalities'
+                    onPress={() => {
+                        navigation.navigate('Test')
+                    }}
+                />
+            </View>
         </SaveViewWithColorStatusBar>
     )
 }

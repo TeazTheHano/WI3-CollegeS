@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
-import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon } from '../assets/svgXml';
+import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon, ENFJicon, ENFPicon, ENTJicon, ENTPicon, ESFJicon, ESFPicon, ESTJicon, ESTPicon, INFJicon, INFPicon, INTJicon, INTPicon, ISFJicon, ISFPicon, ISTJicon, ISTPicon } from '../assets/svgXml';
 
 export interface UserInfo {
     userID: string;
@@ -51,6 +51,7 @@ export interface MBTI {
     description: string,
     personality: string[],
     favJob: string[],
+    icon?: any,
 }
 
 
@@ -93,6 +94,7 @@ export default function defaultData() {
                 `These individuals tend to be serious, matter-of-fact, and reserved. They appreciate order and organization and pay a great deal of attention to detail.`,
                 `They like to plan things out in advance and place an emphasis on tradition and law. They are responsible and realistic and can be described as dependable and trustworthy`],
             favJob: [`Accountant`, `Auditor`, `Lawyer`, `Police`, `Military`, `Manager`, `Teacher`],
+            icon: ISTJicon()
         },
         {
             mbti: `ISTP`,
@@ -104,6 +106,7 @@ export default function defaultData() {
                 `They are results- oriented, acting quickly to find workable solutions and understand the underlying cause of practical problems`
             ],
             favJob: [`Engineer`, `Mechanic`, `Athletes`, `Pilot`, `Detective`, `Special Forces`, `Police`, `Firefighter`],
+            icon: ISTPicon()
         },
         {
             mbti: `ISFJ`,
@@ -114,6 +117,7 @@ export default function defaultData() {
                 `They are loyal, considerate, and place a lot of focus on the care of others. They are non-confrontational and value an orderly and harmonious environment.`
             ],
             favJob: [`Nurse`, `Doctor`, `Preschool Teacher`, `Customer Service Representative`, `Administrative Staff`, `Secretary`],
+            icon: ISFJicon()
         },
         {
             mbti: `ISFP`,
@@ -125,6 +129,7 @@ export default function defaultData() {
                 `They are highly considerate and accepting, avoiding confrontation and committed to their values and to people who are important to them.`
             ],
             favJob: [`Artist`, `Designer`, `Musician`, `Photographer`, `Makeup Artist`, `Veterinarian`, `Music Teacher`],
+            icon: ISFPicon()
         },
         {
             mbti: `INFJ`,
@@ -135,6 +140,7 @@ export default function defaultData() {
                 `They value close, deep connections and are sensitive to the needs of others, but also need time and space alone to recharge.`
             ],
             favJob: [`Psychologist`, `Writer`, `Diplomat`, `Consultant`, `Social Activist`],
+            icon: INFJicon()
         },
         {
             mbti: `INFP`,
@@ -145,6 +151,7 @@ export default function defaultData() {
                 `They are family and home-oriented and prefer to interact with a select group of close friends.`
             ],
             favJob: [`Artist`, `Designer`, `Writer`, `Poet`, `Journalist`, `Philosopher`],
+            icon: INFPicon()
         },
         {
             mbti: `INTJ`,
@@ -156,6 +163,7 @@ export default function defaultData() {
                 `They tend to have high expectations of competence and performance for themselves and others.`
             ],
             favJob: [`Engineer`, `Scientist`, `Programmer`, `Strategic Manager`, `Educator`],
+            icon: INTJicon()
         },
         {
             mbti: `INTP`,
@@ -166,6 +174,7 @@ export default function defaultData() {
                 `They are more interested in ideas and theoretical concepts than in social interaction. They are loyal and affectionate to their closest friends and family, but tend to be difficult to get to know.`
             ],
             favJob: [`Mathematics`, `Physics`, `Computer Science`, `Philosophy`, `Natural Sciences`, `Analyst`, `University Lecturer`],
+            icon: INTPicon()
         },
         {
             mbti: `ESTP`,
@@ -176,6 +185,7 @@ export default function defaultData() {
                 `They are outgoing and energetic, and enjoy spending time with a wide circle of friends and acquaintances. They focus on the here and now and prefer the practical over the abstract.`
             ],
             favJob: [`Business`, `Sales`, `Advertising`, `Entertainment`, `Stocks`],
+            icon: ESTPicon()
         },
         {
             mbti: `ESTJ`,
@@ -186,6 +196,7 @@ export default function defaultData() {
                 `They can be seen as rigid, stubborn, or bossy as they are forceful in implementing their plans. However, they tend to excel at putting plans into action because they are hardworking, self-confident, and dependable.`
             ],
             favJob: [`Project Management`, `Executive Director`, `Banking`, `Finance`, `Military`],
+            icon: ESTJicon()
         },
         {
             mbti: `ESFP`,
@@ -196,6 +207,7 @@ export default function defaultData() {
                 `They can be described as easy going, fun, and optimistic. They are spontaneous and focused on the present moment, and enjoy learning through hands-on experiences with other people.`
             ],
             favJob: [`Designer`, `Model`, `Actor`, `Singer`, `MC`, `Veterinarian`, `Preschool Teacher`, `Tourist guide`],
+            icon: ESFPicon()
         },
         {
             mbti: `ESFJ`,
@@ -206,6 +218,7 @@ export default function defaultData() {
                 `They enjoy helping others and providing the care that people need, but want to be appreciated and noticed for their contributions. They are careful observers of others and excel in situations involving personal contact and community.`
             ],
             favJob: [`Teacher`, `Doctor`, `Nurse`, `Customer Service Representative`, `Hotel Manager`],
+            icon: ESFJicon()
         },
         {
             mbti: `ENFP`,
@@ -216,6 +229,7 @@ export default function defaultData() {
                 `They do, however, seek approval from others. They value emotions and expression. They dislike routine and might struggle with disorganization and procrastination.`
             ],
             favJob: [`Journalist`, `Writer`, `Producer`, `Human Resources Manager`, `Consultant`, `Press`, `Communications`, `Performing Arts`, `Education`],
+            icon: ENFPicon()
         },
         {
             mbti: `ENFJ`,
@@ -226,6 +240,7 @@ export default function defaultData() {
                 `They have a desire to help others fulfill their potential, and they derive personal satisfaction from helping others. They tend to make good leaders as they are highly capable of facilitating agreement among diverse groups of people.`
             ],
             favJob: [`Careers related to education`, `Counseling`, `Health service`, `Society and arts`],
+            icon: ENFJicon()
         },
         {
             mbti: `ENTP`,
@@ -236,6 +251,7 @@ export default function defaultData() {
                 `They enjoy interacting with a wide variety of people and love to engage with others in debates. They tend to be easy to get along with, but also can be argumentative at times. They are great conversationalists and make good entrepreneurs.`
             ],
             favJob: [`Lawyer`, `Software Engineer`, `Inventor`, `Scientist`, `Journalist`, `Politician`, `University Lecturer`],
+            icon: ENTPicon()
         },
         {
             mbti: `ENTJ`,
@@ -247,6 +263,7 @@ export default function defaultData() {
                 `They have strong leadership skills and tend to make good executives, captains, and administrators.`
             ],
             favJob: [`CEO`, `Lawyer`, `Politician`,],
+            icon: ENTJicon()
         },
     ]
 
