@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
 import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon, ENFJicon, ENFPicon, ENTJicon, ENTPicon, ESFJicon, ESFPicon, ESTJicon, ESTPicon, INFJicon, INFPicon, INTJicon, INTPicon, ISFJicon, ISFPicon, ISTJicon, ISTPicon } from '../assets/svgXml';
+import clrStyle from '../assets/componentStyleSheet';
 
 export interface UserInfo {
     userID: string;
@@ -51,9 +52,8 @@ export interface MBTI {
     description: string,
     personality: string[],
     favJob: string[],
-    icon?: any,
+    icon: any,
 }
-
 
 export default function defaultData() {
     let ListFavSubject: string[] = [`Math`, `Physics`, `Language`, `Biology`, `Geography`, `Literature`, `Music`, `History`, `Chemistry`];
@@ -88,7 +88,7 @@ export default function defaultData() {
     let mbti: MBTI[] = [
         {
             mbti: `ISTJ`,
-            name: `The Inspector`,
+            name: `Inspector`,
             description: `Reserved and practical, they tend to be loyal, orderly, and traditional.`,
             personality: [
                 `These individuals tend to be serious, matter-of-fact, and reserved. They appreciate order and organization and pay a great deal of attention to detail.`,
@@ -98,7 +98,7 @@ export default function defaultData() {
         },
         {
             mbti: `ISTP`,
-            name: `The Crafter`,
+            name: `Crafter`,
             description: `Highly independent, they enjoy new experiences that provide first-hand learning.`,
             personality: [
                 `People with this personality type are fearless and independent. They love adventure, new experiences, and risk-taking.`,
@@ -110,7 +110,7 @@ export default function defaultData() {
         },
         {
             mbti: `ISFJ`,
-            name: `The Protector`,
+            name: `Protector`,
             description: `Warm-hearted and dedicated, they are always ready to protect the people they care about.`,
             personality: [
                 `These individuals are friendly, responsible, and reserved. They are service and work-oriented, committing to meeting their obligations and duties.`,
@@ -121,7 +121,7 @@ export default function defaultData() {
         },
         {
             mbti: `ISFP`,
-            name: `The Artist`,
+            name: `Artist`,
             description: `Easy-going and flexible, they tend to be reserved and artistic.`,
             personality: [
                 `These individuals are quiet, friendly, easy going, and sensitive. They have a strong need for personal space and time alone to recharge.`,
@@ -133,7 +133,7 @@ export default function defaultData() {
         },
         {
             mbti: `INFJ`,
-            name: `The Advocate`,
+            name: `Advocate`,
             description: `Creative and analytical, they are considered one of the rarest Myers-Briggs types.`,
             personality: [
                 `People with this personality type are serious, logical and hardworking. They are also compassionate, conscientious, and reserved.`,
@@ -144,7 +144,7 @@ export default function defaultData() {
         },
         {
             mbti: `INFP`,
-            name: `The Mediator`,
+            name: `Mediator`,
             description: `Idealistic with high values, they strive to make the world a better place.`,
             personality: [
                 `These people are creative, idealistic, caring, and loyal. They have high values and morals, and are constantly seeking out ways to understand people and to best serve humanity.`,
@@ -155,7 +155,7 @@ export default function defaultData() {
         },
         {
             mbti: `INTJ`,
-            name: `The Architect`,
+            name: `Architect`,
             description: `High logical, they are both very creative and analytical.`,
             personality: [
                 `These people are highly independent, self-confident and prefer to work alone. They are analytical, creative, logical, and driven.`,
@@ -167,7 +167,7 @@ export default function defaultData() {
         },
         {
             mbti: `INTP`,
-            name: `The Thinker`,
+            name: `Thinker`,
             description: `Quiet and introverted, they are known for having a rich inner world.`,
             personality: [
                 `People with this personality type are described as quiet, contained, and analytical. They are highly focused on how things work and on solving problems, and tend to be good at logic and math.`,
@@ -178,7 +178,7 @@ export default function defaultData() {
         },
         {
             mbti: `ESTP`,
-            name: `The Persuader`,
+            name: `Persuader`,
             description: `Out-going and dramatic, they enjoy spending time with others and focusing on the here-and-now`,
             personality: [
                 `These individuals are action-oriented, taking pragmatic approaches to obtain results and solve problems quickly. They are often sophisticated, charming, and spontaneous.`,
@@ -189,7 +189,7 @@ export default function defaultData() {
         },
         {
             mbti: `ESTJ`,
-            name: `The Director`,
+            name: `Director`,
             description: `Assertive and rule-oriented, they have high principles and a tendency to take charge.`,
             personality: [
                 `These people are responsible, practical, and organized. They are assertive and like to take charge, focused on getting results in the most efficient way possible. They have clear standards and place a high value on tradition and rules.`,
@@ -200,7 +200,7 @@ export default function defaultData() {
         },
         {
             mbti: `ESFP`,
-            name: `The Performer`,
+            name: `Performer`,
             description: `Outgoing and spontaneous, they enjoy taking center stage.`,
             personality: [
                 `These people tend to be outgoing, friendly, and impulsive, seizing energy from other people. They love to be the center of attention and enjoy working with others in new environments.`,
@@ -211,7 +211,7 @@ export default function defaultData() {
         },
         {
             mbti: `ESFJ`,
-            name: `The Caregiver`,
+            name: `Caregiver`,
             description: `Soft-hearted and outgoing, they tend to believe the best about other people.`,
             personality: [
                 `These individuals are warmhearted, conscientious, and harmonious. They wear their hearts on their sleeves and tend to see the best in others.`,
@@ -222,7 +222,7 @@ export default function defaultData() {
         },
         {
             mbti: `ENFP`,
-            name: `The Campaigner`,
+            name: `Campaigner`,
             description: `Charismatic and energetic, they enjoy situations where they can put their creativity to work.`,
             personality: [
                 `These individuals are enthusiastic, creative, energetic, and highly imaginative. They have excellent people and communication skills and are good at giving others appreciation and support.`,
@@ -233,7 +233,7 @@ export default function defaultData() {
         },
         {
             mbti: `ENFJ`,
-            name: `The Giver`,
+            name: `Giver`,
             description: `Loyal and sensitive, they are known for being understanding and generous.`,
             personality: [
                 `These people are responsible, warm, and loyal. They are highly attuned to the emotions of others and capable of forging friendships with essentially anybody.`,
@@ -244,7 +244,7 @@ export default function defaultData() {
         },
         {
             mbti: `ENTP`,
-            name: `The Debater`,
+            name: `Debater`,
             description: `Highly inventive, they love being surrounded by ideas and tend to start many projects (but may struggle to finish them).`,
             personality: [
                 `People with this personality type can be described as innovative, outspoken, and lively. They are idea-oriented and are more focused on the future rather than on the present moment.`,
@@ -255,7 +255,7 @@ export default function defaultData() {
         },
         {
             mbti: `ENTJ`,
-            name: `The Commander`,
+            name: `Commander`,
             description: `Outspoken and confident, they are great at making plans and organizing projects.`,
             personality: [
                 `These individuals like to take charge. They value organization and structure and appreciate long-term planning and goal setting.`,
@@ -267,5 +267,12 @@ export default function defaultData() {
         },
     ]
 
-    return { ListFavSubject, listIntersts, bannerList, suitableForYou, bestOfScience, bestOfEconomic, mbti }
+    const mbtiGroup = [
+        { gr: 'Analyst', clr: clrStyle.main7, data: mbti.filter((item) => item.mbti.includes('N') && item.mbti.includes('T')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Intuitive (N) and Thinking (T) personality types, known for their rationality, impartiality, and intellectual excellence.` },
+        { gr: 'Diplomats', clr: clrStyle.main3, data: mbti.filter((item) => item.mbti.includes('N') && item.mbti.includes('F')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Intuitive (N) and Feeling (F) personality types, known for their empathy, diplomatic skills, and passionate idealism.` },
+        { gr: 'Sentinels', clr: clrStyle.main1, data: mbti.filter((item) => item.mbti.includes('S') && item.mbti.includes('J')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Observant (S) and Judging (J) personality types, known for their practicality and focus on order, security, and stability.` },
+        { gr: 'Explorers', clr: clrStyle.main9, data: mbti.filter((item) => item.mbti.includes('S') && item.mbti.includes('P')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Observant (S) and Prospecting (P) personality types, known for their spontaneity, ingenuity, and flexibility.` },
+    ]
+
+    return { ListFavSubject, listIntersts, bannerList, suitableForYou, bestOfScience, bestOfEconomic, mbti, mbtiGroup }
 }

@@ -552,7 +552,7 @@ export class LowBtn extends Component<{
     bgColor?: string,
     fontColor?: string,
     icon?: any,
-    round?: boolean,
+    round?: number,
     CustomStyle?: any,
     FontElement?: ComponentType<{ children: React.ReactNode }>,
 }> {

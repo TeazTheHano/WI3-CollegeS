@@ -17,6 +17,7 @@ import BottomTab from './screens/BottomTab'
 
 // inner
 import Persona from './screens/innerScreen/Persona'
+import ExplorePersona from './screens/innerScreen/ExplorePersona'
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -37,6 +38,7 @@ export default function App() {
 
         {/* inner */}
         <Stack.Screen name="Persona" component={Persona} />
+        <Stack.Screen name="ExplorePersona" component={ExplorePersona} />
       </Stack.Navigator>
     </NavigationContainer>
   )

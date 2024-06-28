@@ -42,6 +42,12 @@ export const componentStyle = StyleSheet.create<any>({
             },
         }),
     },
+    upperShadow: {
+        shadowOffset: { width: 0, height: -vw(2) },
+        shadowOpacity: 0.05,
+        shadowRadius: vw(1),
+        elevation: 10,
+    },
 });
 
 export class Gradient1 extends Component<{ children: ReactNode, style?: any }> {
