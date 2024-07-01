@@ -33,7 +33,7 @@ export default function Search() {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          style={[styles.padding2vw, { backgroundColor: clrStyle.white }]}>
+          style={[styles.padding2vw, styles.borderRadius10, { backgroundColor: clrStyle.white }]}>
           {adjustIcon(vw(6), vw(6))}
         </TouchableOpacity>
       </View>

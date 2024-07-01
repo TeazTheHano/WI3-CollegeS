@@ -55,6 +55,46 @@ export interface MBTI {
     icon: any,
 }
 
+export interface MBTIGroup {
+    gr: string,
+    clr: string,
+    data: MBTI[],
+    desc: string
+}
+
+export interface University {
+    id?: number,
+    name?: string,
+    description?: string[],
+    city?: string,
+    location?: string,
+    img?: any,
+    admission?: number,
+    refURL?: string[],
+    // major
+    major?: {
+        majorName?: string,
+        examGroup?: string[],
+        lowestStandardScore?: number,
+        highestStandardScore?: number,
+        degreeType?: 'College' | 'Doctor' | 'Master' | 'College Advanced Program',
+        description?: string,
+        afterGraduation?: boolean,
+
+    }[],
+    mainMajor?: string[],
+    specialProgram?: string[],
+    // score
+    lowestStandardScore?: number,
+    highestStandardScore?: number,
+    scoreRefYear?: number,
+    // fee
+    minFee?: number,
+    maxFee?: number,
+    unitFee?: string,
+    yearOrSemForFee?: string,
+}
+
 export default function defaultData() {
     let ListFavSubject: string[] = [`Math`, `Physics`, `Language`, `Biology`, `Geography`, `Literature`, `Music`, `History`, `Chemistry`];
 
@@ -272,6 +312,148 @@ export default function defaultData() {
         { gr: 'Diplomats', clr: clrStyle.main3, data: mbti.filter((item) => item.mbti.includes('N') && item.mbti.includes('F')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Intuitive (N) and Feeling (F) personality types, known for their empathy, diplomatic skills, and passionate idealism.` },
         { gr: 'Sentinels', clr: clrStyle.main1, data: mbti.filter((item) => item.mbti.includes('S') && item.mbti.includes('J')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Observant (S) and Judging (J) personality types, known for their practicality and focus on order, security, and stability.` },
         { gr: 'Explorers', clr: clrStyle.main9, data: mbti.filter((item) => item.mbti.includes('S') && item.mbti.includes('P')).sort((a, b) => a.mbti.localeCompare(b.mbti)), desc: `Observant (S) and Prospecting (P) personality types, known for their spontaneity, ingenuity, and flexibility.` },
+    ]
+
+    const universityList: University[] = [
+        {
+            id: 1,
+            name: `Hanoi Medical University (HMU)`,
+            description: [
+                `Hanoi Medical University, which was established in 1902 under the name: Indochina Medico-Pharmaceutical University, was the first university of Indochina. Hanoi Medical University has been known as the leading education entity in the country in training and providing highly qualified human resources for the health sector in Vietnam.`,
+                `Hanoi Medical University, one of the leading Universities in Vietnam with a history of more than one hundred Years, strives continuously to improve human health by reaching excellence in health worker training, science and technology, and providing senior experts for the health sector.`
+            ],
+            city: `Hanoi`,
+            location: `No.1, Ton That Tung Street, Trung Tu Ward, Dong Da District, Hanoi`,
+            img: require(`../assets/photos/homeBanner1.png`),
+            admission: 1720,
+            refURL: [
+                `https://ielts-fighter.com/tin-tuc/dai-hoc-y-ha-noi_mt1641797363.html`,
+                `https://www.healthcarestudies.com/institutions/hanoi-medical-university`,
+                `https://image.tienphong.vn/Uploaded/2024/wpqrnvqdn/2024_06_09/de-an-tuyen-sinh-truong-dh-y-ha-noi-7826.pdf`,
+                `https://hmu.edu.vn/p/dce06f92-b824-4f38-97b5-cb72a9fdd796/co-hoi-nghe-nghiep`,
+                `https://sdh.hmu.edu.vn/images/2024/TUY%E1%BB%82N%20SINH/%C4%90%E1%BB%80%20%C3%81N%20TSS%C4%90H/2024_QD_776%20Q%C4%90%20ban%20h%C3%A0nh%20%C4%91%E1%BB%81%20%C3%A1n%20tuy%E1%BB%83n%20sinh%202024.pdf`,
+                `https://sdh.hmu.edu.vn/images/2024/TUY%E1%BB%82N%20SINH/%C4%90%E1%BB%80%20%C3%81N%20TSS%C4%90H/2024_QD_776%20Q%C4%90%20ban%20h%C3%A0nh%20%C4%91%E1%BB%81%20%C3%A1n%20tuy%E1%BB%83n%20sinh%202024.pdf`,
+            ],
+            major: [
+                {
+                    majorName: `General Medicine`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 24.25,
+                    highestStandardScore: 27.73,
+                },
+                {
+                    majorName: `Traditional Medicine`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 24.77,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Dentistry`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 25.5,
+                    highestStandardScore: 27.5,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Preventive Medicine`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 22.3,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Nutrition`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 23.19,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Optometry`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 25.4,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Medical Laboratory Technology`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 24.85,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Rehabilitation Techniques`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 22.7,
+                },
+                {
+                    majorName: `Nursing (Advanced Program)`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 21,
+                    highestStandardScore: 24,
+                    degreeType: `College Advanced Program`,
+                },
+                {
+                    majorName: `Public Health`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 20.7,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Psychology`,
+                    examGroup: [`B00`, `D01`, `C00`],
+                    lowestStandardScore: 1,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Birthing (Midwife)`,
+                    examGroup: [`B00`],
+                    lowestStandardScore: 1,
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Dental restoration techniques`,
+                    examGroup: [`B00`],
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `General Medical (at Thanh Hoa Branch)`,
+                    examGroup: [`B00`,`B08`],
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Nursing (at Thanh Hoa Branch)`,
+                    examGroup: [`B00`],
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Rehabilitation Techniques (at Thanh Hoa Branch)`,
+                    examGroup: [`B00`],
+                    afterGraduation: true,
+                },
+                {
+                    majorName: `Medical Laboratory Technology (at Thanh Hoa Branch)`,
+                    examGroup: [`B00`],
+                    afterGraduation: true,
+                },
+
+            ],
+            mainMajor: [
+                `General Medicine`,
+                `Dentistry`,
+                `Preventive Medicine`,
+                `Traditional Medicine`,
+                `Nursing`,
+                `Bachelor of Medical Technology`,
+                `Bachelor of Public Health`,
+                `Bachelor of Nutrition`,
+                `Bachelor of Optometry`,
+            ],
+            lowestStandardScore: 19,
+            highestStandardScore: 27.73,
+            scoreRefYear: 2023,
+            minFee: 21000000,
+            maxFee: 55000000,
+            unitFee: `VND`,
+            yearOrSemForFee: `Year`,
+        }
     ]
 
     return { ListFavSubject, listIntersts, bannerList, suitableForYou, bestOfScience, bestOfEconomic, mbti, mbtiGroup }
