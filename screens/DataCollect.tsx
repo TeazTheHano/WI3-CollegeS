@@ -20,6 +20,7 @@ export default function DataCollect() {
     const [interest, setInterest] = React.useState<string[]>([])
     const [favorite, setFavorite] = React.useState<string[]>([])
     const [goal, setGoal] = React.useState<string>('')
+    const [subTitleColor, setSubTitleColor] = React.useState(clrStyle.grey2)
 
     const [userInfo, setUserInfo] = React.useState<UserInfo | undefined>(undefined)
 
@@ -52,7 +53,7 @@ export default function DataCollect() {
                         persona: persona,
                         interest: interest,
                         favorite: favorite,
-                        goal: goal
+                        goal: goal?.length > 0 ? goal : 'No goal yet'
                     }
                 }).then((res) => {
                     if (res) {
@@ -87,16 +88,26 @@ export default function DataCollect() {
                 return (
                     <BoardingInput
                         title='Your age'
-                        value={age}
+                        value={age.toString()}
+                        isNumber={true}
                         onChgText={setAge as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
             case 1:
+                if (currentStep === 1 && persona.length < 4) {
+                    setTimeout(() => {
+                        setSubTitleColor(clrStyle.main7)
+                    }, 3000);
+                }
+
                 return (
                     <BoardingInput
                         title='Your personality'
                         subTitle={`Don't know yet ? `}
                         supFncTitle='Test here'
+                        supFncTitleColor={subTitleColor}
+                        autoCap='characters'
+                        maxLength={4}
                         supFnc={() => {
                             // TODO: Link to personality test
                             Linking.openURL('https://www.google.com').catch(err => console.error('An error occurred', err))

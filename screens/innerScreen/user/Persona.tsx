@@ -1,11 +1,11 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../assets/Class'
-import clrStyle, { componentStyle } from '../../assets/componentStyleSheet'
-import styles, { vw } from '../../assets/stylesheet'
-import defaultData, { MBTI } from '../../data/data'
-import { getUserInfo } from '../../data/storageFunc'
-import { marginBottomForScrollView } from '../../assets/component'
+import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
+import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
+import styles, { vw } from '../../../assets/stylesheet'
+import defaultData, { MBTI } from '../../../data/data'
+import { getUserInfo } from '../../../data/storageFunc'
+import { marginBottomForScrollView } from '../../../assets/component'
 import { SvgXml } from 'react-native-svg'
 
 export default function Persona({ navigation, route }) {
@@ -16,22 +16,22 @@ export default function Persona({ navigation, route }) {
     const [colorTheme, setColorTheme] = useState<string>(clrStyle.main5)
 
     useEffect(() => {
-        mbti.filter((item) => {
-            if (item.mbti === data.data.persona) {
-                setPersonaData(item)
-                console.log(item.mbti);
-            }
+        const unsubscribe = navigation.addListener('focus', () => {
+            mbti.filter((item) => {
+                if (item.mbti === data) {
+                    setPersonaData(item)
+                    console.log(item.mbti);
+                }
+            })
+            mbtiGroup.filter((group, index) => {
+                if (group.data.filter((f1) => f1.mbti === data).length > 0) {
+                    setSelectedGroup(index)
+                    setColorTheme(group.clr)
+                }
+            })
         })
-    }, [])
-
-    useEffect(() => {
-        mbtiGroup.filter((group, index) => {
-            if (group.data.filter((f1) => f1.mbti === data.data.persona).length > 0) {
-                setSelectedGroup(index)
-                setColorTheme(group.clr)
-            }
-        })
-    }, [personaData])
+        return unsubscribe
+    }, [data])
 
     return (
         <SaveViewWithColorStatusBar
@@ -42,7 +42,7 @@ export default function Persona({ navigation, route }) {
                 returnPreScreen={true}
                 returnPreScreenFnc={navigation.goBack}
                 title='Persona'>
-                <Nunito14Bold style={[styles.textCenter, { color: clrStyle.grey2 }]}>{data.data.persona}</Nunito14Bold>
+                <Nunito14Bold style={[styles.textCenter, { color: clrStyle.grey2 }]}>{data}</Nunito14Bold>
             </TopNav>
             <ScrollView
                 contentContainerStyle={[styles.flexColStartCenter, styles.gap6vw, styles.paddingV4vw, styles.paddingH4vw]}
@@ -60,7 +60,7 @@ export default function Persona({ navigation, route }) {
                     <View style={[styles.w100, styles.positionAbsolute, { borderTopWidth: 2, borderTopColor: clrStyle.grey1 }]} />
                     <View style={[styles.flexColCenter, styles.paddingH4vw, { backgroundColor: clrStyle.white, zIndex: 1 }]}>
                         <Nunito14Bold style={{ color: colorTheme }}>Personality of</Nunito14Bold>
-                        <Nunito14Bold style={{ color: colorTheme }}>{data.data.persona} group</Nunito14Bold>
+                        <Nunito14Bold style={{ color: colorTheme }}>{data} group</Nunito14Bold>
                     </View>
                 </View>
 

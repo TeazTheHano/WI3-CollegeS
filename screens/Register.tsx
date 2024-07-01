@@ -25,8 +25,14 @@ export default function Register() {
     const [hidePassword, setHidePassword] = React.useState(true)
 
     const list = [accountName, email, password, confirmPassword]
+    const required = [accountName, email, password, confirmPassword]
 
     function currentStepAdjust(act: boolean) {
+        if (act && required[currentStep] === '') {
+            Alert.alert('Please fill in all fields');
+            return;
+        }
+
         if (act && currentStep < list.length - 1) {
             setShowGoBack(false);
             setCurrentStep(currentStep + 1);
@@ -95,6 +101,7 @@ export default function Register() {
                     <BoardingInput
                         title='Your Name'
                         value={accountName}
+                        autoCap='words'
                         onChgText={setAccountName as React.Dispatch<React.SetStateAction<string | number>>}
                         contentType='username'
                     />)
@@ -104,8 +111,9 @@ export default function Register() {
                     <BoardingInput
                         title='Email'
                         value={email}
-                        onChgText={setEmail as React.Dispatch<React.SetStateAction<string | number>>}
+                        autoCap='none'
                         contentType='emailAddress'
+                        onChgText={setEmail as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
                 break;
             case 2:
@@ -113,6 +121,7 @@ export default function Register() {
                     <BoardingInput
                         title='Password'
                         value={password}
+                        autoCap='none'
                         onChgText={setPassword as React.Dispatch<React.SetStateAction<string | number>>}
                         contentType='password'
                         hideContent={hidePassword}
@@ -124,6 +133,7 @@ export default function Register() {
                     <BoardingInput
                         title='Confirm Password'
                         value={confirmPassword}
+                        autoCap='none'
                         onChgText={setConfirmPassword as React.Dispatch<React.SetStateAction<string | number>>}
                         contentType='password'
                         hideContent={hidePassword}

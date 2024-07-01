@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Alert } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import styles, { vw } from '../assets/stylesheet'
 import { BoardingInput, BoardingNavigation, LowBtn, Nunito18Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
@@ -22,6 +22,11 @@ export default function Login() {
     const list = [email, password,]
 
     function currentStepAdjust(act: boolean) {
+        if (act && list[currentStep] === '') {
+            Alert.alert('Please fill in all fields');
+            return;
+        }
+
         if (act && currentStep < list.length - 1) {
             setShowGoBack(false);
             setCurrentStep(currentStep + 1);

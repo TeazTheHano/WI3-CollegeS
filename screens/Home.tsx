@@ -120,7 +120,7 @@ export default function Home() {
       <TopNav
         title='College Search'
         rightIcon={searchIcon(vw(6), vw(6), 'white')}
-        rightFnc={() => console.log('search')}
+        rightFnc={() => navigation.navigate('Search')}
         hideChildren={showTopNav}
       >
         <View style={[styles.flexRowBetweenCenter, styles.paddingBottom2vw, styles.paddingH2vw, styles.paddingTop2vw]}>

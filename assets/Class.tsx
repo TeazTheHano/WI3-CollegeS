@@ -571,6 +571,7 @@ export class LowBtn extends Component<{
 export class BoardingInput extends Component<{
     title: string,
     supFncTitle?: string,
+    supFncTitleColor?: string,
     supFnc?: () => void,
     subTitle?: string,
     placeholder?: string,
@@ -580,14 +581,15 @@ export class BoardingInput extends Component<{
     CustomStyleClass?: any,
     CustomStyleText?: any,
     CustomStyleInput?: any,
-    required?: boolean,
     contentType?: string
     hideContent?: boolean,
     hideContentFnc?: (value: boolean) => void,
+    autoCap?: 'none' | 'characters' | 'words' | 'sentences',
+    maxLength?: number,
 }> {
 
     render() {
-        const { title, placeholder, value, onChgText, CustomStyleClass, CustomStyleInput, CustomStyleText, contentType, subTitle, supFnc, supFncTitle, hideContent, hideContentFnc } = this.props;
+        const { title, placeholder, value, onChgText, CustomStyleClass, CustomStyleInput, CustomStyleText, contentType, subTitle, supFnc, supFncTitle, hideContent, hideContentFnc, autoCap, maxLength, supFncTitleColor } = this.props;
         const isNumber = this.props.isNumber ? this.props.isNumber : false;
 
         function changFnc(value: string | number) {
@@ -608,9 +610,11 @@ export class BoardingInput extends Component<{
                     value={value ? value.toString() : ''}
                     onChangeText={changFnc}
                     placeholderTextColor={clrStyle.grey2}
-                    secureTextEntry={hideContent}
+                    secureTextEntry={hideContent? hideContent : false}
                     keyboardType={isNumber ? 'numeric' : 'default'}
+                    autoCapitalize={autoCap ? autoCap : 'sentences'}
                     textContentType={contentType}
+                    maxLength={maxLength ? maxLength : undefined}
                     style={[styles.w100, styles.border1, styles.textCenter, { borderColor: value ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: value ? 'Nunito-Bold' : 'Nunito-Regular', fontSize: vw(4.5), borderRadius: vw(2), color: value ? clrStyle.main5 : clrStyle.grey2 }, CustomStyleInput]} />
                 {hideContentFnc ?
                     <TouchableOpacity
@@ -622,7 +626,7 @@ export class BoardingInput extends Component<{
                 {subTitle ?
                     <View style={[styles.flexRowCenter]}>
                         <Nunito16Reg style={[{ color: clrStyle.grey2 }]}>{subTitle}</Nunito16Reg>
-                        <TouchableOpacity onPress={supFnc}><Nunito16Reg style={[styles.textUnderline, { color: clrStyle.grey3 }]}>{supFncTitle}</Nunito16Reg></TouchableOpacity>
+                        <TouchableOpacity onPress={supFnc}><Nunito16Reg style={[styles.textUnderline, { color: supFncTitleColor ? supFncTitleColor : clrStyle.grey3 }]}>{supFncTitle}</Nunito16Reg></TouchableOpacity>
                     </View>
                     : null
                 }
@@ -749,10 +753,9 @@ export class BoardingPicking extends Component<{
     }
 }
 
-
 export class TopNav extends Component<{
     children?: React.ReactNode,
-    title: string,
+    title?: string,
     returnPreScreen?: boolean,
     returnPreScreenFnc?: () => void,
     rightIcon?: any,
@@ -775,7 +778,7 @@ export class TopNav extends Component<{
                             </TouchableOpacity>
                             : <View style={[{ width: vw(10), height: vw(10), }]} />
                         }
-                        <Nunito20Bold style={[styles.textCenter, styles.alignSelfCenter, { color: 'white' }]}>{title}</Nunito20Bold>
+                        {title ? <Nunito20Bold style={[styles.textCenter, styles.alignSelfCenter, { color: 'white' }]}>{title}</Nunito20Bold> : null}
                         {rightIcon ?
                             <TouchableOpacity
                                 style={[styles.padding2vw]}

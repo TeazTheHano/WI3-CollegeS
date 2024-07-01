@@ -1,11 +1,11 @@
 import { View, Text, ScrollView, TouchableOpacity, FlatList, Animated } from 'react-native'
 import React, { useState } from 'react'
-import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../assets/Class'
-import clrStyle, { componentStyle } from '../../assets/componentStyleSheet'
+import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
+import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
-import styles, { vw } from '../../assets/stylesheet'
-import { marginBottomForScrollView } from '../../assets/component'
-import defaultData from '../../data/data'
+import styles, { vw } from '../../../assets/stylesheet'
+import { marginBottomForScrollView } from '../../../assets/component'
+import defaultData from '../../../data/data'
 import { SvgXml } from 'react-native-svg'
 
 export default function ExplorePersona() {
@@ -62,7 +62,7 @@ export default function ExplorePersona() {
                 key={index}
                 style={[styles.flexColEndCenter, styles.gap2vw, styles.padding4vw, styles.shadowW0H05Black, styles.margin2vw, styles.borderRadius3vw, styles.w30vw, { backgroundColor: clrStyle.white }]}
                 onPress={() => {
-
+                    navigation.navigate('Persona', { data: item.mbti })
                 }}>
                 <View style={[{ width: vw(20), height: vw(25) }]}>{item.icon}</View>
                 <Nunito14Bold style={[styles.textCenter, { color: clrStyle.grey2 }]}>{item.name}</Nunito14Bold>

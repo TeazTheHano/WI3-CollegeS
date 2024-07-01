@@ -4,23 +4,29 @@ import { BottomBar, Nunito14Bold, Nunito16Bold, Nunito16Reg, Nunito18Bold, Nunit
 import clrStyle from '../assets/componentStyleSheet'
 import { getUserInfo } from '../data/storageFunc'
 import styles, { vw } from '../assets/stylesheet'
-import { bestOfScCoIcon, curveRightArrow, MBTIIcon, wishListIcon } from '../assets/svgXml'
+import { bestOfScCoIcon, curveRightArrow, ENTJicon, MBTIIcon, wishListIcon } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
 import defaultData from '../data/data'
 import { marginBottomForScrollView } from '../assets/component'
 
 export default function User() {
   const navigation = useNavigation()
-  const { bestOfEconomic } = defaultData()
+  const { bestOfEconomic, mbti } = defaultData()
 
   const [userInfo, setUserInfo] = useState<any>(null)
 
   useEffect(() => {
     getUserInfo().then((res) => {
       setUserInfo(res);
+      mbti.filter((item) => {
+        if (item.mbti === res?.data?.persona) {
+          setMbtiIcon(item.icon)
+        }
+      })
     })
   }, [userInfo])
 
+  const [mbtiIcon, setMbtiIcon] = useState<any>(null)
 
   interface UserTarget {
     title: string,
@@ -29,7 +35,9 @@ export default function User() {
     navTo: string
   }
   let userTarget: UserTarget[] = [
-    { title: 'MBTI', icon: MBTIIcon(), data: userInfo?.data?.persona, navTo: 'Persona' },
+    {
+      title: 'MBTI', icon: mbtiIcon, data: userInfo?.data?.persona, navTo: 'Persona'
+    },
     { title: 'Goal', icon: bestOfScCoIcon(), data: userInfo?.data?.goal, navTo: 'Persona' },
     { title: 'Wishlist', icon: wishListIcon(), data: userInfo?.data?.goal, navTo: 'Persona' },
   ]
@@ -60,7 +68,7 @@ export default function User() {
             userTarget.map((item, index) => {
               return (
                 <TouchableOpacity
-                  onPress={() => { navigation.navigate(item.navTo, { data: userInfo }) }}
+                  onPress={() => { navigation.navigate(item.navTo, { data: userInfo.data.persona }) }}
                   key={index} style={[styles.flexCol, styles.alignItemsCenter, styles.w30, styles.shadowW0H1Black, styles.borderRadius4vw, styles.padding2vw, { backgroundColor: clrStyle.white }]}>
                   <Nunito14Bold style={[styles.paddingTop2vw, styles.textCenter, { color: clrStyle.grey3 }]}>{item.title}</Nunito14Bold>
                   <View style={[{ width: '100%', height: vw(28), borderTopWidth: 2, borderTopColor: clrStyle.grey1 }]}>{item.icon}</View>
