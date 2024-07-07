@@ -120,8 +120,6 @@ export default function Home() {
       useNativeDriver: false,
       easing: Easing.inOut(Easing.ease),
     }).start();
-    console.log(topNavMove);
-
   }, [showTopNav])
 
   return (
