@@ -13,6 +13,7 @@ export default function Compare() {
       <TopNav
         title='Compare' />
       <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.flexColStartCenter, styles.gap6vw, styles.paddingV4vw, styles.paddingH4vw]}
         style={[styles.flex1]}>
         <Text>Compare</Text>

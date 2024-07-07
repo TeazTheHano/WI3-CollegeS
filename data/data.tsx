@@ -65,6 +65,7 @@ export interface MBTIGroup {
 export interface University {
     id?: number,
     name?: string,
+    shortName?: string | null,
     description?: string[],
     city?: string,
     location?: string,
@@ -318,7 +319,8 @@ export default function defaultData() {
     const universityList: University[] = [
         {
             id: 1,
-            name: `Hanoi Medical University (HMU)`,
+            name: `Hanoi Medical University`,
+            shortName: `HMU`,
             description: [
                 `Hanoi Medical University, which was established in 1902 under the name: Indochina Medico-Pharmaceutical University, was the first university of Indochina. Hanoi Medical University has been known as the leading education entity in the country in training and providing highly qualified human resources for the health sector in Vietnam.`,
                 `Hanoi Medical University, one of the leading Universities in Vietnam with a history of more than one hundred Years, strives continuously to improve human health by reaching excellence in health worker training, science and technology, and providing senior experts for the health sector.`
@@ -458,6 +460,7 @@ export default function defaultData() {
         {
             id: 2,
             name: `Vinh University`,
+            shortName: null,
             description: [
                 `Established in 1959, Vinh University was one of the first universities of the Vietnamese education system after the August Revolution. The school is situated on the hometown of Former President Ho Chi Minh - the land of talented people with thirsts for knowledge, bursts of nationalism and revolution.`
             ],
@@ -822,90 +825,105 @@ export default function defaultData() {
                 },
                 {
                     majorName: `Doctorate - Calculus`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Algebra and Number Theory`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: null,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Topology`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: null,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Mathematics Education`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - The Theory of Probability and Mathematical Statistics`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Optics`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Physics Education`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Organic Chemistry`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Chemistry Education`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Botany`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Vietnamese as a Language`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: null,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Vietnamese Literature`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: null,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - World History`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
-                    majorName: `Doctorae - Vietnamese History`,
+                    majorName: `Doctorate - Vietnamese History`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 2,
                     lowestStandardScore: null,
                 },
                 {
                     majorName: `Doctorate - Education Management`,
+                    degreeType: `Doctor`,
                     examGroup: null,
                     addmission: 6,
                     lowestStandardScore: null,
@@ -914,7 +932,8 @@ export default function defaultData() {
         },
         {
             id: 3,
-            name: `Hanoi Law University (HLU)`,
+            name: `Hanoi Law University`,
+            shortName: `HLU`,
             description: [
                 `Hanoi Law University, established in 1979, is a prestigious institution located in Hanoi, Vietnam. The university is dedicated to providing high-quality legal education and producing competent legal professionals. It is a government-owned institution and is recognized for its comprehensive curriculum that focuses on both theoretical and practical aspects of law.`
             ],

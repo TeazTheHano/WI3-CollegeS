@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, TouchableOpacity, FlatList, Animated } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, ScrollView, TouchableOpacity, FlatList, Animated, Linking } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
 import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
@@ -15,7 +15,7 @@ export default function ExplorePersona() {
     const [selectedGroup, setSelectedGroup] = useState<number>(0)
     const [showSelector, setShowSelector] = useState<boolean>(false)
 
-    const animation = new Animated.Value(0)
+    const animation = useRef(new Animated.Value(0)).current
     const opacityAnimation = animation.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 1]
@@ -82,6 +82,7 @@ export default function ExplorePersona() {
                 title={mbtiGroup[selectedGroup].gr}>
             </TopNav>
             <ScrollView
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={[styles.flexColStartCenter, styles.gap4vw, styles.paddingV4vw, styles.paddingH8vw]}
                 style={[styles.flex1]}>
                 {selectorRender()}
@@ -99,9 +100,10 @@ export default function ExplorePersona() {
             <View style={[styles.padding4vw, componentStyle.upperShadow, { backgroundColor: clrStyle.white }]}>
                 <LowBtn
                     round={vw(2)}
-                    title='Explore other personalities'
+                    title='Test personality HERE'
                     onPress={() => {
-                        navigation.navigate('Test')
+                        // TODO: Link to personality test
+                        Linking.openURL('https://www.google.com').catch(err => console.error('An error occurred', err))
                     }}
                 />
             </View>

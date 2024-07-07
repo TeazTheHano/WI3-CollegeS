@@ -45,12 +45,12 @@ export default function Register() {
             }
 
             saveUserInfo({
-                userID: `${accountName}+${email}`,
+                userID: `${accountName.trim()}+${email.trim()}`,
                 synced: false,
-                name: accountName,
+                name: accountName.trim(),
                 age: 0,
                 loginMethod: 'email',
-                email: email,
+                email: email.trim(),
                 password: password,
                 dataCollect: false,
                 createTime: new Date().getTime(),

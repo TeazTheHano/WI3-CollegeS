@@ -33,6 +33,7 @@ export default function Login() {
         } else if (!act && currentStep > 0) {
             setCurrentStep(currentStep - 1);
         } else if (act && currentStep === list.length - 1) {
+            // TODO: do trim() for email and password
             // TODO: firebase auth
             // TODO: after auth, navigate to Onboard
             // TODO: check if have other data to collect

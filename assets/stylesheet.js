@@ -563,6 +563,18 @@ const styles = StyleSheet.create({
         paddingRight: vw(1),
     },
 
+    paddingTop10vw: {
+        paddingTop: vw(10),
+    },
+
+    paddingTop8vw: {
+        paddingTop: vw(8),
+    },
+
+    paddingTop6vw: {
+        paddingTop: vw(6),
+    },
+
     paddingTop4vw: {
         paddingTop: vw(4),
     },
@@ -1249,6 +1261,10 @@ const styles = StyleSheet.create({
 
     border1: {
         borderWidth: 1,
+    },
+
+    zIndex1: {
+        zIndex: 1,
     },
 
     zIndexM1: {

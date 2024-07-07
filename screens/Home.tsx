@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView, ImageBackground } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getUserInfo } from '../data/storageFunc'
 import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito12Reg, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle, { componentStyle } from '../assets/componentStyleSheet'
@@ -108,7 +108,21 @@ export default function Home() {
   // Track the Y position of the ScrollView
   const [showTopNav, setShowTopNav] = useState<boolean>(false);
   const topNavHeight = vh(20);
+  const topNavHideAnimation = useRef(new Animated.Value(0)).current;
+  const topNavMove = topNavHideAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [vw(16), 0]
+  });
+  useEffect(() => {
+    Animated.timing(topNavHideAnimation, {
+      toValue: showTopNav ? 1 : 0,
+      duration: 100,
+      useNativeDriver: false,
+      easing: Easing.inOut(Easing.ease),
+    }).start();
+    console.log(topNavMove);
 
+  }, [showTopNav])
 
   return (
     <SaveViewWithColorStatusBar
@@ -116,13 +130,13 @@ export default function Home() {
       StatusBarLightContent={true}
       bgColor={clrStyle.white}
     >
-      {/* HomeNameBar */}
       <TopNav
         title='College Search'
         rightIcon={searchIcon(vw(6), vw(6), 'white')}
         rightFnc={() => navigation.navigate('Search')}
-        hideChildren={showTopNav}
+        hideChildren={topNavMove}
       >
+        {/* HomeNameBar */}
         <View style={[styles.flexRowBetweenCenter, styles.paddingBottom2vw, styles.paddingH2vw, styles.paddingTop2vw]}>
           <View style={[styles.flexCol, styles.gap1vw]}>
             <Nunito18Bold style={[{ color: 'white' }]}>Hello, {userInfo?.name}</Nunito18Bold>
@@ -135,6 +149,7 @@ export default function Home() {
       </TopNav>
 
       <ScrollView
+        showsVerticalScrollIndicator={false}
         onScroll={(e) => { setShowTopNav(e.nativeEvent.contentOffset.y > topNavHeight ? true : false) }}
         style={[styles.flex1]}>
         {/* banner */}

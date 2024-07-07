@@ -50,6 +50,7 @@ export default function User() {
       <TopNav
         title='User' />
       <ScrollView
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={[styles.flexColStartCenter, styles.gap6vw, styles.paddingV4vw, styles.paddingH4vw]}
         style={[styles.flex1]}>
 

@@ -1,4 +1,4 @@
-import React, { Children, Component, ComponentType, useState } from 'react';
+import React, { Children, Component, ComponentType, useRef, useState } from 'react';
 // system import
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -610,7 +610,7 @@ export class BoardingInput extends Component<{
                     value={value ? value.toString() : ''}
                     onChangeText={changFnc}
                     placeholderTextColor={clrStyle.grey2}
-                    secureTextEntry={hideContent? hideContent : false}
+                    secureTextEntry={hideContent ? hideContent : false}
                     keyboardType={isNumber ? 'numeric' : 'default'}
                     autoCapitalize={autoCap ? autoCap : 'sentences'}
                     textContentType={contentType}
@@ -760,15 +760,13 @@ export class TopNav extends Component<{
     returnPreScreenFnc?: () => void,
     rightIcon?: any,
     rightFnc?: () => void,
-    hideChildren?: boolean,
+    hideChildren?: any,
 }> {
     render() {
         const { children, title, returnPreScreen, returnPreScreenFnc, rightIcon, rightFnc, hideChildren } = this.props;
-        let animation = new Animated.Value(0);
-
         return (
             <>
-                <Animated.View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, styles.overflowHidden, { backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }]}>
+                <Animated.View style={[styles.paddingH4vw, styles.paddingBottom4vw, styles.paddingTop2vw, styles.overflowHidden, { zIndex: 1, backgroundColor: clrStyle.main5, borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }]}>
                     <View style={[styles.paddingTop2vw, styles.w100, styles.flexRowBetweenCenter]}>
                         {returnPreScreen ?
                             <TouchableOpacity
@@ -788,7 +786,7 @@ export class TopNav extends Component<{
                             : <View style={[{ width: vw(10), height: vw(10), }]} />
                         }
                     </View>
-                    <Animated.View style={{ display: hideChildren ? 'none' : undefined }}>
+                    <Animated.View style={{ height: hideChildren, opacity: hideChildren}}>
                         {children}
                     </Animated.View>
                 </Animated.View >

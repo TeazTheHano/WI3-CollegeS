@@ -1,5 +1,5 @@
 
-import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Linking } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ImageStyle, StatusBar, SafeAreaView, TextInput, Animated, Linking, Alert } from 'react-native'
 import React, { useEffect, useRef } from 'react'
 import styles, { vw } from '../assets/stylesheet'
 import { BoardingInput, BoardingNavigation, BoardingPicking, LowBtn, Nunito14Reg, Nunito18Bold, Nunito20Bold, Nunito24Bold, Nunito24Reg, ProcessBarSelfMade } from '../assets/Class'
@@ -25,6 +25,7 @@ export default function DataCollect() {
     const [userInfo, setUserInfo] = React.useState<UserInfo | undefined>(undefined)
 
     const list = [age, persona, interest, favorite, goal]
+    const required = [age, persona, interest, favorite]
 
     useEffect(() => {
         getUserInfo().then((res) => {
@@ -33,6 +34,10 @@ export default function DataCollect() {
     }, [currentStep])
 
     function currentStepAdjust(act: boolean) {
+        if (act && required[currentStep]?.toString().trim().length === 0) {
+            Alert.alert('Please fill in all fields');
+            return;
+        }
         if (act && currentStep < list.length - 1) {
             setShowGoBack(false);
             setCurrentStep(currentStep + 1);
@@ -53,7 +58,7 @@ export default function DataCollect() {
                         persona: persona,
                         interest: interest,
                         favorite: favorite,
-                        goal: goal?.length > 0 ? goal : 'No goal yet'
+                        goal: goal?.trim().length > 0 ? goal.trim() : 'No goal yet'
                     }
                 }).then((res) => {
                     if (res) {
@@ -88,7 +93,7 @@ export default function DataCollect() {
                 return (
                     <BoardingInput
                         title='Your age'
-                        value={age.toString()}
+                        value={age}
                         isNumber={true}
                         onChgText={setAge as React.Dispatch<React.SetStateAction<string | number>>}
                     />)
