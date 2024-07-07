@@ -10,7 +10,7 @@ import { University } from '../../../data/data'
 import { SvgXml } from 'react-native-svg'
 
 export default function UniversityDetail({ route }: any) {
-    const item = route.params.item
+    const uniItem = route.params.item
     const navigation = useNavigation()
 
     const [currentTab, setCurrentTab] = React.useState<number>(0)
@@ -70,11 +70,11 @@ export default function UniversityDetail({ route }: any) {
         const tabOption = [`Introduce`, `Education`, `Community`]
         return (
             <View style={[styles.flexRowEvenlyCenter, styles.paddingH6vw, styles.marginTop4vw, styles.marginBottom2vw, { borderBottomColor: clrStyle.grey2, borderBottomWidth: 1 }]}>
-                {tabOption.map((item: string, index: number) => (
+                {tabOption.map((tabOptionItem: string, index: number) => (
                     <TouchableOpacity key={index} style={[styles.flex1, styles.paddingV3vw, styles.flexRowCenter, { borderBottomWidth: vw(0.75), borderBottomColor: currentTab == index ? clrStyle.main1 : `rgba(0,0,0,0)` }]} onPress={() => setCurrentTab(index)}>
                         {currentTab == index ?
-                            <Nunito16Bold style={[{ color: clrStyle.main1 }]}>{item}</Nunito16Bold>
-                            : <Nunito16Reg style={[{ color: clrStyle.grey2 }]}>{item}</Nunito16Reg>
+                            <Nunito16Bold style={[{ color: clrStyle.main1 }]}>{tabOptionItem}</Nunito16Bold>
+                            : <Nunito16Reg style={[{ color: clrStyle.grey2 }]}>{tabOptionItem}</Nunito16Reg>
                         }
                     </TouchableOpacity>
                 ))}
@@ -103,8 +103,8 @@ export default function UniversityDetail({ route }: any) {
                         <View style={[styles.w100, styles.positionAbsolute, { height: 2, backgroundColor: clrStyle.main6 }]}></View>
                     </View>
 
-                    {item.description.map((item: string, index: number) => (
-                        <Nunito16Reg key={index} style={[styles.paddingV2vw, styles.textJustify, { color: clrStyle.grey3 }]}>{item}</Nunito16Reg>
+                    {uniItem.description.map((descriptionItem: string, index: number) => (
+                        <Nunito16Reg key={index} style={[styles.paddingV2vw, styles.textJustify, { color: clrStyle.grey3 }]}>{descriptionItem}</Nunito16Reg>
                     ))}
                 </View >
             )
@@ -112,18 +112,18 @@ export default function UniversityDetail({ route }: any) {
 
         function renderEducaion() {
             let degreeTypeList = [`All`, `College`, `Doctor`, `Master`, `College Advanced Program`, `After Graduation`,]
-            let majorList = item.major
-            let collegeList = item.major.filter((item: any) => item.degreeType === undefined || item.degreeType === `College`)
-            let doctorList = item.major.filter((item: any) => item.degreeType == `Doctor`)
-            let masterList = item.major.filter((item: any) => item.degreeType == `Master`)
-            let advancedList = item.major.filter((item: any) => item.degreeType == `College Advanced Program`)
-            let afterGraList = item.major.filter((item: any) => item.afterGraduation == true)
+            let majorList = uniItem.major
+            let collegeList = uniItem.major.filter((uniItem: any) => uniItem.degreeType === undefined || uniItem.degreeType === `College`)
+            let doctorList = uniItem.major.filter((uniItem: any) => uniItem.degreeType == `Doctor`)
+            let masterList = uniItem.major.filter((uniItem: any) => uniItem.degreeType == `Master`)
+            let advancedList = uniItem.major.filter((uniItem: any) => uniItem.degreeType == `College Advanced Program`)
+            let afterGraList = uniItem.major.filter((uniItem: any) => uniItem.afterGraduation == true)
 
             let sortTag = [`A-Z`, `Z-A`, `Highest score`, `Lowest score`]
 
             switch (currentDegreeType) {
                 case `All`:
-                    majorList = item.major
+                    majorList = uniItem.major
                     break;
                 case `College`:
                     majorList = collegeList
@@ -194,13 +194,13 @@ export default function UniversityDetail({ route }: any) {
                             </TouchableOpacity>
                             <View style={[styles.positionRelative, showSelector ? styles.shadowW0H1Black : null, styles.borderRadius3vw, styles.wfit, { backgroundColor: clrStyle.white, display: showSelector ? undefined : 'none' }]}>
                                 <Animated.View style={[styles.overflowHidden, styles.borderRadius3vw, styles.positionAbsolute, { opacity: tabSellectAnimation, backgroundColor: clrStyle.white }]}>
-                                    {degreeTypeList.map((item, index) => {
+                                    {degreeTypeList.map((degreeTypeListItem, index) => {
                                         return (
                                             <TouchableOpacity
                                                 key={index}
-                                                onPress={() => { setShowSelector(false); setCurrentDegreeType(item) }}
+                                                onPress={() => { setShowSelector(false); setCurrentDegreeType(degreeTypeListItem) }}
                                                 style={[styles.padding3vw, { backgroundColor: clrStyle.white, borderBottomWidth: index < degreeTypeList.length - 1 ? 1 : 0, borderBlockColor: clrStyle.grey1 }]}>
-                                                <Nunito14Bold style={[styles.paddingH2vw, { color: clrStyle.black }]}>{item}</Nunito14Bold>
+                                                <Nunito14Bold style={[styles.paddingH2vw, { color: clrStyle.black }]}>{degreeTypeListItem}</Nunito14Bold>
                                             </TouchableOpacity>
                                         )
                                     })}
@@ -209,19 +209,19 @@ export default function UniversityDetail({ route }: any) {
                         </View>
                         <View style={[styles.w10, { zIndex: 1 }]}>
                             <TouchableOpacity
-                                onPress={() => { setShowSort(!showSort), console.log(showSort) }}
+                                onPress={() => { setShowSort(!showSort) }}
                                 style={[styles.flexRowStartCenter, styles.gap1vw, styles.paddingV2vw, styles.wfit]}>
                                 <SvgXml xml={`<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.4415 6.62732H22M13.4415 11.4421H19.5547M13.4415 16.2569H17.1094M5.80564 6V18M5.80564 18L2 14.3317M5.80564 18L9.7566 14.3317" stroke="#808797" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
                             </TouchableOpacity>
                             <View style={[styles.positionRelative, showSort ? styles.shadowW0H1Black : null, styles.borderRadius3vw, styles.wfit, { backgroundColor: clrStyle.white, display: showSort ? undefined : 'none' }]}>
                                 <Animated.View style={[styles.overflowHidden, styles.borderRadius3vw, styles.positionAbsolute, { opacity: sortAnimation, backgroundColor: clrStyle.white, right: -24 }]}>
-                                    {sortTag.map((item, index) => {
+                                    {sortTag.map((sortTagItem, index) => {
                                         return (
                                             <TouchableOpacity
                                                 key={index}
-                                                onPress={() => { setShowSort(false); setCurrentSort(item) }}
+                                                onPress={() => { setShowSort(false); setCurrentSort(sortTagItem) }}
                                                 style={[styles.padding3vw, styles.w40vw, { backgroundColor: clrStyle.white, borderBottomWidth: index < degreeTypeList.length - 1 ? 1 : 0, borderBlockColor: clrStyle.grey1 }]}>
-                                                <Nunito14Bold style={[styles.paddingH2vw, styles.textRight, { color: clrStyle.black }]}>{item}</Nunito14Bold>
+                                                <Nunito14Bold style={[styles.paddingH2vw, styles.textRight, { color: clrStyle.black }]}>{sortTagItem}</Nunito14Bold>
                                             </TouchableOpacity>
                                         )
                                     })}
@@ -241,29 +241,30 @@ export default function UniversityDetail({ route }: any) {
 
                     {selectorRender()}
 
-                    {majorList.map((item: any, index: number) => (
+                    {majorList.map((majorListItem: any, index: number) => (
                         <TouchableOpacity
                             key={index}
                             style={[styles.flexRowBetweenCenter, styles.padding10, styles.gap2vw, styles.w100, styles.borderRadius3vw, styles.shadowW0H05Black, { backgroundColor: clrStyle.white, }]}
                             onPress={() => {
-                                console.log(item)
+                                navigation.navigate(`MajorDetail`, { major: majorListItem, uniItem: uniItem })
                             }}>
-                            {item.icon ? item.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
+                            {majorListItem.icon ? majorListItem.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
                             <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
-                                <Nunito16Bold style={{ color: clrStyle.grey3, }}>{item.majorName}</Nunito16Bold>
+                                <Nunito16Bold style={{ color: clrStyle.grey3, }}>{majorListItem.majorName}</Nunito16Bold>
                                 <View style={[styles.flexRow, styles.gap1vw]}>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main2 }]}>
-                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main1 }]}>{item.examGroup ? item.examGroup.join(', ') : `Recruitment`}</Nunito12Bold>
+                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main1 }]}>{majorListItem.examGroup ? majorListItem.examGroup.join(', ') : `Recruitment`}</Nunito12Bold>
                                     </View>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main8 }]}>
-                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main7 }]}>{item.degreeType ? item.degreeType : `Eco?Bla?`}</Nunito12Bold>
+                                        {/* TODO: check recuit */}
+                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main7 }]}>{majorListItem.degreeType ? majorListItem.degreeType : `Eco?Bla?`}</Nunito12Bold>
                                     </View>
                                 </View>
                             </View>
-                            {item.lowestStandardScore || item.lowestStandardScore == 0 ?
+                            {majorListItem.lowestStandardScore || majorListItem.lowestStandardScore == 0 ?
                                 <View style={[styles.flexColCenter, styles.padding1vw]}>
                                     <Nunito12Reg style={[styles.textRight, styles.w100, { color: clrStyle.grey2, }]}>Score</Nunito12Reg>
-                                    <Nunito20Bold style={[styles.textRight, styles.w100, { color: clrStyle.main5 }]}>{item.lowestStandardScore ? item.lowestStandardScore.toFixed(2) : `N/A`}</Nunito20Bold>
+                                    <Nunito20Bold style={[styles.textRight, styles.w100, { color: clrStyle.main5 }]}>{majorListItem.lowestStandardScore ? majorListItem.lowestStandardScore.toFixed(2) : `N/A`}</Nunito20Bold>
                                 </View>
                                 : null
                             }
@@ -292,11 +293,11 @@ export default function UniversityDetail({ route }: any) {
             <TopNav
                 returnPreScreen={true}
                 returnPreScreenFnc={() => navigation.goBack()}
-                title={item.name}
+                title={uniItem.name}
             />
             <ScrollView
                 style={[styles.flex1, { transform: [{ translateY: -vw(6) }] }]}>
-                <Animated.Image source={item.img} style={[styles.w100, { height: imageHeightAnimation, resizeMode: 'cover', borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }] as ImageStyle} />
+                <Animated.Image source={uniItem.img} style={[styles.w100, { height: imageHeightAnimation, resizeMode: 'cover', borderBottomLeftRadius: vw(6), borderBottomRightRadius: vw(6), }] as ImageStyle} />
                 {renderTabOption()}
                 <View style={[styles.padding4vw, styles.flex1]}>
                     {renderTab()}

@@ -20,6 +20,7 @@ import Persona from './screens/innerScreen/user/Persona'
 import ExplorePersona from './screens/innerScreen/user/ExplorePersona'
 import Search from './screens/innerScreen/home/Search'
 import UniversityDetail from './screens/innerScreen/home/UniversityDetail'
+import MajorDetail from './screens/innerScreen/home/MajorDetail'
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -44,6 +45,7 @@ export default function App() {
 
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="UniversityDetail" component={UniversityDetail} />
+        <Stack.Screen name="MajorDetail" component={MajorDetail} />
       </Stack.Navigator>
     </NavigationContainer>
   )
