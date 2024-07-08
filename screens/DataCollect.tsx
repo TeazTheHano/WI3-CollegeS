@@ -114,8 +114,7 @@ export default function DataCollect() {
                         autoCap='characters'
                         maxLength={4}
                         supFnc={() => {
-                            // TODO: Link to personality test
-                            Linking.openURL('https://www.google.com').catch(err => console.error('An error occurred', err))
+                            Linking.openURL('https://www.16personalities.com').catch(err => console.error('An error occurred', err))
                         }}
                         value={persona}
                         onChgText={setPersona as React.Dispatch<React.SetStateAction<string | number>>}

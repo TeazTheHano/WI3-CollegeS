@@ -82,6 +82,7 @@ export interface University {
         description?: string,
         afterGraduation?: boolean,
         addmission?: number | null,
+        majorFee?: number | null,
     }[],
     mainMajor?: string[],
     specialProgram?: string[],
@@ -927,6 +928,182 @@ export default function defaultData() {
                     examGroup: null,
                     addmission: 6,
                     lowestStandardScore: 0,
+                },
+                {
+                    majorName: `Master - Calculus`,
+                    addmission: 15,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Algebra and Number Theory`,
+                    addmission: 17,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Vietnamese`,
+                    addmission: 19,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Mathematics Education`,
+                    addmission: 5,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - The Theory of Probability and Mathematical Statistics`,
+                    addmission: 16,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Optics`,
+                    addmission: 15,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Physics Education`,
+                    addmission: 9,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Organic Chemistry`,
+                    addmission: 29,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Inorganic Chemistry`,
+                    addmission: 19,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Analytical Chemistry`,
+                    addmission: 11,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Chemistry Education`,
+                    addmission: 25,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Zoology`,
+                    addmission: 30,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Botany`,
+                    addmission: 20,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Experimental Biology`,
+                    addmission: 30,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Biology Education`,
+                    addmission: 25,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Information Technology`,
+                    addmission: 8,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Poltical Economy`,
+                    addmission: 30,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Aquaculture`,
+                    addmission: null,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Crop Sciences`,
+                    addmission: 55,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Finance Management`,
+                    addmission: 32,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Literature Education`,
+                    addmission: null,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Vietnamese Language of Arts`,
+                    addmission: null,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Construction Engineering`,
+                    addmission: 57,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `World History`,
+                    addmission: 18,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Vietnamese History`,
+                    addmission: 20,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Business Management`,
+                    addmission: 5,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Geography`,
+                    addmission: 15,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Political Science`,
+                    addmission: 24,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Politics Education`,
+                    addmission: 25,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `English Education`,
+                    addmission: null,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Government and Law History Education`,
+                    addmission: 93,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Primary Education`,
+                    addmission: 34,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Early Childhood Education`,
+                    addmission: 18,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Education Management`,
+                    addmission: 41,
+                    degreeType: `Master`,
+                },
+                {
+                    majorName: `Master - Physical Education`,
+                    addmission: 9,
+                    degreeType: `Master`,
+
                 },
             ],
         },

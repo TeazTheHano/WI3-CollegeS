@@ -102,8 +102,7 @@ export default function ExplorePersona() {
                     round={vw(2)}
                     title='Test personality HERE'
                     onPress={() => {
-                        // TODO: Link to personality test
-                        Linking.openURL('https://www.google.com').catch(err => console.error('An error occurred', err))
+                        Linking.openURL('https://www.16personalities.com').catch(err => console.error('An error occurred', err))
                     }}
                 />
             </View>

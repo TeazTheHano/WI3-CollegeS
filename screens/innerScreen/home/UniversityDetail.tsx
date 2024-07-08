@@ -1,11 +1,11 @@
-import { View, Text, ImageBackground, ImageStyle, Image, ScrollView, TouchableOpacity, Animated, Easing, Alert } from 'react-native'
+import { View, Text, ImageBackground, ImageStyle, Image, ScrollView, TouchableOpacity, Animated, Easing, Alert, Linking } from 'react-native'
 import React, { useRef } from 'react'
-import { Nunito12Bold, Nunito12Reg, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito16Reg, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
+import { Nunito12Bold, Nunito12Med, Nunito12Reg, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito16Med, Nunito16Reg, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
 import clrStyle from '../../../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import styles, { vh, vw } from '../../../assets/stylesheet'
 import { uniDetailPageHatIcon } from '../../../assets/svgXml'
-import { marginBottomForScrollView } from '../../../assets/component'
+import { formatNumber, ListGen, marginBottomForScrollView } from '../../../assets/component'
 import { University } from '../../../data/data'
 import { SvgXml } from 'react-native-svg'
 
@@ -95,6 +95,76 @@ export default function UniversityDetail({ route }: any) {
         function renderIntroduce() {
             return (
                 <View style={[styles.flexColStartCenter, styles.gap4vw]}>
+                    <View style={[styles.positionRelative, styles.w100, styles.flexRowCenter]}>
+                        <View style={[styles.wfit, styles.paddingH4vw, { zIndex: 1, backgroundColor: clrStyle.white }]}>
+                            <Nunito20Bold style={[{ color: clrStyle.main5 }]}>Quick View</Nunito20Bold>
+                        </View>
+                        <View style={[styles.w100, styles.positionAbsolute, { height: 2, backgroundColor: clrStyle.main6 }]}></View>
+                    </View>
+
+                    <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Full name: </Nunito16Bold>
+                        <Nunito16Med style={[styles.flex1, { color: clrStyle.main5 }]}>{uniItem.name}</Nunito16Med>
+                    </View>
+
+                    {uniItem.shortName ?
+                        <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                            <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Short name: </Nunito16Bold>
+                            <Nunito16Med style={[styles.flex1, { color: clrStyle.main5 }]}>{uniItem.shortName}</Nunito16Med>
+                        </View>
+                        : null
+                    }
+
+                    <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Number of Majors and Programs: </Nunito16Bold>
+                        <Nunito16Med style={[styles.flex1, { color: clrStyle.main1 }]}>{uniItem.major.length}</Nunito16Med>
+                    </View>
+
+                    {uniItem.minFee && uniItem.maxFee ?
+                        <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                            <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Fee range:</Nunito16Bold>
+                            <Nunito16Med style={[styles.flex1, { color: clrStyle.main3 }]}>{uniItem.unitFee} {formatNumber(uniItem.minFee)} ~ {formatNumber(uniItem.maxFee)} <Nunito14Reg style={{ color: clrStyle.grey2 }}>/{uniItem.yearOrSemForFee}</Nunito14Reg></Nunito16Med>
+                        </View>
+                        :
+                        <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                            <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Average fee:</Nunito16Bold>
+                            <Nunito16Med style={[styles.flex1, { color: clrStyle.main3 }]}>{uniItem.unitFee} {formatNumber(uniItem.avgFee)} <Nunito14Reg style={{ color: clrStyle.grey2 }}>/{uniItem.yearOrSemForFee}</Nunito14Reg></Nunito16Med>
+                        </View>
+                    }
+
+                    <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Score range: </Nunito16Bold>
+                        <Nunito16Med style={[styles.flex1, { color: clrStyle.main7 }]}>{uniItem.lowestStandardScore} ~ {uniItem.highestStandardScore} <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>/{uniItem.scoreRefYear}</Nunito14Reg></Nunito16Med>
+                    </View>
+
+                    <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Admission: </Nunito16Bold>
+                        <Nunito16Med style={[styles.flex1, { color: clrStyle.main5 }]}>{uniItem.admission}</Nunito16Med>
+                    </View>
+
+                    <View style={[styles.flexRow, styles.gap2vw, styles.w100]}>
+                        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Location: </Nunito16Bold>
+                        <TouchableOpacity
+                            style={[styles.flex1,]}
+                            onPress={() => {
+                                const query = encodeURIComponent(uniItem.location);
+                                const googleSearchURL = `https://www.google.com/search?q=${query}`;
+                                Linking.openURL(googleSearchURL).catch(err => console.error('An error occurred', err));
+                            }}>
+                            <Nunito16Med style={[styles.flex1, { color: clrStyle.main1 }]}>{uniItem.location}</Nunito16Med>
+                        </TouchableOpacity>
+                    </View>
+
+                    {uniItem.mainMajor.length > 0 ?
+                        <View style={[styles.flexRow, styles.gap2vw, styles.w100,]}>
+                            <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Main major: </Nunito16Bold>
+                            {ListGen(uniItem.mainMajor, Nunito16Med, clrStyle.main5, Nunito16Med, '-')}
+                        </View>
+                        : null
+                    }
+
+                    {marginBottomForScrollView(0.25)}
+
                     {uniDetailPageHatIcon(vw(29.5), vw(16.75))}
                     <View style={[styles.positionRelative, styles.w100, styles.flexRowCenter]}>
                         <View style={[styles.wfit, styles.paddingH4vw, { zIndex: 1, backgroundColor: clrStyle.white }]}>
@@ -106,6 +176,25 @@ export default function UniversityDetail({ route }: any) {
                     {uniItem.description.map((descriptionItem: string, index: number) => (
                         <Nunito16Reg key={index} style={[styles.paddingV2vw, styles.textJustify, { color: clrStyle.grey3 }]}>{descriptionItem}</Nunito16Reg>
                     ))}
+
+                    <View style={[styles.positionRelative, styles.w100, styles.flexRowCenter]}>
+                        <View style={[styles.wfit, styles.paddingH4vw, { zIndex: 1, backgroundColor: clrStyle.white }]}>
+                            <Nunito20Bold style={[{ color: clrStyle.main7 }]}>Reference</Nunito20Bold>
+                        </View>
+                        <View style={[styles.w100, styles.positionAbsolute, { height: 2, backgroundColor: clrStyle.main8 }]}></View>
+                    </View>
+
+                    {uniItem.refURL.length > 0 ?
+                        <View style={[styles.flex1]}>
+                            {uniItem.refURL.map((referenceItem: string, index: number) => (
+                                <TouchableOpacity
+                                    key={index}
+                                    onPress={() => { Linking.openURL(referenceItem).catch(err => console.error('An error occurred', err)) }}>
+                                    <Nunito12Med key={index} lineNumber={2} style={[styles.paddingV2vw, { color: clrStyle.main1 }]}>{referenceItem}</Nunito12Med>
+                                </TouchableOpacity>
+                            ))}
+                        </View> : null
+                    }
                 </View >
             )
         }

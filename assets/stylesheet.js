@@ -892,6 +892,38 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
 
+    alignContentCenter: {
+        alignContent: 'center',
+    },
+
+    alignContentStart: {
+        alignContent: 'flex-start',
+    },
+
+    alignContentEnd: {
+        alignContent: 'flex-end',
+    },
+
+    alignContentSpaceBetween: {
+        alignContent: 'space-between',
+    },
+
+    alignContentSpaceAround: {
+        alignContent: 'space-around',
+    },
+
+    alignContentSpaceEvenly: {
+        alignContent: 'space-evenly',
+    },
+
+    alignContentStretch: {
+        alignContent: 'stretch',
+    },
+
+    alignContentBaseline: {
+        alignContent: 'baseline',
+    },
+
     alignItemsCenter: {
         alignItems: 'center',
     },
