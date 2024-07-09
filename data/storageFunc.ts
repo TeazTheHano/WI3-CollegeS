@@ -1,6 +1,6 @@
 import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import defaultData, {UserInfo} from './data';
+import {UserInfo} from './data';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 

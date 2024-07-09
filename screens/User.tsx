@@ -6,12 +6,11 @@ import { getUserInfo } from '../data/storageFunc'
 import styles, { vw } from '../assets/stylesheet'
 import { bestOfScCoIcon, curveRightArrow, ENTJicon, MBTIIcon, wishListIcon } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
-import defaultData from '../data/data'
+import { bestOfEconomic, mbti }  from '../data/data'
 import { marginBottomForScrollView } from '../assets/component'
 
 export default function User() {
   const navigation = useNavigation()
-  const { bestOfEconomic, mbti } = defaultData()
 
   const [userInfo, setUserInfo] = useState<any>(null)
 

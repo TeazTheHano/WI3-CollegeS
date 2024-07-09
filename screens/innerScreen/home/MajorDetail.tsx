@@ -1,15 +1,17 @@
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Nunito14Bold, Nunito14Reg, Nunito16Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
-import clrStyle from '../../../assets/componentStyleSheet'
+import { LowBtn, Nunito12Bold, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito18Reg, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
+import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import styles, { vh, vw } from '../../../assets/stylesheet'
 import { SvgXml } from 'react-native-svg'
 import { marginBottomForScrollView } from '../../../assets/component'
+import { examGroupList } from '../../../data/data'
 
 export default function MajorDetail({ route }: any) {
     const { major, uniItem } = route.params
     const navigation = useNavigation()
+
     return (
         <SaveViewWithColorStatusBar
             StatusBarColor={clrStyle.main5}
@@ -30,7 +32,7 @@ export default function MajorDetail({ route }: any) {
                 {/* banner */}
                 <View style={[styles.flexRowEvenlyCenter, styles.padding4vw, styles.gap4vw, styles.flex1]}>
                     {major.icon ? major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(31), height: vw(35), borderRadius: vw(1) }} />}
-                    <View style={[styles.flexColBetweenCenter, styles.flex1, styles.h100,]}>
+                    <View style={[styles.flexColBetweenCenter, styles.flex1, styles.h100, styles.gap2vw]}>
                         {/* major */}
                         <View style={[styles.flexRowBetweenCenter, styles.gap1vw, styles.flex1, styles.w100]}>
                             <View style={[styles.flexRowStartCenter, styles.gap1vw]}>
@@ -38,7 +40,7 @@ export default function MajorDetail({ route }: any) {
                                 <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Major</Nunito14Reg>
                             </View>
                             {/* TODO: chuyen nganh */}
-                            <Nunito14Bold style={[styles.flex1]}>{major.majorName}</Nunito14Bold>
+                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.majorName}</Nunito14Bold>
                         </View>
                         {/* exam group */}
                         <View style={[styles.flexRowBetweenCenter, styles.gap1vw, styles.flex1, styles.w100]}>
@@ -46,7 +48,7 @@ export default function MajorDetail({ route }: any) {
                                 <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.625 2.5C3.23529 2.5 2.5 3.23529 2.5 5.625C2.5 8.01471 3.23529 8.75 5.625 8.75C8.01471 8.75 8.75 8.01471 8.75 5.625C8.75 3.23529 8.01471 2.5 5.625 2.5Z" stroke="#1C8EDC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.625 11.25C3.23529 11.25 2.5 11.9853 2.5 14.375C2.5 16.7647 3.23529 17.5 5.625 17.5C8.01471 17.5 8.75 16.7647 8.75 14.375C8.75 11.9853 8.01471 11.25 5.625 11.25Z" stroke="#1C8EDC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.375 11.25C11.9853 11.25 11.25 11.9853 11.25 14.375C11.25 16.7647 11.9853 17.5 14.375 17.5C16.7647 17.5 17.5 16.7647 17.5 14.375C17.5 11.9853 16.7647 11.25 14.375 11.25Z" stroke="#1C8EDC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.375 2.5C11.9853 2.5 11.25 3.23529 11.25 5.625C11.25 8.01471 11.9853 8.75 14.375 8.75C16.7647 8.75 17.5 8.01471 17.5 5.625C17.5 3.23529 16.7647 2.5 14.375 2.5Z" stroke="#1C8EDC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
                                 <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Comb</Nunito14Reg>
                             </View>
-                            <Nunito14Bold style={[styles.flex1]}>{major.examGroup ? major.examGroup.join(', ') : `Recruitment`}</Nunito14Bold>
+                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.examGroup ? major.examGroup.map((examGroupItem: any, index: number) => { return examGroupItem.name }).join(', ') : `Recruitment`}</Nunito14Bold>
                         </View>
                         {/* major */}
                         <View style={[styles.flexRowBetweenCenter, styles.gap1vw, styles.flex1, styles.w100]}>
@@ -54,7 +56,7 @@ export default function MajorDetail({ route }: any) {
                                 <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.8333 11.6666C17.6743 11.6666 19.1667 13.3333 19.1667 14.5833C19.1667 15.2736 18.607 15.8333 17.9167 15.8333H17.5M14.1667 9.16663C15.5474 9.16663 16.6667 8.04734 16.6667 6.66663C16.6667 5.28591 15.5474 4.16663 14.1667 4.16663M4.16668 11.6666C2.32573 11.6666 0.833344 13.3333 0.833344 14.5833C0.833344 15.2736 1.39299 15.8333 2.08334 15.8333H2.50001M5.83334 9.16663C4.45263 9.16663 3.33334 8.04734 3.33334 6.66663C3.33334 5.28591 4.45263 4.16663 5.83334 4.16663M13.75 15.8333H6.25001C5.55965 15.8333 5.00001 15.2736 5.00001 14.5833C5.00001 12.5 7.50001 11.6666 10 11.6666C12.5 11.6666 15 12.5 15 14.5833C15 15.2736 14.4404 15.8333 13.75 15.8333ZM12.5 6.66663C12.5 8.04734 11.3807 9.16663 10 9.16663C8.6193 9.16663 7.50001 8.04734 7.50001 6.66663C7.50001 5.28591 8.6193 4.16663 10 4.16663C11.3807 4.16663 12.5 5.28591 12.5 6.66663Z" stroke="#36B77A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
                                 <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Admission</Nunito14Reg>
                             </View>
-                            <Nunito14Bold style={[styles.flex1]}>{major.addmission ? major.addmission : `N/A`}</Nunito14Bold>
+                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.addmission ? major.addmission : `N/A`}</Nunito14Bold>
                         </View>
                         <TouchableOpacity
                             onPress={
@@ -72,24 +74,41 @@ export default function MajorDetail({ route }: any) {
                 <View style={[styles.flex1, styles.flexCol, styles.gap3vw]}>
                     <Nunito16Bold style={{ color: clrStyle.main5 }}>Tuition</Nunito16Bold>
                     {/* TODO: change to multi if have more data */}
-                    <View style={[styles.flexRowBetweenCenter]}>
-                        <Nunito14Reg style={[{ color: clrStyle.grey3 }]}>In <Nunito14Bold>{uniItem.scoreRefYear}</Nunito14Bold></Nunito14Reg>
-                        <Nunito16Bold style={{ color: major.majorFee ? clrStyle.main3 : clrStyle.grey2 }}>{major.majorFee ? `${uniItem.unitFee} ${major.majorFee}/${uniItem.yearOrSemForFee}` : `N/A`}</Nunito16Bold>
+                    <View style={[styles.flexRowBetweenCenter, styles.paddingV1vw]}>
+                        <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>In <Nunito14Bold>{uniItem.scoreRefYear}</Nunito14Bold></Nunito14Reg>
+                        <Nunito16Bold style={{ color: major.majorFee ? clrStyle.main3 : clrStyle.grey3 }}>{major.majorFee ? `${uniItem.unitFee} ${major.majorFee}/${uniItem.yearOrSemForFee}` : `N/A`}</Nunito16Bold>
                     </View>
                 </View>
 
                 {/* score */}
                 <View style={[styles.flex1, styles.flexCol, styles.gap3vw]}>
                     <Nunito16Bold style={{ color: clrStyle.main5 }}>Scores from previous years</Nunito16Bold>
-                    {/* TODO: change to multi if have more data */}
-                    <View style={[styles.flexRowBetweenCenter]}>
-                        <Nunito14Reg style={[{ color: clrStyle.grey3 }]}>In <Nunito14Bold>{uniItem.scoreRefYear}</Nunito14Bold></Nunito14Reg>
-                        <Nunito16Bold style={{ color: major.majorFee ? clrStyle.main3 : clrStyle.grey2 }}>{major.majorFee ? `${uniItem.unitFee} ${major.majorFee}/${uniItem.yearOrSemForFee}` : `N/A`}</Nunito16Bold>
+                    <View style={[styles.flexRowBetweenCenter, styles.gap4vw, styles.paddingH4vw]}>
+                        <Nunito16Bold style={{ color: clrStyle.grey2 }}>{uniItem.scoreRefYear}</Nunito16Bold>
+                        <View style={[styles.flex1, { height: 2, backgroundColor: clrStyle.grey1 }]}></View>
                     </View>
+                    {major.examGroup ? major.examGroup.map((examGroupItem: any, index: number) => {
+                        return (
+                            <View key={index} style={[styles.flexRowBetweenCenter, styles.paddingV1vw]}>
+                                <Nunito14Bold style={{ color: clrStyle.main1 }}>Comb {examGroupItem.name} <Nunito12Bold style={{ color: clrStyle.grey2 }}><Nunito18Reg>|</Nunito18Reg> {examGroupList[examGroupItem.name].join(', ')}</Nunito12Bold></Nunito14Bold>
+                                <Nunito18Bold style={{ color: clrStyle.main5 }}>{examGroupItem.lowestStandardScore ? examGroupItem.lowestStandardScore : `N/A`}</Nunito18Bold>
+                            </View>
+                        )
+                    }) :
+                        <Nunito14Bold style={[styles.paddingH4vw, { color: clrStyle.grey3 }]}>Recruitment</Nunito14Bold>
+                    }
                 </View>
 
                 {marginBottomForScrollView(2)}
             </ScrollView>
+            <View style={[styles.padding4vw, componentStyle.upperShadow, { backgroundColor: clrStyle.white }]}>
+                <LowBtn
+                    round={vw(2)}
+                    title='Compare with ...'
+                    onPress={() => {
+                    }}
+                />
+            </View>
         </SaveViewWithColorStatusBar>
     )
 }

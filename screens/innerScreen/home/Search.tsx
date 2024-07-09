@@ -5,9 +5,7 @@ import clrStyle from '../../../assets/componentStyleSheet'
 import { adjustIcon, searchIcon, sharpLeftArrow, xIcon } from '../../../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
 import styles, { vh, vw } from '../../../assets/stylesheet'
-import defaultData from '../../../data/data'
-
-const universitiesData = defaultData().universityList
+import { universityList } from '../../../data/data'
 
 export default function Search() {
   const navigation = useNavigation()
@@ -72,7 +70,7 @@ export default function Search() {
 
 export const searchUniFnc = (searchText: string) => {
   if (searchText.trim() === '') { return [] }
-  const filteredData = universitiesData.filter((item) => {
+  const filteredData = universityList.filter((item) => {
     if (item.name) { return item.name.toLowerCase().includes(searchText.trim().toLowerCase()) }
     else { return false }
   })

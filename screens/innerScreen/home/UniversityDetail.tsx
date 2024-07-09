@@ -245,12 +245,14 @@ export default function UniversityDetail({ route }: any) {
                     break;
                 case `Lowest score`:
                     majorList.sort((a: any, b: any) => {
-                        if (a.lowestStandardScore && b.lowestStandardScore) {
-                            return a.lowestStandardScore - b.lowestStandardScore;
-                        } else if (a.lowestStandardScore) {
-                            return -1;
-                        } else if (b.lowestStandardScore) {
-                            return 1;
+                        if (a.examGroup && b.examGroup) {
+                            if (a.examGroup[0].lowestStandardScore && b.examGroup[0].lowestStandardScore) {
+                                return a.examGroup[0].lowestStandardScore - b.examGroup[0].lowestStandardScore;
+                            } else if (a.examGroup[0].lowestStandardScore) {
+                                return -1;
+                            } else if (b.examGroup[0].lowestStandardScore) {
+                                return 1;
+                            }
                         } else {
                             return 0;
                         }
@@ -258,12 +260,11 @@ export default function UniversityDetail({ route }: any) {
                     break;
                 case `Highest score`:
                     majorList.sort((a: any, b: any) => {
-                        if (a.lowestStandardScore && b.lowestStandardScore) {
-                            return b.lowestStandardScore - a.lowestStandardScore;
-                        } else if (a.lowestStandardScore) {
-                            return -1;
-                        } else if (b.lowestStandardScore) {
-                            return 1;
+                        if (a.examGroup && b.examGroup) {
+                            const aScore = a.examGroup[0].lowestStandardScore !== undefined && a.examGroup[0].lowestStandardScore !== 0 ? a.examGroup[0].lowestStandardScore : -Infinity;
+                            const bScore = b.examGroup[0].lowestStandardScore !== undefined && b.examGroup[0].lowestStandardScore !== 0 ? b.examGroup[0].lowestStandardScore : -Infinity;
+                            // Reverse the comparison for highest score
+                            return bScore - aScore;
                         } else {
                             return 0;
                         }
@@ -320,7 +321,6 @@ export default function UniversityDetail({ route }: any) {
                     </View>
                 )
             }
-
             return (
                 <View style={[styles.flexColStartCenter, styles.gap4vw, styles.flex1]}>
                     <View style={[styles.flexRowStartCenter, styles.gap2vw, styles.w100]}>
@@ -342,18 +342,19 @@ export default function UniversityDetail({ route }: any) {
                                 <Nunito16Bold style={{ color: clrStyle.grey3, }}>{majorListItem.majorName}</Nunito16Bold>
                                 <View style={[styles.flexRow, styles.gap1vw]}>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main2 }]}>
-                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main1 }]}>{majorListItem.examGroup ? majorListItem.examGroup.join(', ') : `Recruitment`}</Nunito12Bold>
+                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main1 }]}>{majorListItem.examGroup ? majorListItem.examGroup.map((examGroupItem: any, index: number) => { return examGroupItem.name }).join(', ') : `Recruitment`}</Nunito12Bold>
+
                                     </View>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main8 }]}>
                                         {/* TODO: check recuit */}
-                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main7 }]}>{majorListItem.degreeType ? majorListItem.degreeType : `Eco?Bla?`}</Nunito12Bold>
+                                        <Nunito12Bold key={index} style={[{ color: clrStyle.main7 }]}>{majorListItem.degreeType ? majorListItem.degreeType : `College`}</Nunito12Bold>
                                     </View>
                                 </View>
                             </View>
-                            {majorListItem.lowestStandardScore || majorListItem.lowestStandardScore == 0 ?
+                            {majorListItem.examGroup ?
                                 <View style={[styles.flexColCenter, styles.padding1vw]}>
                                     <Nunito12Reg style={[styles.textRight, styles.w100, { color: clrStyle.grey2, }]}>Score</Nunito12Reg>
-                                    <Nunito20Bold style={[styles.textRight, styles.w100, { color: clrStyle.main5 }]}>{majorListItem.lowestStandardScore ? majorListItem.lowestStandardScore.toFixed(2) : `N/A`}</Nunito20Bold>
+                                    <Nunito20Bold style={[styles.textRight, styles.w100, { color: clrStyle.main5 }]}>{majorListItem.examGroup[0].lowestStandardScore ? majorListItem.examGroup[0].lowestStandardScore.toFixed(2) : `N/A`}</Nunito20Bold>
                                 </View>
                                 : null
                             }

@@ -3,14 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { LowBtn, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito20Bold, Nunito24Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
 import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import styles, { vw } from '../../../assets/stylesheet'
-import defaultData, { MBTI } from '../../../data/data'
+import { MBTI, mbti, mbtiGroup } from '../../../data/data'
 import { getUserInfo } from '../../../data/storageFunc'
 import { marginBottomForScrollView } from '../../../assets/component'
 import { SvgXml } from 'react-native-svg'
 
 export default function Persona({ navigation, route }) {
     const { data } = route.params
-    const { mbti, mbtiGroup } = defaultData()
     const [personaData, setPersonaData] = useState<MBTI>()
     const [selectedGroup, setSelectedGroup] = useState<number>(0)
     const [colorTheme, setColorTheme] = useState<string>(clrStyle.main5)

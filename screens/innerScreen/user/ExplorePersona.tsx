@@ -5,12 +5,11 @@ import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import styles, { vw } from '../../../assets/stylesheet'
 import { marginBottomForScrollView } from '../../../assets/component'
-import defaultData from '../../../data/data'
+import { mbti, mbtiGroup } from '../../../data/data'
 import { SvgXml } from 'react-native-svg'
 
 export default function ExplorePersona() {
     const navigation = useNavigation()
-    const { mbti, mbtiGroup } = defaultData()
     //  selector section
     const [selectedGroup, setSelectedGroup] = useState<number>(0)
     const [showSelector, setShowSelector] = useState<boolean>(false)

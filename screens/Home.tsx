@@ -5,15 +5,13 @@ import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito12Reg, Nunito14B
 import clrStyle, { componentStyle } from '../assets/componentStyleSheet'
 import styles, { vh, vw } from '../assets/stylesheet'
 import { curveRightArrow, searchIcon } from '../assets/svgXml'
-import defaultData from '../data/data'
+import { bannerList, suitableForYou, bestOfEconomic, bestOfScience }  from '../data/data'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
 import { marginBottomForScrollView } from '../assets/component'
 
 export default function Home() {
   const navigation = useNavigation();
-
-  const { bannerList, suitableForYou, bestOfEconomic, bestOfScience } = defaultData();
 
   const [currentBanner, setCurrentBanner] = useState<number>(0)
   const [userInfo, setUserInfo] = useState<any>(null)
