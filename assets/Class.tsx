@@ -720,9 +720,14 @@ export class BoardingPicking extends Component<{
     selected: string[],
     setSelected: (value: string[]) => void,
     maxLength?: number | undefined,
+    deleteFromOriginal?: string[],
+    deleteFromOtherSelected1?: string,
+    deleteFromOriginalFnc?: (value: string[]) => void,
+    deleteFromOtherSelectedFnc1?: (value: string) => void,
+    originalData?: string[],
 }> {
     render() {
-        const { data, selected, setSelected, maxLength } = this.props;
+        const { data, selected, setSelected, maxLength, originalData, deleteFromOriginal, deleteFromOriginalFnc, deleteFromOtherSelected1, deleteFromOtherSelectedFnc1 } = this.props;
         const length = maxLength ? maxLength : data.length;
         return (
             <View style={[styles.flexRowStartCenter, styles.flexWrap, styles.gap4vw]}>
@@ -733,11 +738,21 @@ export class BoardingPicking extends Component<{
                             onPress={() => {
                                 if (selected.includes(item)) {
                                     setSelected(selected.filter((value) => value !== item))
+                                    if (deleteFromOriginal && deleteFromOriginalFnc && !originalData?.includes(item)) {
+                                        deleteFromOriginalFnc(deleteFromOriginal.filter((value) => value !== item))
+                                    }
+                                    if (deleteFromOtherSelected1 && deleteFromOtherSelectedFnc1) {
+                                        if (deleteFromOtherSelected1.includes(`${item},`)) {
+                                            deleteFromOtherSelectedFnc1(deleteFromOtherSelected1.replace(`${item},`, ''))
+                                        } else {
+                                            deleteFromOtherSelectedFnc1(deleteFromOtherSelected1.replace(item, ''))
+                                        }
+                                    }
                                 } else {
                                     if (selected.length < length!) {
                                         setSelected([...selected, item])
                                     }
-                                }
+                                };
                             }}
                             style={[styles.wfit, styles.paddingV2vw, styles.paddingH4vw, styles.border1, { borderColor: selected.includes(item) ? clrStyle.main5 : clrStyle.grey2, borderRadius: vw(2), }]}>
                             {selected.includes(item) ?
@@ -786,7 +801,7 @@ export class TopNav extends Component<{
                             : <View style={[{ width: vw(10), height: vw(10), }]} />
                         }
                     </View>
-                    <Animated.View style={{ height: hideChildren, opacity: hideChildren}}>
+                    <Animated.View style={{ height: hideChildren, opacity: hideChildren }}>
                         {children}
                     </Animated.View>
                 </Animated.View >

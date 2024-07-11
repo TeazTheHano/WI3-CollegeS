@@ -1,14 +1,15 @@
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Animated } from 'react-native'
-import React, { useEffect, useRef } from 'react'
-import { Nunito12Bold, Nunito12Med, Nunito14Bold, Nunito14Med, Nunito14Reg, Nunito16Bold, Nunito18Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
+import React, { useEffect, useRef, useState } from 'react'
+import { BoardingPicking, LowBtn, Nunito12Bold, Nunito12Med, Nunito14Bold, Nunito14Med, Nunito14Reg, Nunito16Bold, Nunito18Bold, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
 import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import { adjustIcon, searchIcon, sharpLeftArrow, sharpXIcon, xIcon } from '../../../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
 import styles, { vh, vw } from '../../../assets/stylesheet'
 import { RecentSearch, universityList } from '../../../data/data'
 import { Slider } from '@miblanchard/react-native-slider';
-import { formatNumber } from '../../../assets/component'
+import { formatNumber, marginBottomForScrollView } from '../../../assets/component'
 import { getRecentSearch, saveRecentSearch } from '../../../data/storageFunc'
+import { examGroupList } from '../../../data/data'
 
 export default function Search() {
   const navigation = useNavigation()
@@ -16,23 +17,12 @@ export default function Search() {
   const [searchText, setSearchText] = React.useState<string>('')
   const [result, setResult] = React.useState<any[]>([])
 
-  // recent search
-  const [recentSearch, setRecentSearch] = React.useState<RecentSearch[]>()
-
-  // filter
-  const [showFilter, setShowFilter] = React.useState<boolean>(true)
-  const [minSlide1, setMinSlide1] = React.useState<number>(0)
-  const [maxSlide1, setMaxSlide1] = React.useState<number>(1)
-  const [minSlide2, setMinSlide2] = React.useState<number>(0.003)
-  const [maxSlide2, setMaxSlide2] = React.useState<number>(1)
-  const [maxScore, setMaxScore] = React.useState<number>(0)
-  const [minScore, setMinScore] = React.useState<number>(0)
-  const [maxFee, setMaxFee] = React.useState<number>(0)
-  const [minFee, setMinFee] = React.useState<number>(0)
-
   useEffect(() => {
     setResult(searchUniFnc(searchText))
   }, [searchText])
+
+  // get search history _______________________________________________________
+  const [recentSearch, setRecentSearch] = React.useState<RecentSearch[]>()
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -44,20 +34,12 @@ export default function Search() {
     return unsubscribe
   }, [navigation])
 
-  // show filter animation
+  // show filter animation _______________________________________________________
+  const [showFilter, setShowFilter] = React.useState<boolean>(true)
+
   useEffect(() => {
     renderShowFilterAnimation(showFilter)
   }, [showFilter])
-
-  useEffect(() => {
-    setMaxScore(Math.round(maxSlide1 * 60))
-    setMinScore(Math.round(minSlide1 * 60))
-  }, [minSlide1, maxSlide1, minScore, maxScore])
-
-  useEffect(() => {
-    setMaxFee(maxSlide2 * 500000000)
-    setMinFee(minSlide2 * 500000000)
-  }, [minSlide2, maxSlide2, minFee, maxFee])
 
   const showFilterAnimate = useRef(new Animated.Value(0)).current
   const showFilterAnimation = showFilterAnimate.interpolate({
@@ -80,36 +62,188 @@ export default function Search() {
     }).start()
   }
 
+  // slider data set section _______________________________________________________
+  const [minSlide1, setMinSlide1] = React.useState<number>(0)
+  const [maxSlide1, setMaxSlide1] = React.useState<number>(1)
+  const [minSlide2, setMinSlide2] = React.useState<number>(0.003)
+  const [maxSlide2, setMaxSlide2] = React.useState<number>(1)
+  const [maxScore, setMaxScore] = React.useState<number>(0)
+  const [minScore, setMinScore] = React.useState<number>(0)
+  const [maxFee, setMaxFee] = React.useState<number>(0)
+  const [minFee, setMinFee] = React.useState<number>(0)
+
+  useEffect(() => {
+    setMaxScore(Math.round(maxSlide1 * 60))
+    setMinScore(Math.round(minSlide1 * 60))
+  }, [minSlide1, maxSlide1,])
+
+  useEffect(() => {
+    setMaxFee(maxSlide2 * 500000000)
+    setMinFee(minSlide2 * 500000000)
+  }, [minSlide2, maxSlide2,])
+
   class SliderInput extends React.Component<
     {
       minvalue: number,
       maxvalue: number,
       onchangeMax: (value: number) => void,
       onchangeMin: (value: number) => void
+      showMinValue: number
+      showMaxValue: number
       step: number
       thumbTintColor?: string
       minimumTrackTintColor?: string
+      formatNumber?: boolean
     }> {
     state = {
       value: [this.props.minvalue, this.props.maxvalue]
     };
     render() {
       return (
-        <Slider
-          thumbTintColor={this.props.thumbTintColor}
-          minimumTrackTintColor={this.props.minimumTrackTintColor}
-          value={this.state.value}
-          step={this.props.step}
-          onValueChange={value => {
-            this.setState({ value })
-          }}
-          onSlidingComplete={(value) => {
-            this.props.onchangeMin(value[0])
-            this.props.onchangeMax(value[1])
-          }}
-        />
+        <>
+          <Slider
+            thumbTintColor={this.props.thumbTintColor}
+            minimumTrackTintColor={this.props.minimumTrackTintColor}
+            value={this.state.value}
+            step={this.props.step}
+            onValueChange={value => {
+              this.setState({ value })
+            }}
+            onSlidingComplete={(value) => {
+              this.props.onchangeMin(value[0])
+              this.props.onchangeMax(value[1])
+            }}
+          />
+          <View style={[styles.flexRowCenter, styles.gap4vw]}>
+            <View style={[styles.flexRowCenter, styles.gap1vw, styles.border1, { borderColor: clrStyle.grey2, padding: vw(2.5), borderRadius: vw(2), }]}>
+              <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Min |</Nunito14Reg>
+              <TextInput
+                value={
+                  this.props.formatNumber ? formatNumber(this.props.showMinValue) : this.props.showMinValue.toString()
+                }
+                editable={false}
+                onChangeText={(text) => this.props.onchangeMin(parseInt(text))}
+                style={[styles.textCenter, { fontFamily: 'Nunito-Bold', fontSize: vw(4), color: this.props.thumbTintColor }]} />
+            </View>
+            <View style={[styles.flexRowCenter, styles.gap1vw, styles.border1, { borderColor: clrStyle.grey2, padding: vw(2.5), borderRadius: vw(2), }]}>
+              <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Max |</Nunito14Reg>
+              <TextInput
+                value={
+                  this.props.formatNumber ? formatNumber(this.props.showMaxValue) : this.props.showMaxValue.toString()
+                }
+                editable={false}
+                onChangeText={(text) => this.props.onchangeMax(parseInt(text))}
+                style={[styles.textCenter, { fontFamily: 'Nunito-Bold', fontSize: vw(4), color: this.props.thumbTintColor }]} />
+            </View>
+          </View>
+        </>
       );
     }
+  }
+  // end of slider data set section _______________________________________________________
+
+  // tag picker section _______________________________________________________
+  const [selectComb, setSelectComb] = React.useState<string[]>([])
+  const [selectField, setSelectField] = React.useState<string[]>([])
+  const [otherComb, setOtherComb] = React.useState<string>('')
+  const [otherField, setOtherField] = React.useState<string>('')
+
+  const [fieldList, setFieldList] = useState<string[]>([`Economics`, `Science`, `Engineering`, `Art`, `Medicine`, `Education`, `Social Science`, `other`])
+  const [combList, setCombList] = useState<string[]>([`A00`, `A01`, `A02`, `B00`, `B01`, `B02`, `C00`, `D00`, `D01`, `D02`, `other`])
+  const orginFieldList: string[] = [`Economics`, `Science`, `Engineering`, `Art`, `Medicine`, `Education`, `Social Science`, `other`]
+  const orginCombList: string[] = [`A00`, `A01`, `A02`, `B00`, `B01`, `B02`, `C00`, `D00`, `D01`, `D02`, `other`]
+  const examGroupKey: string[] = Object.keys(examGroupList)
+  // TODO: update the fieldGroupKey with real data
+  const fieldGroupKey: string[] = [`Economics`, `Science`, `Engineering`, `Art`, `Medicine`, `Education`, `Social Science`, `Law`, `Accounting`, `Architecture`, `Business`,]
+  function renderCombSelect() {
+    // get the key of the examGroupList
+
+    useEffect(() => {
+      if (otherComb) {
+        if (!selectComb.includes(otherComb) && examGroupKey.includes(otherComb)) {
+          setSelectComb([...selectComb, otherComb])
+          setCombList([...combList, otherComb])
+        } else if (otherComb.includes(',')) {
+          otherComb.split(',').map((item) => {
+            item.trim()
+            if (!selectComb.includes(item) && examGroupKey.includes(item)) {
+              setSelectComb([...selectComb, item])
+              setCombList([...combList, item])
+            }
+          })
+        }
+      }
+    }, [otherComb, selectComb])
+
+    return (
+      <>
+        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Combination</Nunito16Bold>
+        <BoardingPicking
+          data={combList}
+          selected={selectComb}
+          originalData={orginCombList}
+          setSelected={setSelectComb as React.Dispatch<React.SetStateAction<string[]>>}
+          deleteFromOriginal={combList}
+          deleteFromOriginalFnc={setCombList as React.Dispatch<React.SetStateAction<string[]>>}
+          deleteFromOtherSelected1={otherComb}
+          deleteFromOtherSelectedFnc1={setOtherComb as React.Dispatch<React.SetStateAction<string>>}
+        />
+        {selectComb.includes('other') ?
+          <TextInput
+            placeholder='Other comb, saparate by comma (,)'
+            placeholderTextColor={clrStyle.grey2}
+            value={otherComb}
+            autoCapitalize='characters'
+            onChangeText={setOtherComb}
+            style={[styles.w100, styles.border1, styles.textCenter, { borderColor: otherComb ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: 'Nunito-Bold', fontSize: vw(4), borderRadius: vw(2), color: otherComb ? clrStyle.main5 : clrStyle.grey2 }]} />
+          : null
+        }
+      </>
+    )
+  }
+
+  function renderFieldSelect() {
+    useEffect(() => {
+      if (otherField) {
+        if (!selectField.includes(otherField) && fieldGroupKey.includes(otherField)) {
+          setSelectField([...selectField, otherField])
+          setFieldList([...fieldList, otherField])
+        } else if (otherField.includes(',')) {
+          otherField.split(',').map((item) => {
+            item.trim()
+            if (!selectField.includes(item) && fieldGroupKey.includes(item)) {
+              setSelectField([...selectField, item])
+              setFieldList([...fieldList, item])
+            }
+          })
+        }
+      }
+    }, [otherField, selectField])
+
+    return (
+      <>
+        <Nunito16Bold style={[{ color: clrStyle.grey3 }]}>Majors</Nunito16Bold>
+        <BoardingPicking
+          data={fieldList}
+          selected={selectField}
+          originalData={orginFieldList}
+          setSelected={setSelectField as React.Dispatch<React.SetStateAction<string[]>>}
+          deleteFromOriginal={fieldList}
+          deleteFromOriginalFnc={setFieldList as React.Dispatch<React.SetStateAction<string[]>>}
+          deleteFromOtherSelected1={otherField}
+          deleteFromOtherSelectedFnc1={setOtherField as React.Dispatch<React.SetStateAction<string>>}
+        />
+        {selectField.includes('other') ?
+          <TextInput
+            placeholder='Other field, saparate by comma (,)'
+            placeholderTextColor={clrStyle.grey2}
+            value={otherField}
+            onChangeText={setOtherField}
+            style={[styles.w100, styles.border1, styles.textCenter, { borderColor: otherField ? clrStyle.main5 : clrStyle.grey2, padding: vw(2.5), fontFamily: 'Nunito-Bold', fontSize: vw(4), borderRadius: vw(2), color: otherField ? clrStyle.main5 : clrStyle.grey2 }]} />
+          : null
+        }
+      </>
+    )
   }
 
   return (
@@ -196,7 +330,7 @@ export default function Search() {
       </Animated.ScrollView>
 
       {/* Filter */}
-      <Animated.View style={[styles.w100, styles.zIndex1, componentStyle.filterShadow, styles.padding4vw, { height: showFilterAnimation, borderTopRightRadius: vw(6), borderTopLeftRadius: vw(6), backgroundColor: clrStyle.white, opacity: showFilterOpaAnimation }]}>
+      <Animated.View style={[styles.w100, styles.zIndex1, componentStyle.filterShadow, styles.paddingV4vw, styles.paddingH6vw, { height: showFilterAnimation, borderTopRightRadius: vw(6), borderTopLeftRadius: vw(6), backgroundColor: clrStyle.white, opacity: showFilterOpaAnimation }]}>
         <View style={[styles.flexRowBetweenCenter, styles.paddingH2vw, { borderBottomWidth: 1, borderBlockColor: clrStyle.grey2 }]}>
           <Nunito18Bold style={{ color: clrStyle.main5 }}>Filter</Nunito18Bold>
           <TouchableOpacity
@@ -205,7 +339,9 @@ export default function Search() {
             {sharpXIcon(vw(6), vw(6))}
           </TouchableOpacity>
         </View>
-        <View style={[styles.flexCol, styles.gap2vw, styles.paddingV4vw]}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.flexCol, styles.gap4vw, styles.paddingV4vw]}>
           <Nunito16Bold>Score range</Nunito16Bold>
           <SliderInput
             step={1 / 60}
@@ -213,24 +349,37 @@ export default function Search() {
             maxvalue={maxSlide1}
             onchangeMax={(value) => setMaxSlide1(value)}
             onchangeMin={(value) => setMinSlide1(value)}
+            showMinValue={minScore}
+            showMaxValue={maxScore}
             thumbTintColor={clrStyle.main1}
-            minimumTrackTintColor={clrStyle.main5}
+            minimumTrackTintColor={clrStyle.main2}
           />
+          {renderCombSelect()}
+          {renderFieldSelect()}
+          <Nunito16Bold>Fee range/ (semester or year)</Nunito16Bold>
           <SliderInput
             step={0.001}
             minvalue={minSlide2}
             maxvalue={maxSlide2}
             onchangeMax={(value) => setMaxSlide2(value)}
             onchangeMin={(value) => setMinSlide2(value)}
+            showMinValue={minFee}
+            showMaxValue={maxFee}
             thumbTintColor={clrStyle.main3}
             minimumTrackTintColor={clrStyle.main4}
+            formatNumber={true}
+          />
+
+          {marginBottomForScrollView(3)}
+        </ScrollView>
+        <View style={[styles.padding4vw, componentStyle.upperShadow, styles.w100vw, styles.positionAbsolute, { bottom: 0, left: 0, backgroundColor: clrStyle.white }]}>
+          <LowBtn
+            title='Apply Filter'
+            onPress={() => setResult(filterUniFnc(result, minScore, maxScore, minFee, maxFee))}
+            round={vw(2)}
+            CustomStyle={[styles.w100]}
           />
         </View>
-        <TouchableOpacity
-          onPress={() => setResult(filterUniFnc(result, minScore, maxScore, minFee, maxFee))}
-          style={[styles.padding2vw, styles.borderRadius10, { backgroundColor: clrStyle.main5 }]}>
-          <Nunito16Bold style={[{ color: clrStyle.white }]}>Apply Filter</Nunito16Bold>
-        </TouchableOpacity>
       </Animated.View>
     </SaveViewWithColorStatusBar >
   )
