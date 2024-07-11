@@ -61,11 +61,11 @@ export default function MajorDetail({ route }: any) {
                         <TouchableOpacity
                             onPress={
                                 () => { }
-                                // TODO: add to wishlist
+                                // TODO: add to goal
                             }
                             style={[styles.flexRowCenter, styles.w100, { backgroundColor: clrStyle.main5, paddingVertical: vw(1.5), borderRadius: vw(2) }]}>
                             <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.83334 10H17.1667M10.5 3.33337V16.6667" stroke="#CCCED5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
-                            <Nunito14Bold style={{ color: clrStyle.white }}> Add to wishlist</Nunito14Bold>
+                            <Nunito14Bold style={{ color: clrStyle.white }}> Add to goal</Nunito14Bold>
                         </TouchableOpacity>
                     </View>
                 </View>

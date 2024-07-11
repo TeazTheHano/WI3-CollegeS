@@ -63,9 +63,6 @@ export default function DataCollect() {
                 }).then((res) => {
                     if (res) {
                         console.log('Data saved');
-                        getUserInfo().then((res) => {
-                            console.log(res);
-                        })
                         navigation.navigate('BottomTab');
                     }
                 })

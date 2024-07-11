@@ -1,6 +1,6 @@
 import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {UserInfo} from './data';
+import {RecentSearch, UserInfo} from './data';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -70,7 +70,39 @@ export async function getUserInfo(
 
 // remove user info
 export async function removeAllUserInfo(): Promise<void> {
+  // await storage.remove({
+  //   key: 'userInfo',
+  // });
   await storage.remove({
-    key: 'userInfo',
+    key: 'recentSearch',
   });
+}
+
+// save recent search
+export async function saveRecentSearch(
+  data: RecentSearch[],
+): Promise<boolean | undefined> {
+  try {
+    await storage.save({
+      key: 'recentSearch',
+      data: data,
+    });
+    return true;
+  } catch (error) {
+    Alert.alert('Failed to save recent search');
+    return false;
+  }
+}
+
+// get recent search
+export async function getRecentSearch(): Promise<RecentSearch[] | undefined> {
+  try {
+    const data = await storage.load({
+      key: 'recentSearch',
+    });
+    return data;
+  } catch (error) {
+    console.log('No recent search found');
+    return undefined;
+  }
 }

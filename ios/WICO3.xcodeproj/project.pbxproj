@@ -21,6 +21,7 @@
 		19FB5F9B0021496F83F053BB /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4902B90A47194F6CBB8537CB /* Nunito-Light.ttf */; };
 		27FC6569694748FBA5D291E2 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3417EEF377984219BCAB8C23 /* Nunito-MediumItalic.ttf */; };
 		2E70B28E9BFEED5D38CCA24F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8834F87571D889FF560847D1 /* PrivacyInfo.xcprivacy */; };
+		31036832D2CA4DD3BF854B51 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = E2A2238AEBDA4D9AA517EE7E /* Helvetica.ttc */; };
 		4166B426B6EB49D0A75B798B /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8FDE5D4897843B7A144ED0D /* Roboto-Regular.ttf */; };
 		45DB37F6A3794EDE92212371 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9CDE0C8DDB534B74BFAFF7C2 /* Nunito-ExtraLight.ttf */; };
 		525C05470240405D8E19636F /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E87AC922618F4FD0BF6EC5E8 /* Roboto-Medium.ttf */; };
@@ -50,7 +51,6 @@
 		EC10102C2CDE4FD7A4209F64 /* Signika-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 76CDFA2D5DF14B35AA877680 /* Signika-SemiBold.ttf */; };
 		ED2C09ADCD374976AC726B5D /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAF555603FA24384B7C0F438 /* Roboto-ThinItalic.ttf */; };
 		EE66576BF79642CD8BCC40A3 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E7E279AE310402CA0FF3DF3 /* Roboto-MediumItalic.ttf */; };
-		31036832D2CA4DD3BF854B51 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = E2A2238AEBDA4D9AA517EE7E /* Helvetica.ttc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,12 +113,12 @@
 		D8C7FABDFC2443AFA927FA13 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
 		D8FDE5D4897843B7A144ED0D /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DF68BD672A54496FAA587BE1 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		E2A2238AEBDA4D9AA517EE7E /* Helvetica.ttc */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Helvetica.ttc; path = ../assets/fonts/Helvetica.ttc; sourceTree = "<group>"; };
 		E87AC922618F4FD0BF6EC5E8 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		E9BCBEEF8BC9483B8438E300 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-BlackItalic.ttf"; path = "../assets/fonts/Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAF555603FA24384B7C0F438 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		FE0D200E3DDF4B369AB66C7E /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
-		E2A2238AEBDA4D9AA517EE7E /* Helvetica.ttc */ = {isa = PBXFileReference; name = "Helvetica.ttc"; path = "../assets/fonts/Helvetica.ttc"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

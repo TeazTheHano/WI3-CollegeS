@@ -22,7 +22,7 @@ const clrStyle = StyleSheet.create<any>({
 });
 
 export default clrStyle;
-
+const borderWidth = vw(1)
 export const componentStyle = StyleSheet.create<any>({
     outerGlowL1T1White: {
         shadowOffset: { width: 0, height: 2 },
@@ -47,6 +47,24 @@ export const componentStyle = StyleSheet.create<any>({
         shadowOpacity: 0.05,
         shadowRadius: vw(1),
         elevation: 10,
+    },
+
+    filterShadow: {
+        shadowOffset: { width: 0, height: -vw(1.5) },
+        shadowOpacity: 0.3,
+        shadowRadius: vw(1),
+        elevation: 10,
+    },
+
+    activeMark: {
+        borderColor: 'red',
+        borderWidth,
+        left: -borderWidth / 2,
+    },
+    inactiveMark: {
+        borderColor: 'grey',
+        borderWidth,
+        left: -borderWidth / 2,
     },
 });
 

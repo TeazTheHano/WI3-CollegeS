@@ -62,11 +62,19 @@ export interface MBTIGroup {
     desc: string
 }
 
+export interface RecentSearch {
+    indexNum: number,
+    uniName: string,
+    uniShortName: string,
+    field: string,
+}
+
 export interface University {
     id?: number,
     name?: string,
     shortName?: string | null,
     description?: string[],
+    field?: string[],
     city?: string,
     location?: string,
     img?: any,
@@ -85,6 +93,8 @@ export interface University {
         afterGraduation?: boolean,
         addmission?: number | null,
         majorFee?: number | null,
+        icon?: any,
+        field?: string,
     }[],
     mainMajor?: string[],
     specialProgram?: string[],
