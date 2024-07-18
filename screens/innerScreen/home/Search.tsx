@@ -35,7 +35,7 @@ export default function Search() {
   }, [navigation])
 
   // show filter animation _______________________________________________________
-  const [showFilter, setShowFilter] = React.useState<boolean>(true)
+  const [showFilter, setShowFilter] = React.useState<boolean>(false)
 
   useEffect(() => {
     renderShowFilterAnimation(showFilter)
@@ -154,6 +154,7 @@ export default function Search() {
   const orginCombList: string[] = [`A00`, `A01`, `A02`, `B00`, `B01`, `B02`, `C00`, `D00`, `D01`, `D02`, `other`]
   const examGroupKey: string[] = Object.keys(examGroupList)
   // TODO: update the fieldGroupKey with real data
+  // TODO: update and check the search engine with real data
   const fieldGroupKey: string[] = [`Economics`, `Science`, `Engineering`, `Art`, `Medicine`, `Education`, `Social Science`, `Law`, `Accounting`, `Architecture`, `Business`,]
   function renderCombSelect() {
     // get the key of the examGroupList
@@ -161,12 +162,18 @@ export default function Search() {
     useEffect(() => {
       if (otherComb) {
         if (!selectComb.includes(otherComb) && examGroupKey.includes(otherComb)) {
+          if (orginCombList.includes(otherComb)) {
+            return setSelectComb([...selectComb, otherComb])
+          }
           setSelectComb([...selectComb, otherComb])
           setCombList([...combList, otherComb])
         } else if (otherComb.includes(',')) {
           otherComb.split(',').map((item) => {
             item.trim()
             if (!selectComb.includes(item) && examGroupKey.includes(item)) {
+              if (orginCombList.includes(item)) {
+                return setSelectComb([...selectComb, item])
+              }
               setSelectComb([...selectComb, item])
               setCombList([...combList, item])
             }
@@ -206,12 +213,18 @@ export default function Search() {
     useEffect(() => {
       if (otherField) {
         if (!selectField.includes(otherField) && fieldGroupKey.includes(otherField)) {
+          if (orginFieldList.includes(otherField)) {
+            return setSelectField([...selectField, otherField])
+          }
           setSelectField([...selectField, otherField])
           setFieldList([...fieldList, otherField])
         } else if (otherField.includes(',')) {
           otherField.split(',').map((item) => {
             item.trim()
             if (!selectField.includes(item) && fieldGroupKey.includes(item)) {
+              if (orginFieldList.includes(item)) {
+                return setSelectField([...selectField, item])
+              }
               setSelectField([...selectField, item])
               setFieldList([...fieldList, item])
             }
@@ -319,7 +332,13 @@ export default function Search() {
                       uniShortName: item.shortName,
                       field: item.field,
                     }
-                    saveRecentSearch(recentSearch ? [...recentSearch, recent] : [recent])
+                    if (recentSearch) {
+                      if (!recentSearch.some((item) => item.uniName === recent.uniName)) {
+                        saveRecentSearch([...recentSearch, recent])
+                      }
+                    } else {
+                      saveRecentSearch([recent])
+                    }
                     navigation.navigate('UniversityDetail', { item });
                   }}
                 >

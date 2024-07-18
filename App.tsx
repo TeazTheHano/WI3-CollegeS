@@ -22,31 +22,34 @@ import Search from './screens/innerScreen/home/Search'
 import UniversityDetail from './screens/innerScreen/home/UniversityDetail'
 import MajorDetail from './screens/innerScreen/home/MajorDetail'
 
+
 export default function App() {
   const Stack = createNativeStackNavigator()
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="LoginOpt" component={LoginOpt} />
-        <Stack.Screen name="Onboard" component={Onboard} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="DataCollect" component={DataCollect} />
+    // <ProviderTotal>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="LoginOpt" component={LoginOpt} />
+          <Stack.Screen name="Onboard" component={Onboard} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="DataCollect" component={DataCollect} />
 
-        <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="User" component={User} />
-        <Stack.Screen name="Compare" component={Compare} />
-        <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="BottomTab" component={BottomTab} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="User" component={User} />
+          <Stack.Screen name="Compare" component={Compare} />
+          <Stack.Screen name="Settings" component={Settings} />
 
-        {/* inner */}
-        <Stack.Screen name="Persona" component={Persona} />
-        <Stack.Screen name="ExplorePersona" component={ExplorePersona} />
+          {/* inner */}
+          <Stack.Screen name="Persona" component={Persona} />
+          <Stack.Screen name="ExplorePersona" component={ExplorePersona} />
 
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen name="UniversityDetail" component={UniversityDetail} />
-        <Stack.Screen name="MajorDetail" component={MajorDetail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="UniversityDetail" component={UniversityDetail} />
+          <Stack.Screen name="MajorDetail" component={MajorDetail} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    // </ProviderTotal>
   )
 }

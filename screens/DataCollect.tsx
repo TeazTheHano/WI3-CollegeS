@@ -7,7 +7,7 @@ import { statusBarTransparency } from '../assets/component'
 import clrStyle from '../assets/componentStyleSheet'
 import { useNavigation } from '@react-navigation/native'
 import { shareIcon, sharpLeftArrow, sharpRightArrow } from '../assets/svgXml'
-import data, { UserInfo } from '../data/data'
+import { UserInfo, listIntersts, ListFavSubject } from '../data/data'
 import storage, { getUserInfo, saveUserInfo } from '../data/storageFunc'
 
 export default function DataCollect() {
@@ -78,8 +78,8 @@ export default function DataCollect() {
     }
 
     // list of interest and favorite subject
-    const interestList = data().listIntersts;
-    const favoriteList = data().ListFavSubject;
+    const interestList = listIntersts;
+    const favoriteList = ListFavSubject;
     useEffect(() => {
         console.log(interest);
     }, [interest])

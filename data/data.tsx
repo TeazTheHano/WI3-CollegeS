@@ -69,6 +69,22 @@ export interface RecentSearch {
     field: string,
 }
 
+export interface Major {
+    majorName?: string,
+    examGroup?: {
+        name: string,
+        lowestStandardScore?: number | null,
+        highestStandardScore?: number | null,
+    }[] | null,
+    degreeType?: 'College' | 'Doctor' | 'Master' | 'College Advanced Program',
+    description?: string,
+    afterGraduation?: boolean,
+    addmission?: number | null,
+    majorFee?: number | null,
+    icon?: any,
+    field?: string,
+}
+
 export interface University {
     id?: number,
     name?: string,
@@ -81,21 +97,7 @@ export interface University {
     admission?: number,
     refURL?: string[],
     // major
-    major?: {
-        majorName?: string,
-        examGroup?: {
-            name: string,
-            lowestStandardScore?: number | null,
-            highestStandardScore?: number | null,
-        }[] | null,
-        degreeType?: 'College' | 'Doctor' | 'Master' | 'College Advanced Program',
-        description?: string,
-        afterGraduation?: boolean,
-        addmission?: number | null,
-        majorFee?: number | null,
-        icon?: any,
-        field?: string,
-    }[],
+    major?: Major[],
     mainMajor?: string[],
     specialProgram?: string[],
     // score
