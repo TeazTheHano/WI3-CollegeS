@@ -3,13 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle from '../assets/componentStyleSheet'
 import styles, { vw } from '../assets/stylesheet'
-import { getUserInfo, removeAllUserInfo } from '../data/storageFunc'
+import { getUserInfo, removeAllUserInfo, resetPersonalData } from '../data/storageFunc'
 import { SvgXml } from 'react-native-svg'
 import { sharpRightArrow } from '../assets/svgXml'
 import { marginBottomForScrollView } from '../assets/component'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Settings() {
   const [userInfo, setUserInfo] = useState<any>(null)
+  const navigation = useNavigation()
 
   useEffect(() => {
     getUserInfo().then((res) => {
@@ -46,14 +48,26 @@ export default function Settings() {
     },
     {
       icon: `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_6900_12469" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25"><rect x="0.128418" y="0.271484" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_6900_12469)"><path d="M1.12842 21.2715L12.1284 2.27148L23.1284 21.2715H1.12842ZM4.57842 19.2715H19.6784L12.1284 6.27148L4.57842 19.2715ZM12.1284 18.2715C12.4118 18.2715 12.6493 18.1757 12.8409 17.984C13.0326 17.7923 13.1284 17.5548 13.1284 17.2715C13.1284 16.9882 13.0326 16.7507 12.8409 16.559C12.6493 16.3673 12.4118 16.2715 12.1284 16.2715C11.8451 16.2715 11.6076 16.3673 11.4159 16.559C11.2243 16.7507 11.1284 16.9882 11.1284 17.2715C11.1284 17.5548 11.2243 17.7923 11.4159 17.984C11.6076 18.1757 11.8451 18.2715 12.1284 18.2715ZM11.1284 15.2715H13.1284V10.2715H11.1284V15.2715Z" fill="red"/></g></svg>`,
-      name: `Reset account data`,
-      fnc: () => { },
+      name: `Reset personal data`,
+      fnc: () => {
+        resetPersonalData().then(() => {
+          console.log('resetPersonalData');
+
+          navigation.navigate('DataCollect', { step: 0 } as never)
+        })
+      },
       caution: true,
     },
     {
       icon: `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><mask id="mask0_6900_12469" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="25"><rect x="0.128418" y="0.271484" width="24" height="24" fill="#D9D9D9"/></mask><g mask="url(#mask0_6900_12469)"><path d="M1.12842 21.2715L12.1284 2.27148L23.1284 21.2715H1.12842ZM4.57842 19.2715H19.6784L12.1284 6.27148L4.57842 19.2715ZM12.1284 18.2715C12.4118 18.2715 12.6493 18.1757 12.8409 17.984C13.0326 17.7923 13.1284 17.5548 13.1284 17.2715C13.1284 16.9882 13.0326 16.7507 12.8409 16.559C12.6493 16.3673 12.4118 16.2715 12.1284 16.2715C11.8451 16.2715 11.6076 16.3673 11.4159 16.559C11.2243 16.7507 11.1284 16.9882 11.1284 17.2715C11.1284 17.5548 11.2243 17.7923 11.4159 17.984C11.6076 18.1757 11.8451 18.2715 12.1284 18.2715ZM11.1284 15.2715H13.1284V10.2715H11.1284V15.2715Z" fill="red"/></g></svg>`,
       name: `Delete local storage`,
-      fnc: removeAllUserInfo,
+      fnc: () => {
+        console.log('Delete local storage');
+
+        removeAllUserInfo().then(() => {
+          navigation.navigate('LoginOpt')
+        })
+      },
       caution: true,
     },
   ]

@@ -11,14 +11,22 @@ import storage, { getUserInfo } from '../data/storageFunc'
 export default function LoginOpt() {
     const navigation = useNavigation();
     useEffect(() => {
-        getUserInfo().then((res) => {
-            console.log(res);
-            if (res?.synced && res?.dataCollect) {
-                navigation.navigate('BottomTab');
-            } else if (res?.synced && !res?.dataCollect) {
-                navigation.navigate('DataCollect');
-            }
-        })
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log('focus loginopt');
+            
+            getUserInfo().then((res) => {
+                
+                console.log(res);
+                if (res?.synced && res?.dataCollect) {
+                    console.log('synced');
+                    navigation.navigate('BottomTab');
+                } else if (res?.synced && !res?.dataCollect) {
+                    console.log('not synced');
+                    navigation.navigate('DataCollect');
+                }
+            })
+        });
+        return unsubscribe;
     }, [])
 
     // TODO: Login Functionality

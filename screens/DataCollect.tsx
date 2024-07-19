@@ -10,7 +10,7 @@ import { shareIcon, sharpLeftArrow, sharpRightArrow } from '../assets/svgXml'
 import { UserInfo, listIntersts, ListFavSubject } from '../data/data'
 import storage, { getUserInfo, saveUserInfo } from '../data/storageFunc'
 
-export default function DataCollect() {
+export default function DataCollect({ route }: any) {
     const navigation = useNavigation();
 
     const [currentStep, setCurrentStep] = React.useState(0)
@@ -32,6 +32,19 @@ export default function DataCollect() {
             setUserInfo(res);
         })
     }, [currentStep])
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            if (route.params) {
+                let step = route.params.step;
+                if (step === 0) {
+                    setCurrentStep(step);
+                }
+            }
+        });
+        return unsubscribe;
+    }, [navigation]);
+
 
     function currentStepAdjust(act: boolean) {
         if (act && required[currentStep]?.toString().trim().length === 0) {
@@ -105,6 +118,7 @@ export default function DataCollect() {
                 return (
                     <BoardingInput
                         title='Your personality'
+                        placeholder='e.g. INTP, ENFJ, etc.'
                         subTitle={`Don't know yet ? `}
                         supFncTitle='Test here'
                         supFncTitleColor={subTitleColor}

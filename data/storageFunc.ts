@@ -70,9 +70,9 @@ export async function getUserInfo(
 
 // remove user info
 export async function removeAllUserInfo(): Promise<void> {
-  // await storage.remove({
-  //   key: 'userInfo',
-  // });
+  await storage.remove({
+    key: 'userInfo',
+  });
   await storage.remove({
     key: 'recentSearch',
   });
@@ -104,5 +104,38 @@ export async function getRecentSearch(): Promise<RecentSearch[] | undefined> {
   } catch (error) {
     console.log('No recent search found');
     return undefined;
+  }
+}
+
+export async function resetPersonalData(): Promise<void> {
+  let newUserInfo: UserInfo;
+  try {
+    const data = await getUserInfo();
+    if (data) {
+      newUserInfo = {
+        synced: data.synced,
+        name: data.name,
+        email: data.email,
+        userID: data.userID,
+        loginMethod: data.loginMethod,
+        password: data.password,
+        createTime: data.createTime,
+        dataCollect: false,
+        age: 0,
+        data: {
+          persona: ``,
+          interest: [],
+          favorite: [],
+          goal: ``,
+        },
+      };
+      await saveUserInfo(newUserInfo).then(() => {
+        console.log('Personal data reset');
+
+        return true;
+      });
+    }
+  } catch (error) {
+    console.error('Error resetting personal data:', error);
   }
 }
