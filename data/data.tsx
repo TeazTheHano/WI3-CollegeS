@@ -112,6 +112,11 @@ export interface University {
     yearOrSemForFee?: string,
 }
 
+export interface CompareMajorItem {
+    uniName: string,
+    major: Major,
+}
+
 export let ListFavSubject: string[] = [`Math`, `Physics`, `Language`, `Biology`, `Geography`, `Literature`, `Music`, `History`, `Chemistry`];
 
 export let listIntersts: string[] = [`Singing`, `Movie`, `Hangout`, `Cooking`, `Board game`, `Video game`, `Sports`, `Reading`, `Writing`]

@@ -1,6 +1,12 @@
 import Storage from 'react-native-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {RecentSearch, UserInfo} from './data';
+import {
+  CompareMajorItem,
+  Major,
+  RecentSearch,
+  University,
+  UserInfo,
+} from './data';
 import {Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
@@ -71,10 +77,10 @@ export async function getUserInfo(
 // remove user info
 export async function removeAllUserInfo(): Promise<void> {
   await storage.remove({
-    key: 'userInfo',
+    key: 'goalList',
   });
   await storage.remove({
-    key: 'recentSearch',
+    key: 'compareData',
   });
 }
 
@@ -139,3 +145,167 @@ export async function resetPersonalData(): Promise<void> {
     console.error('Error resetting personal data:', error);
   }
 }
+
+export const saveCompareData = async (data: CompareMajorItem[]) => {
+  try {
+    await storage.save({
+      key: 'compareData',
+      data: data,
+    });
+    return true;
+  } catch (error) {
+    Alert.alert('Failed to save compare data');
+    return false;
+  }
+};
+
+export const saveCompareDataWithAlert = async (
+  uniItem: University,
+  major: Major,
+  naviFnc: () => void,
+) => {
+  let data: CompareMajorItem = {
+    uniName: uniItem.name as string,
+    major: major as Major,
+  };
+  getCompareData().then(compareData => {
+    console.log(compareData);
+    if (compareData) {
+      if (
+        !compareData.find(
+          item =>
+            item.uniName === data.uniName &&
+            item.major.majorName === data.major.majorName,
+        )
+      ) {
+        compareData.push(data);
+        saveCompareData(compareData).then(res => {
+          if (res) {
+            if (compareData.length > 1) {
+              Alert.alert(
+                'Add to compare list successfully',
+                `You have ${compareData.length} items in your list. Do you want to compare them now?`,
+                [
+                  {text: 'Cancel'},
+                  {text: 'OK', style: 'default', onPress: naviFnc},
+                ],
+              );
+            } else {
+              Alert.alert('Success', 'Add to compare list successfully');
+            }
+          }
+        });
+      } else {
+        Alert.alert(
+          'No need to add',
+          'This item is already in your compare list',
+        );
+      }
+    } else {
+      saveCompareData([data]).then(res => {
+        if (res) {
+          Alert.alert('Success', 'Add to goal successfully');
+        }
+      });
+    }
+  });
+};
+
+export const getCompareData = async (): Promise<
+  CompareMajorItem[] | undefined
+> => {
+  try {
+    const data = await storage.load({
+      key: 'compareData',
+    });
+    return data;
+  } catch (error) {
+    console.log('No compare data found');
+    return undefined;
+  }
+};
+
+export const removeCompareData = async () => {
+  await storage.remove({
+    key: 'compareData',
+  });
+};
+
+export const saveGoalList = async (uniItem: University, major: Major) => {
+  let data: CompareMajorItem = {
+    uniName: uniItem.name as string,
+    major: major as Major,
+  };
+  const saveFNC = async (data: CompareMajorItem[]) => {
+    try {
+      await storage.save({
+        key: 'goalList',
+        data: data,
+      });
+      return true;
+    } catch (error) {
+      Alert.alert('Failed to save goal data');
+      return false;
+    }
+  };
+
+  return getGoalList().then(goalData => {
+    console.log(goalData);
+    if (goalData) {
+      if (
+        !goalData.find(
+          item =>
+            item.uniName === data.uniName &&
+            item.major.majorName === data.major.majorName,
+        )
+      ) {
+        goalData.push(data);
+        return saveFNC(goalData).then(res => {
+          if (res) {
+            Alert.alert('Success', 'Add to goal list successfully');
+            return true;
+          }
+          return false;
+        });
+      } else {
+        Alert.alert('No need to add', 'This item is already in your goal list');
+        return false;
+      }
+    } else {
+      return saveFNC([data]).then(res => {
+        if (res) {
+          Alert.alert('Success', 'Add to goal successfully');
+          return true;
+        }
+        return false;
+      });
+    }
+  });
+};
+
+export const updateGoalList = async (data: CompareMajorItem[]) => {
+  try {
+    await storage.save({
+      key: 'goalList',
+      data: data,
+    });
+    return true;
+  } catch (error) {
+    Alert.alert('Failed to save goal data');
+    return false;
+  }
+};
+
+export const getGoalList = async (): Promise<
+  CompareMajorItem[] | undefined
+> => {
+  try {
+    const data = await storage.load({
+      key: 'goalList',
+    });
+    return data;
+  } catch (error) {
+    console.log('No goal data found');
+    return undefined;
+  }
+};

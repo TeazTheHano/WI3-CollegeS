@@ -12,16 +12,10 @@ export default function LoginOpt() {
     const navigation = useNavigation();
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            console.log('focus loginopt');
-            
             getUserInfo().then((res) => {
-                
-                console.log(res);
                 if (res?.synced && res?.dataCollect) {
-                    console.log('synced');
                     navigation.navigate('BottomTab');
                 } else if (res?.synced && !res?.dataCollect) {
-                    console.log('not synced');
                     navigation.navigate('DataCollect');
                 }
             })

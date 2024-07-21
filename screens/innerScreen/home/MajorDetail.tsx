@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
+import { View, Text, ScrollView, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { LowBtn, Nunito12Bold, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito18Reg, SaveViewWithColorStatusBar, TopNav } from '../../../assets/Class'
@@ -6,11 +6,24 @@ import clrStyle, { componentStyle } from '../../../assets/componentStyleSheet'
 import styles, { vh, vw } from '../../../assets/stylesheet'
 import { SvgXml } from 'react-native-svg'
 import { marginBottomForScrollView } from '../../../assets/component'
-import { examGroupList } from '../../../data/data'
+import { CompareMajorItem, examGroupList } from '../../../data/data'
+import { getCompareData, getGoalList, saveCompareData, saveCompareDataWithAlert, saveGoalList, updateGoalList } from '../../../data/storageFunc'
+import { useBottomSheet } from '@gorhom/bottom-sheet'
 
 export default function MajorDetail({ route }: any) {
     const { major, uniItem } = route.params
     const navigation = useNavigation()
+    const [isInGoal, setIsInGoal] = React.useState<boolean>(false)
+
+    useEffect(() => {
+        getGoalList().then((data) => {
+            if (data) {
+                if (data.find(item => item.uniName === uniItem.name && item.major.majorName === major.majorName)) {
+                    setIsInGoal(true)
+                }
+            }
+        })
+    }, [])
 
     return (
         <SaveViewWithColorStatusBar
@@ -58,15 +71,59 @@ export default function MajorDetail({ route }: any) {
                             </View>
                             <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.addmission ? major.addmission : `N/A`}</Nunito14Bold>
                         </View>
-                        <TouchableOpacity
-                            // TODO: add to goal
-                            onPress={
-                                ()=>{}
-                            }
-                            style={[styles.flexRowCenter, styles.w100, { backgroundColor: clrStyle.main5, paddingVertical: vw(1.5), borderRadius: vw(2) }]}>
-                            <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.83334 10H17.1667M10.5 3.33337V16.6667" stroke="#CCCED5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
-                            <Nunito14Bold style={{ color: clrStyle.white }}> Add to goal</Nunito14Bold>
-                        </TouchableOpacity>
+                        {
+                            !isInGoal ?
+                                <TouchableOpacity
+                                    onPress={
+                                        () => {
+                                            saveGoalList(uniItem, major).then((res) => {
+                                                if (res) {
+                                                    setIsInGoal(true)
+                                                }
+                                            })
+                                        }}
+                                    style={[styles.flexRowCenter, styles.w100, { backgroundColor: clrStyle.main5, paddingVertical: vw(1.5), borderRadius: vw(2) }]}>
+                                    <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.83334 10H17.1667M10.5 3.33337V16.6667" stroke="#CCCED5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
+                                    <Nunito14Bold style={{ color: clrStyle.white }}> Add to goal</Nunito14Bold>
+                                </TouchableOpacity> :
+                                <TouchableOpacity
+                                    onPress={
+                                        () => {
+                                            Alert.alert(
+                                                'Remove from goal',
+                                                `Are you sure you want to remove ${uniItem.name} - ${major.majorName} from your goal?`,
+                                                [
+                                                    {
+                                                        text: 'Cancel',
+                                                        style: 'cancel'
+                                                    },
+                                                    {
+                                                        text: 'OK',
+                                                        onPress: () => {
+                                                            getGoalList().then((data) => {
+                                                                if (data) {
+                                                                    // find index of item
+                                                                    let index = data.findIndex(item => item.uniName === uniItem.name && item.major.majorName === major.majorName)
+
+                                                                    data.splice(index, 1)
+                                                                    updateGoalList(data).then((res) => {
+                                                                        if (res) {
+                                                                            setIsInGoal(false)
+                                                                        }
+                                                                    })
+
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                ]
+                                            )
+                                        }}
+                                    style={[styles.flexRowCenter, styles.w100, { backgroundColor: clrStyle.main9, paddingVertical: vw(1.5), borderRadius: vw(2) }]}>
+                                    <SvgXml width={vw(6)} height={vw(6)} xml={`<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.16667 17.4999H13.8333M10.5 17.4999V14.1666M10.5 14.1666C8.19881 14.1666 6.33333 12.3011 6.33333 9.99992V4.99992M10.5 14.1666C12.8012 14.1666 14.6667 12.3011 14.6667 9.99992V4.99992M14.6667 4.99992C14.6667 4.07944 13.9205 3.33325 13 3.33325H8C7.07953 3.33325 6.33333 4.07944 6.33333 4.99992M14.6667 4.99992H15.9167C17.0673 4.99992 18 5.93266 18 7.08325C18 8.23385 17.0673 9.16659 15.9167 9.16659H14.6667M6.33333 4.99992H5.08333C3.93274 4.99992 3 5.93266 3 7.08325C3 8.23385 3.93274 9.16659 5.08333 9.16659H6.33333" stroke="#FCFCFC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} />
+                                    <Nunito14Bold style={{ color: clrStyle.white }}> Your Goal</Nunito14Bold>
+                                </TouchableOpacity>
+                        }
                     </View>
                 </View>
 
@@ -106,6 +163,7 @@ export default function MajorDetail({ route }: any) {
                     round={vw(2)}
                     title='Compare with ...'
                     onPress={() => {
+                        saveCompareDataWithAlert(uniItem, major, () => { navigation.navigate('BottomTab', { screen: 'Compare' }); })
                     }}
                 />
             </View>

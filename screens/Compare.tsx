@@ -1,52 +1,36 @@
 import { View, Text, ScrollView, Animated } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle from '../assets/componentStyleSheet'
 import styles, { vw } from '../assets/stylesheet'
 import { SvgXml } from 'react-native-svg'
+import { useNavigation } from '@react-navigation/native'
+import { getCompareData } from '../data/storageFunc'
 
 export default function Compare() {
+  const navigation = useNavigation();
+
   const [compare, setCompare] = React.useState<boolean>(false)
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getCompareData().then((data) => {
+        if (data) {
+          console.log(data);
+
+        } else {
+        }
+      });
+    });
+    return unsubscribe;
+  }, [navigation]);
 
 
   function pendingCompare() {
-    let data = [
-      {
-        uniName: 'University of Sydney',
-        major: 'Computer Science',
-        img: 'https://www.sydney.edu.au/content/dam/corporate/brand-and-style-assets/brand-assets/hero-images/hero-image-1.jpg',
-        score: 90,
-        rank: 1,
-        fee: 10000,
-        duration: 3,
-        location: 'Sydney, Australia',
-        country: 'Australia',
-        rating: 4.5
-      },
-      {
-        uniName: 'University of Melbourne',
-        major: 'Computer Science',
-        img: 'https://www.sydney.edu.au/content/dam/corporate/brand-and-style-assets/brand-assets/hero-images/hero-image-1.jpg',
-        score: 90,
-        rank: 1,
-        fee: 10000,
-        duration: 3,
-        location: 'Sydney, Australia',
-        country: 'Australia',
-        rating: 4.5
-      }
-    ]
 
     return (
       <View>
-        {data.map((item, index) => {
-          return (
-            <View>
-              
-            </View>
-          )
-        })}
+
       </View>
     )
   }
@@ -58,7 +42,7 @@ export default function Compare() {
       bgColor={clrStyle.white}>
       <TopNav
         title='Compare'
-        returnPreScreen={true}
+        returnPreScreen={compare}
         returnPreScreenFnc={() => { setCompare(false) }}
       />
       <ScrollView

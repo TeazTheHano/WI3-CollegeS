@@ -9,6 +9,8 @@ import { sharpRightArrow } from '../assets/svgXml'
 import { marginBottomForScrollView } from '../assets/component'
 import { useNavigation } from '@react-navigation/native'
 
+// import * as ImagePicker from 'expo-image-picker';
+
 export default function Settings() {
   const [userInfo, setUserInfo] = useState<any>(null)
   const navigation = useNavigation()
@@ -18,6 +20,24 @@ export default function Settings() {
       setUserInfo(res);
     })
   }, [userInfo])
+
+  const [image, setImage] = useState<string | null>(null);
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    // let result = await ImagePicker.launchImageLibraryAsync({
+    //   mediaTypes: ImagePicker.MediaTypeOptions.All,
+    //   allowsEditing: true,
+    //   aspect: [4, 3],
+    //   quality: 1,
+    // });
+
+    // console.log(result);
+
+    // if (!result.canceled) {
+    //   setImage(result.assets[0].uri);
+    // }
+  };
+
 
   const btnList = [
     {
@@ -122,9 +142,15 @@ export default function Settings() {
         style={[styles.flex1]}>
 
         <View style={[styles.flexColCenter, styles.gap3vw]}>
-          <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(28), height: vw(28), backgroundColor: 'black' }]}>
-            {/* TODO: img goes here */}
-          </View>
+          <TouchableOpacity
+            onPress={() => {
+              // open the image picker
+              pickImage()
+            }}>
+            <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(28), height: vw(28), backgroundColor: 'black' }]}>
+              {/* TODO: img goes here */}
+            </View>
+          </TouchableOpacity>
           <Nunito18Bold style={[{ color: clrStyle.black }]}>Hello, {userInfo?.name}</Nunito18Bold>
           <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Welcome back!</Nunito14Reg>
         </View>
