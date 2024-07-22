@@ -104,14 +104,14 @@ export default function Wishlist() {
                             style={[styles.flexRowBetweenCenter, styles.padding10, styles.paddingV4vw, styles.w100, styles.borderRadius3vw, { backgroundColor: clrStyle.white, borderBottomWidth: 1, borderBottomColor: clrStyle.grey1 }]}
                             onPress={() => {
                                 // TODO: fix the uniItem to fit the MajorDetail screen requirement
-                                navigation.navigate(`MajorDetail`, { major: wishlistItem.major, uniItem: wishlistItem.university })
+                                navigation.navigate(`MajorDetail`, { major: wishlistItem.major, uniItem: wishlistItem.uniItem });
                             }}>
 
                             <View style={[styles.flexRowBetweenCenter, styles.gap2vw, styles.flex1]}>
                                 {wishlistItem.major.icon ? wishlistItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
                                 <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
                                     <Nunito20Bold style={{ color: clrStyle.grey3, }}>{wishlistItem.major.majorName}</Nunito20Bold>
-                                    <Nunito16Reg style={{ color: clrStyle.grey2, }}>{wishlistItem.uniName} {wishlistItem.major.field ? `- ${wishlistItem.major.field}` : null}</Nunito16Reg>
+                                    <Nunito16Reg style={{ color: clrStyle.grey2, }}>{wishlistItem.uniItem.name} {wishlistItem.major.field ? `- ${wishlistItem.major.field}` : null}</Nunito16Reg>
                                 </View>
                             </View>
                             {/* TODO: fix match */}

@@ -175,10 +175,7 @@ export const saveCompareDataWithAlert = async (
   naviFnc: () => void,
 ) => {
   let data: CompareMajorItem = {
-    uniName: uniItem.name as string,
-    uniFee: uniItem.avgFee ? uniItem.avgFee : uniItem.minFee,
-    uniFeeUnit: uniItem.unitFee,
-    yearOrSem: uniItem.yearOrSemForFee,
+    uniItem: uniItem as University,
     major: major as Major,
   };
   getCompareData().then(compareData => {
@@ -187,7 +184,7 @@ export const saveCompareDataWithAlert = async (
       if (
         !compareData.find(
           item =>
-            item.uniName === data.uniName &&
+            item.uniItem.name === data.uniItem.name &&
             item.major.majorName === data.major.majorName,
         )
       ) {
@@ -246,9 +243,8 @@ export const removeCompareData = async () => {
 
 export const saveWishlist = async (uniItem: University, major: Major) => {
   let data: CompareMajorItem = {
-    uniName: uniItem.name as string,
+    uniItem: uniItem as University,
     major: major as Major,
-    uniShortName: uniItem.shortName as string,
   };
   const saveFNC = async (data: CompareMajorItem[]) => {
     try {
@@ -269,7 +265,7 @@ export const saveWishlist = async (uniItem: University, major: Major) => {
       if (
         !wishData.find(
           item =>
-            item.uniName === data.uniName &&
+            item.uniItem.name === data.uniItem.name &&
             item.major.majorName === data.major.majorName,
         )
       ) {
@@ -324,9 +320,9 @@ export const getWishlist = async (): Promise<
   }
 };
 
-export const saveGoalMajor = async (uniItem: string, major: Major) => {
-  let data: CompareMajorItem = {
-    uniName: uniItem as string,
+export const saveGoalMajor = async (uniName: string, major: Major) => {
+  let data = {
+    uniName: uniName as string,
     major: major as Major,
   };
   try {

@@ -17,7 +17,7 @@ export default function MajorDetail({ route }: any) {
     useEffect(() => {
         getWishlist().then((data) => {
             if (data) {
-                if (data.find(item => item.uniName === uniItem.name && item.major.majorName === major.majorName)) {
+                if (data.find(item => item.uniItem.name === uniItem.name && item.major.majorName === major.majorName)) {
                     setIsInWishlist(true)
                 }
             }
@@ -102,7 +102,7 @@ export default function MajorDetail({ route }: any) {
                                                             getWishlist().then((data) => {
                                                                 if (data) {
                                                                     // find index of item
-                                                                    let index = data.findIndex(item => item.uniName === uniItem.name && item.major.majorName === major.majorName)
+                                                                    let index = data.findIndex(item => item.uniItem.name === uniItem.name && item.major.majorName === major.majorName)
 
                                                                     data.splice(index, 1)
                                                                     updateWishlist(data).then((res) => {

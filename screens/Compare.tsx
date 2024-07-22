@@ -34,7 +34,7 @@ export default function Compare() {
   function pendingCompare() {
     if (compareList.length > 0) {
       return (
-        <View style={[styles.flexCol, styles.gap6vw]}>
+        <View style={[styles.flexCol, styles.gap6vw, styles.paddingH6vw]}>
           <View style={[styles.flexRowStartCenter, styles.w100, styles.gap2vw,]}>
             <SvgXml xml={`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 6.17855L28.7721 24.5936L32 19.4383L3.25107 1L0 6.17855Z" fill="#94CDED"/><path d="M1.62549 3.60093L30.3977 22.0393L32 19.4383L3.25106 1L1.62549 3.60093Z" fill="#DBDBDB"/><path d="M18.2061 10.3583L16.7198 9.40625L15.1407 11.8678L13.2598 14.7937L15.373 16.1406L18.2061 10.3583Z" fill="#850000"/><path d="M15.3267 13.447C15.5357 14.5849 15.4892 15.1887 14.0727 20.6923C12.6793 26.2191 14.003 28.5181 14.003 28.5181L15.8607 28.193C15.8607 28.193 14.9319 20.8549 15.5124 18.3237C16.093 15.7925 16.0001 13.7024 16.0001 13.7024L15.3267 13.4703V13.447Z" fill="#850000"/><path d="M16.6733 13.2844C18.2524 14.4455 23.0826 17.743 22.6878 21.3192C22.2698 24.8954 21.9447 31.7227 21.9447 31.7227L19.4135 30.6777C20.3424 24.64 20.8533 19.1596 19.1581 17.2554C17.1842 15.0493 16.1392 14.4223 16.1392 14.4223L16.6965 13.2844H16.6733Z" fill="#B80000"/></svg>`} width={vw(8)} height={vw(8)} />
             <Nunito20Bold style={{ color: clrStyle.main5 }}>Choose your option</Nunito20Bold>
@@ -45,14 +45,14 @@ export default function Compare() {
                 style={[styles.flexRowBetweenCenter, styles.padding10, styles.paddingV4vw, styles.w100, styles.borderRadius3vw, styles.shadowW0H2Black, { backgroundColor: clrStyle.white, borderBottomWidth: 1, borderBottomColor: clrStyle.grey1 }]}
                 onPress={() => {
                   // TODO: fix the uniItem to fit the MajorDetail screen requirement
-                  navigation.navigate(`MajorDetail`, { major: compareItem.major, uniItem: compareItem.university })
+                  navigation.navigate(`MajorDetail`, { major: compareItem.major, uniItem: compareItem.uniItem })
                 }}>
 
                 <View style={[styles.flexRowBetweenCenter, styles.gap2vw, styles.flex1]}>
                   {compareItem.major.icon ? compareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
                   <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
                     <Nunito20Bold style={{ color: clrStyle.grey3, }}>{compareItem.major.majorName}</Nunito20Bold>
-                    <Nunito16Reg style={{ color: clrStyle.grey2, }}>{compareItem.uniName} {compareItem.major.field ? `- ${compareItem.major.field}` : null}</Nunito16Reg>
+                    <Nunito16Reg style={{ color: clrStyle.grey2, }}>{compareItem.uniItem.name} {compareItem.major.field ? `- ${compareItem.major.field}` : null}</Nunito16Reg>
                   </View>
                 </View>
                 <TouchableOpacity
@@ -68,8 +68,8 @@ export default function Compare() {
                       }
                     }])
                   }}
-                  style={[styles.flexColCenter, styles.gap2vw, styles.padding2vw]}>
-                  {xIcon(vw(4), vw(4), clrStyle.main7)}
+                  style={[styles.flexColCenter, styles.padding1vw]}>
+                  {xIcon(vw(6), vw(6), clrStyle.main7)}
                 </TouchableOpacity>
               </TouchableOpacity>
               {
@@ -129,12 +129,12 @@ export default function Compare() {
         compareList.map((inCompareItem, index) => {
           return (
             <React.Fragment key={index}>
-              <View style={[styles.flexCol, styles.gap8vw, styles.w30vw, styles.h100]}>
+              <View style={[styles.flexCol, styles.gap8vw, styles.w30vw, styles.h100, { marginLeft: index == 0 ? vw(6) : null, marginRight: index == compareList.length - 1 ? vw(6) : 0 }]}>
                 {/* icon */}
                 <View style={[styles.shadowW0H05Black, styles.flexColCenter, styles.gap2vw, { borderRadius: vw(2), backgroundColor: clrStyle.white }]}>
-                  <View style={[styles.flexColCenter, styles.gap1vw, styles.paddingTop2vw, { borderTopLeftRadius: vw(2), borderTopRightRadius: vw(2) }]}>
+                  <View style={[styles.flexColCenter, styles.gap1vw, styles.paddingTop2vw, styles.paddingH1vw, { borderTopLeftRadius: vw(2), borderTopRightRadius: vw(2) }]}>
                     {inCompareItem.major.icon ? inCompareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
-                    <Nunito12Reg lineNumber={2} style={[styles.textCenter, { color: clrStyle.grey2 }]}>{inCompareItem.uniName}</Nunito12Reg>
+                    <Nunito12Reg lineNumber={2} style={[styles.textCenter, { color: clrStyle.grey2 }]}>{inCompareItem.uniItem.name}</Nunito12Reg>
                     <Nunito14Med lineNumber={2} style={[styles.textCenter, { color: clrStyle.grey3 }]}>{inCompareItem.major.majorName}</Nunito14Med>
                   </View>
                   <TouchableOpacity
@@ -146,11 +146,11 @@ export default function Compare() {
                 </View>
 
                 {/* comb */}
-                <View style={[styles.flexRowCenter, styles.positionRelative, styles.borderRadius2vw, styles.paddingH4vw, styles.paddingV2vw, { borderWidth: 2, borderColor: clrStyle.grey1 }]}>
+                <View style={[styles.flexRowCenter, styles.positionRelative, styles.borderRadius2vw, styles.paddingH2vw, styles.paddingV2vw, { borderWidth: 2, borderColor: clrStyle.grey1 }]}>
                   <View style={[styles.positionAbsolute, styles.paddingH2vw, { top: -vw(2.5), backgroundColor: clrStyle.white }]}><Nunito12Reg style={[styles.textCenter, { color: clrStyle.grey2 }]}>Comb</Nunito12Reg></View>
                   {inCompareItem.major.examGroup && inCompareItem.major.examGroup.length > 1 ?
 
-                    <Nunito16Bold style={[styles.flex1, { color: clrStyle.main1 }]}>{inCompareItem.major.examGroup.map((item: any) => { return item.name }).join(', ')}</Nunito16Bold>
+                    <Nunito16Bold style={[styles.flex1, styles.textCenter, { color: clrStyle.main1 }]}>{inCompareItem.major.examGroup.map((item: any) => { return item.name }).join(', ')}</Nunito16Bold>
                     :
                     inCompareItem.major.examGroup && inCompareItem.major.examGroup.length == 1 ?
                       <Nunito16Bold style={{ color: clrStyle.main1 }}>{inCompareItem.major.examGroup[0].name}</Nunito16Bold>
@@ -159,9 +159,9 @@ export default function Compare() {
                 </View>
 
                 {/* Tuition */}
-                <View style={[styles.flexRowCenter, styles.positionRelative, styles.borderRadius2vw, styles.paddingH4vw, styles.paddingV2vw, { borderWidth: 2, borderColor: clrStyle.grey1 }]}>
+                <View style={[styles.flexRowCenter, styles.positionRelative, styles.borderRadius2vw, styles.paddingV2vw, { borderWidth: 2, borderColor: clrStyle.grey1 }]}>
                   <View style={[styles.positionAbsolute, styles.paddingH2vw, { top: -vw(2.5), backgroundColor: clrStyle.white }]}><Nunito12Reg style={[styles.textCenter, { color: clrStyle.grey2 }]}>Tuition</Nunito12Reg></View>
-                  <Nunito16Bold style={{ color: clrStyle.main3 }}>{inCompareItem.major.majorFee ? formatNumber(inCompareItem.major.majorFee) : inCompareItem.uniFee ? formatNumber(inCompareItem.uniFee) : null} <Nunito12Reg style={{ color: clrStyle.grey2 }}>{inCompareItem.uniFee || inCompareItem.major.majorFee ? `/${inCompareItem.uniFeeUnit} /${inCompareItem.yearOrSem}` : null}</Nunito12Reg></Nunito16Bold>
+                  <Nunito16Bold style={[styles.textCenter, { color: clrStyle.main3 }]}>{inCompareItem.major.majorFee ? formatNumber(inCompareItem.major.majorFee) : inCompareItem.uniItem.minFee ? formatNumber(inCompareItem.uniItem.minFee) : `N/A`} <Nunito12Reg style={{ color: clrStyle.grey2 }}>{inCompareItem.uniItem.minFee || inCompareItem.major.majorFee ? `/${inCompareItem.uniItem.unitFee} /${inCompareItem.uniItem.yearOrSemForFee}` : null}</Nunito12Reg></Nunito16Bold>
                 </View>
 
                 {/* score */}
@@ -173,7 +173,7 @@ export default function Compare() {
                       {
                         inCompareItem.major.examGroup.map((item: any, index: number) => {
                           return (
-                            <Nunito14Bold key={index} style={[styles.flex1, { color: clrStyle.grey2 }]}>{item.name}: <Nunito16Bold style={{ color: clrStyle.main1 }}>{item.lowestStandardScore}</Nunito16Bold></Nunito14Bold>
+                            <Nunito14Bold key={index} style={[styles.flex1, styles.textCenter, { color: clrStyle.grey2 }]}>{item.name}: <Nunito16Bold style={{ color: clrStyle.main1 }}>{item.lowestStandardScore}</Nunito16Bold></Nunito14Bold>
                           )
                         })
                       }
@@ -239,7 +239,7 @@ export default function Compare() {
         />
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.flexColStartCenter, styles.gap4vw, styles.paddingV4vw, styles.paddingH4vw]}
+          contentContainerStyle={[styles.flexColStartCenter, styles.gap4vw, styles.paddingV4vw,]}
           style={[styles.flex1]}>
 
           {!compare ? pendingCompare() : inCompare()}
