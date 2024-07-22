@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Animated, TouchableOpacity, Alert } from 'react-native'
 import React, { useEffect } from 'react'
-import { Nunito12Reg, Nunito14Bold, Nunito14Med, Nunito16Bold, Nunito16Reg, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
+import { Nunito12Reg, Nunito14Bold, Nunito14Med, Nunito14Reg, Nunito16Bold, Nunito16Reg, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle from '../assets/componentStyleSheet'
 import styles, { vw } from '../assets/stylesheet'
 import { SvgXml } from 'react-native-svg'
@@ -8,13 +8,16 @@ import { useNavigation } from '@react-navigation/native'
 import { getCompareData } from '../data/storageFunc'
 import { CompareMajorItem } from '../data/data'
 import { editIcon, infoIcon, xIcon } from '../assets/svgXml'
-import { formatNumber } from '../assets/component'
+import { formatNumber, marginBottomForScrollView } from '../assets/component'
+
+import * as Progress from 'react-native-progress';
 
 export default function Compare() {
   const navigation = useNavigation();
 
   const [compare, setCompare] = React.useState<boolean>(false)
   const [compareList, setCompareList] = React.useState<CompareMajorItem[]>([])
+  const [visible, setVisible] = React.useState<boolean[]>([])
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
@@ -26,8 +29,7 @@ export default function Compare() {
       });
     });
     return unsubscribe;
-  }, [navigation]);
-
+  }, [navigation, compareList]);
 
   function pendingCompare() {
     if (compareList.length > 0) {
@@ -38,7 +40,7 @@ export default function Compare() {
             <Nunito20Bold style={{ color: clrStyle.main5 }}>Choose your option</Nunito20Bold>
           </View>
           {compareList.map((compareItem: any, index: number) => (
-            <View key={index} style={[styles.flexCol, styles.gap6vw]}>
+            <View key={index} style={[styles.flexCol, styles.gap6vw, { display: visible ? 'flex' : 'none' }]}>
               <TouchableOpacity
                 style={[styles.flexRowBetweenCenter, styles.padding10, styles.paddingV4vw, styles.w100, styles.borderRadius3vw, styles.shadowW0H2Black, { backgroundColor: clrStyle.white, borderBottomWidth: 1, borderBottomColor: clrStyle.grey1 }]}
                 onPress={() => {
@@ -53,9 +55,19 @@ export default function Compare() {
                     <Nunito16Reg style={{ color: clrStyle.grey2, }}>{compareItem.uniName} {compareItem.major.field ? `- ${compareItem.major.field}` : null}</Nunito16Reg>
                   </View>
                 </View>
-                {/* TODO: fix match */}
                 <TouchableOpacity
-                  onPress={() => { Alert.alert('Remove', 'Are you sure you want to remove this major from compare list?', [{ text: 'Cancel' }, { text: 'OK', onPress: () => { console.log('remove') } }]) }}
+                  onPress={() => {
+                    Alert.alert('Remove', 'Are you sure you want to remove this major from compare list?', [{ text: 'Cancel' }, {
+                      text: 'OK', onPress: () => {
+                        let temp = compareList
+                        temp.splice(index, 1)
+                        setCompareList(temp)
+                        let visibleTemp = [...visible]
+                        visibleTemp[index] = false
+                        setVisible(visibleTemp)
+                      }
+                    }])
+                  }}
                   style={[styles.flexColCenter, styles.gap2vw, styles.padding2vw]}>
                   {xIcon(vw(4), vw(4), clrStyle.main7)}
                 </TouchableOpacity>
@@ -79,11 +91,15 @@ export default function Compare() {
             </View>
           ))
           }
-          <TouchableOpacity
-            onPress={() => { setCompare(true) }}
-            style={[styles.flexRowCenter, styles.paddingV3vw, styles.paddingH4vw, { borderRadius: vw(2), backgroundColor: clrStyle.main6 }]}>
-            <Nunito16Bold style={{ color: clrStyle.main5 }}>Start compare</Nunito16Bold>
-          </TouchableOpacity>
+          {
+            compareList.length > 1 ?
+              <TouchableOpacity
+                onPress={() => { setCompare(true) }}
+                style={[styles.flexRowCenter, styles.paddingV3vw, styles.paddingH4vw, { borderRadius: vw(2), backgroundColor: clrStyle.main6 }]}>
+                <Nunito16Bold style={{ color: clrStyle.main5 }}>Start compare</Nunito16Bold>
+              </TouchableOpacity>
+              : null
+          }
         </View >
       )
     } else {
@@ -106,6 +122,9 @@ export default function Compare() {
       return null
     }
     function compareLayout() {
+      // TODO:change it to dynamic percent
+      const percent = 50
+
       return (
         compareList.map((inCompareItem, index) => {
           return (
@@ -152,9 +171,9 @@ export default function Compare() {
 
                     <View style={[styles.w100]}>
                       {
-                        inCompareItem.major.examGroup.map((item: any) => {
+                        inCompareItem.major.examGroup.map((item: any, index: number) => {
                           return (
-                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey2 }]}>{item.name}: <Nunito16Bold style={{ color: clrStyle.main1 }}>{item.lowestStandardScore}</Nunito16Bold></Nunito14Bold>
+                            <Nunito14Bold key={index} style={[styles.flex1, { color: clrStyle.grey2 }]}>{item.name}: <Nunito16Bold style={{ color: clrStyle.main1 }}>{item.lowestStandardScore}</Nunito16Bold></Nunito14Bold>
                           )
                         })
                       }
@@ -166,8 +185,13 @@ export default function Compare() {
                       : <Nunito16Bold style={{ color: clrStyle.main1 }}>No score</Nunito16Bold>
                   }
                 </View>
-
-
+                <View style={[styles.flexRowCenter, styles.positionRelative]}>
+                  <View style={[styles.positionAbsolute, styles.flexColCenter]}>
+                    <Nunito14Reg style={{ color: clrStyle.grey2 }}>Matching</Nunito14Reg>
+                    <Nunito16Bold style={{ color: clrStyle.main5 }}>{percent}%</Nunito16Bold>
+                  </View>
+                  <Progress.Circle thickness={vw(2)} strokeCap='round' color={clrStyle.main5} unfilledColor={clrStyle.grey1} borderWidth={0} size={vw(25)} progress={percent / 100} animated={true} />
+                </View>
 
               </View>
               {index < compareList.length - 1 ?
@@ -184,6 +208,7 @@ export default function Compare() {
     if (compareList.length > 2) {
       return (
         <ScrollView
+          showsHorizontalScrollIndicator={false}
           horizontal
           style={[styles.flex1, styles.w100, styles.paddingV4vw]}
           contentContainerStyle={[styles.flexRow, styles.justifyContentSpaceEvenly, styles.gap6vw,]}>
@@ -218,6 +243,7 @@ export default function Compare() {
           style={[styles.flex1]}>
 
           {!compare ? pendingCompare() : inCompare()}
+          {marginBottomForScrollView()}
         </ScrollView>
       </Animated.View>
     </SaveViewWithColorStatusBar>
