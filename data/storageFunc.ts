@@ -77,10 +77,20 @@ export async function getUserInfo(
 // remove user info
 export async function removeAllUserInfo(): Promise<void> {
   await storage.remove({
-    key: 'goalList',
+    key: 'wishList',
   });
   await storage.remove({
     key: 'compareData',
+  });
+  // TODO: re-active this when the data is ready
+  // await storage.remove({
+  //   key: 'userInfo',
+  // });
+  // await storage.remove({
+  //   key: 'recentSearch',
+  // });
+  await storage.remove({
+    key: 'goalList',
   });
 }
 
@@ -204,7 +214,7 @@ export const saveCompareDataWithAlert = async (
     } else {
       saveCompareData([data]).then(res => {
         if (res) {
-          Alert.alert('Success', 'Add to goal successfully');
+          Alert.alert('Success', 'Add to wishlist successfully');
         }
       });
     }
@@ -231,7 +241,7 @@ export const removeCompareData = async () => {
   });
 };
 
-export const saveGoalList = async (uniItem: University, major: Major) => {
+export const saveWishlist = async (uniItem: University, major: Major) => {
   let data: CompareMajorItem = {
     uniName: uniItem.name as string,
     major: major as Major,
@@ -239,42 +249,42 @@ export const saveGoalList = async (uniItem: University, major: Major) => {
   const saveFNC = async (data: CompareMajorItem[]) => {
     try {
       await storage.save({
-        key: 'goalList',
+        key: 'wishList',
         data: data,
       });
       return true;
     } catch (error) {
-      Alert.alert('Failed to save goal data');
+      Alert.alert('Failed to save wish data');
       return false;
     }
   };
 
-  return getGoalList().then(goalData => {
-    console.log(goalData);
-    if (goalData) {
+  return getWishlist().then(wishData => {
+    console.log(wishData);
+    if (wishData) {
       if (
-        !goalData.find(
+        !wishData.find(
           item =>
             item.uniName === data.uniName &&
             item.major.majorName === data.major.majorName,
         )
       ) {
-        goalData.push(data);
-        return saveFNC(goalData).then(res => {
+        wishData.push(data);
+        return saveFNC(wishData).then(res => {
           if (res) {
-            Alert.alert('Success', 'Add to goal list successfully');
+            Alert.alert('Success', 'Add to wish list successfully');
             return true;
           }
           return false;
         });
       } else {
-        Alert.alert('No need to add', 'This item is already in your goal list');
+        Alert.alert('No need to add', 'This item is already in your wish list');
         return false;
       }
     } else {
       return saveFNC([data]).then(res => {
         if (res) {
-          Alert.alert('Success', 'Add to goal successfully');
+          Alert.alert('Success', 'Add to wishlist successfully');
           return true;
         }
         return false;
@@ -283,7 +293,38 @@ export const saveGoalList = async (uniItem: University, major: Major) => {
   });
 };
 
-export const updateGoalList = async (data: CompareMajorItem[]) => {
+export const updateWishlist = async (data: CompareMajorItem[]) => {
+  try {
+    await storage.save({
+      key: 'wishList',
+      data: data,
+    });
+    return true;
+  } catch (error) {
+    Alert.alert('Failed to save wish data');
+    return false;
+  }
+};
+
+export const getWishlist = async (): Promise<
+  CompareMajorItem[] | undefined
+> => {
+  try {
+    const data = await storage.load({
+      key: 'wishList',
+    });
+    return data;
+  } catch (error) {
+    console.log('No wish data found');
+    return undefined;
+  }
+};
+
+export const saveGoalMajor = async (uniItem: string, major: Major) => {
+  let data: CompareMajorItem = {
+    uniName: uniItem as string,
+    major: major as Major,
+  };
   try {
     await storage.save({
       key: 'goalList',
@@ -296,9 +337,7 @@ export const updateGoalList = async (data: CompareMajorItem[]) => {
   }
 };
 
-export const getGoalList = async (): Promise<
-  CompareMajorItem[] | undefined
-> => {
+export const getGoalMajor = async (): Promise<CompareMajorItem | undefined> => {
   try {
     const data = await storage.load({
       key: 'goalList',

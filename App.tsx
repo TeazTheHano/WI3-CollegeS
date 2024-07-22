@@ -21,6 +21,7 @@ import ExplorePersona from './screens/innerScreen/user/ExplorePersona'
 import Search from './screens/innerScreen/home/Search'
 import UniversityDetail from './screens/innerScreen/home/UniversityDetail'
 import MajorDetail from './screens/innerScreen/home/MajorDetail'
+import Wishlist from './screens/innerScreen/user/Wishlist'
 
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
           <Stack.Screen name="Search" component={Search} />
           <Stack.Screen name="UniversityDetail" component={UniversityDetail} />
           <Stack.Screen name="MajorDetail" component={MajorDetail} />
+          <Stack.Screen name="Wishlist" component={Wishlist} />
         </Stack.Navigator>
       </NavigationContainer>
     // </ProviderTotal>
