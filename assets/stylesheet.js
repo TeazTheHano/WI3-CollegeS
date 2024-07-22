@@ -692,6 +692,10 @@ const styles = StyleSheet.create({
         borderRadius: vw(2.5),
     },
 
+    borderRadius2vw: {
+        borderRadius: vw(2),
+    },
+
     borderRadius3vw: {
         borderRadius: vw(3),
     },
@@ -1351,6 +1355,14 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: vw(1),
         elevation: vw(2),
+    },
+
+    shadowW0H2Black: {
+        shadowColor: 'black',
+        shadowOffset: { width: vw(0), height: vw(1.5) },
+        shadowOpacity: 0.075,
+        shadowRadius: vw(1.75),
+        elevation: vw(3),
     },
 
     bgcolorBlack: {

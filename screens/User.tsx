@@ -7,7 +7,7 @@ import styles, { vw } from '../assets/stylesheet'
 import { bestOfScCoIcon, curveRightArrow, ENTJicon, MBTIIcon, wishListIcon } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
 import { bestOfEconomic, CompareMajorItem, mbti } from '../data/data'
-import { marginBottomForScrollView } from '../assets/component'
+import { avatarComponet, marginBottomForScrollView } from '../assets/component'
 
 export default function User() {
   const navigation = useNavigation()
@@ -26,7 +26,9 @@ export default function User() {
       })
     })
     getWishlist().then((res) => {
-      setWishList(res)
+      if (res) {
+        setWishList(res)
+      }
     })
   }, [userInfo])
 
@@ -59,9 +61,7 @@ export default function User() {
         style={[styles.flex1]}>
 
         <View style={[styles.flexRowStartCenter, styles.paddingV2vw, styles.w100]}>
-          <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(12), height: vw(12), backgroundColor: 'black' }]}>
-            {/* TODO: img goes here */}
-          </View>
+          {avatarComponet()}
           <View style={[styles.flexCol, styles.gap1vw]}>
             <Nunito18Bold style={[{ color: clrStyle.grey3 }]}>Hello, {userInfo?.name}</Nunito18Bold>
             {/* <Nunito14Bold style={[{ color: clrStyle.grey2 }]}>Welcome back!</Nunito14Bold> */}

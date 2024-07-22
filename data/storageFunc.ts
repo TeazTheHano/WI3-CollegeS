@@ -176,6 +176,9 @@ export const saveCompareDataWithAlert = async (
 ) => {
   let data: CompareMajorItem = {
     uniName: uniItem.name as string,
+    uniFee: uniItem.avgFee ? uniItem.avgFee : uniItem.minFee,
+    uniFeeUnit: uniItem.unitFee,
+    yearOrSem: uniItem.yearOrSemForFee,
     major: major as Major,
   };
   getCompareData().then(compareData => {
@@ -214,7 +217,7 @@ export const saveCompareDataWithAlert = async (
     } else {
       saveCompareData([data]).then(res => {
         if (res) {
-          Alert.alert('Success', 'Add to wishlist successfully');
+          Alert.alert('Success', 'Add to compare list successfully');
         }
       });
     }
@@ -245,6 +248,7 @@ export const saveWishlist = async (uniItem: University, major: Major) => {
   let data: CompareMajorItem = {
     uniName: uniItem.name as string,
     major: major as Major,
+    uniShortName: uniItem.shortName as string,
   };
   const saveFNC = async (data: CompareMajorItem[]) => {
     try {

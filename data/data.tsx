@@ -114,6 +114,10 @@ export interface University {
 
 export interface CompareMajorItem {
     uniName: string,
+    uniShortName?: string,
+    uniFee?: number,
+    uniFeeUnit?: string,
+    yearOrSem?: string,
     major: Major,
 }
 

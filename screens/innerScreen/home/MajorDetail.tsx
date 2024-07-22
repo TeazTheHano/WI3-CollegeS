@@ -8,7 +8,6 @@ import { SvgXml } from 'react-native-svg'
 import { marginBottomForScrollView } from '../../../assets/component'
 import { CompareMajorItem, examGroupList } from '../../../data/data'
 import { getCompareData, getWishlist, saveCompareData, saveCompareDataWithAlert, saveWishlist, updateWishlist } from '../../../data/storageFunc'
-import { useBottomSheet } from '@gorhom/bottom-sheet'
 
 export default function MajorDetail({ route }: any) {
     const { major, uniItem } = route.params

@@ -8,6 +8,7 @@ import styles, { vw } from '../../../assets/stylesheet';
 import { SvgXml } from 'react-native-svg';
 import { CompareMajorItem } from '../../../data/data';
 import { editIcon, } from '../../../assets/svgXml';
+import { Screen } from 'react-native-screens';
 
 export default function Wishlist() {
     const navigation = useNavigation();
@@ -84,10 +85,12 @@ export default function Wishlist() {
                                     </View>
                                 </View>
                                 :
-                                <View style={[styles.marginTop8vw]}>
+                                <TouchableOpacity
+                                    onPress={() => { navigation.navigate('Search') }}
+                                    style={[styles.marginTop8vw]}>
                                     <Nunito16Bold style={{ color: clrStyle.grey3, }}>Click here to choose your GOAL</Nunito16Bold>
                                     <Nunito12Reg style={{ color: clrStyle.grey2, }}>Set your goal to get the best match</Nunito12Reg>
-                                </View>
+                                </TouchableOpacity>
                         }
                     </View>
                 </ImageBackground>

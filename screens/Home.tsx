@@ -8,7 +8,7 @@ import { curveRightArrow, searchIcon } from '../assets/svgXml'
 import { bannerList, suitableForYou, bestOfEconomic, bestOfScience } from '../data/data'
 import LinearGradient from 'react-native-linear-gradient'
 import { useNavigation } from '@react-navigation/native'
-import { marginBottomForScrollView } from '../assets/component'
+import { avatarComponet, marginBottomForScrollView } from '../assets/component'
 
 export default function Home() {
   const navigation = useNavigation();
@@ -138,9 +138,7 @@ export default function Home() {
             <Nunito18Bold style={[{ color: 'white' }]}>Hello, {userInfo?.name}</Nunito18Bold>
             <Nunito14Bold style={[{ color: clrStyle.main6 }]}>Welcome back!</Nunito14Bold>
           </View>
-          <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(12), height: vw(12), backgroundColor: 'black' }]}>
-            {/* TODO: img goes here */}
-          </View>
+          {avatarComponet()}
         </View>
       </TopNav>
 

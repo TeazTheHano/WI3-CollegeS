@@ -181,3 +181,11 @@ export function formatNumber(num: number, changeToChar: boolean = true) {
         return new Intl.NumberFormat('de-DE').format(num);
     }
 }
+
+export function avatarComponet() {
+    return (
+        <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(12), height: vw(12), backgroundColor: 'black' }]}>
+            {/* TODO: img goes here */}
+        </View>
+    )
+}
