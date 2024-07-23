@@ -9,6 +9,7 @@ import { SvgXml } from 'react-native-svg';
 import { CompareMajorItem } from '../../../data/data';
 import { editIcon, } from '../../../assets/svgXml';
 import { Screen } from 'react-native-screens';
+import { majorDefault } from '../../../assets/svgXml';
 
 export default function Wishlist() {
     const navigation = useNavigation();
@@ -65,22 +66,25 @@ export default function Wishlist() {
                             {
                                 goalList?.major ?
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { backgroundColor: clrStyle.main5, borderRadius: vw(2) }]}>
-                                        <Nunito12Reg style={{ color: clrStyle.white }}>Match <Nunito14Bold>70</Nunito14Bold></Nunito12Reg>
+                                        <Nunito12Reg style={{ color: clrStyle.white }}>Match <Nunito14Bold>70%</Nunito14Bold></Nunito12Reg>
                                     </View> : null
                             }
                         </View>
                         {
                             goalList?.major ?
-                                <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
-                                    <Nunito16Bold style={{ color: clrStyle.grey3, }}>{goalList.major.majorName}</Nunito16Bold>
-                                    <View style={[styles.flexRow, styles.gap1vw]}>
-                                        <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main2 }]}>
-                                            <Nunito12Bold style={[{ color: clrStyle.main1 }]}>{goalList.major.examGroup ? goalList.major.examGroup.map((examGroupItem: any, index: number) => { return examGroupItem.name }).join(', ') : `Recruitment`}</Nunito12Bold>
+                                <View style={[styles.flexRow, styles.gap2vw, styles.paddingTop4vw]}>
+                                    {goalList.major.icon ? goalList.major.icon(vw(16.5), vw(16.5)) : <View style={{ width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }}>{majorDefault(vw(16.5), vw(16.5))}</View>}
+                                    <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
+                                        <Nunito16Bold style={{ color: clrStyle.grey3, }}>{goalList.major.majorName}</Nunito16Bold>
+                                        <View style={[styles.flexRow, styles.gap1vw]}>
+                                            <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main2 }]}>
+                                                <Nunito12Bold style={[{ color: clrStyle.main1 }]}>{goalList.major.examGroup ? goalList.major.examGroup.map((examGroupItem: any, index: number) => { return examGroupItem.name }).join(', ') : `Recruitment`}</Nunito12Bold>
 
-                                        </View>
-                                        <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main8 }]}>
-                                            {/* TODO: check recuit */}
-                                            <Nunito12Bold style={[{ color: clrStyle.main7 }]}>{goalList.major.degreeType ? goalList.major.degreeType : `College`}</Nunito12Bold>
+                                            </View>
+                                            <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main8 }]}>
+                                                {/* TODO: check recuit */}
+                                                <Nunito12Bold style={[{ color: clrStyle.main7 }]}>{goalList.major.degreeType ? goalList.major.degreeType : `College`}</Nunito12Bold>
+                                            </View>
                                         </View>
                                     </View>
                                 </View>
@@ -108,7 +112,7 @@ export default function Wishlist() {
                             }}>
 
                             <View style={[styles.flexRowBetweenCenter, styles.gap2vw, styles.flex1]}>
-                                {wishlistItem.major.icon ? wishlistItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
+                                {wishlistItem.major.icon ? wishlistItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }}>{majorDefault(vw(16.5), vw(16.5))}</View>}
                                 <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
                                     <Nunito20Bold style={{ color: clrStyle.grey3, }}>{wishlistItem.major.majorName}</Nunito20Bold>
                                     <Nunito16Reg style={{ color: clrStyle.grey2, }}>{wishlistItem.uniItem.name} {wishlistItem.major.field ? `- ${wishlistItem.major.field}` : null}</Nunito16Reg>

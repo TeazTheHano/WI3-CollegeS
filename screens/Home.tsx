@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView, ImageBackground } from 'react-native'
+import { View, Text, TouchableOpacity, Animated, Image, ImageStyle, FlatList, Easing, ScrollView, ImageBackground, Linking } from 'react-native'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { getUserInfo } from '../data/storageFunc'
 import { BannerSliderWithCenter, BottomBar, Nunito12Bold, Nunito12Reg, Nunito14Bold, Nunito14Reg, Nunito16Bold, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
@@ -76,7 +76,14 @@ export default function Home() {
         transform: [{ scale: scaleAnimation }],
       }
       ]}>
-        <Animated.Image source={item.img} style={[styles.w100, styles.h100, { resizeMode: 'cover', transform: [{ translateX: 0 }] }] as ImageStyle} />
+        <TouchableOpacity
+          onPress={
+            () => {
+              Linking.openURL(item.naviTo).catch(err => console.error('An error occurred', err))
+            }
+          }>
+          <Animated.Image source={item.img} style={[styles.w100, styles.h100, { resizeMode: 'cover', transform: [{ translateX: 0 }] }] as ImageStyle} />
+        </TouchableOpacity>
       </Animated.View>
     );
   };

@@ -338,15 +338,14 @@ export default function UniversityDetail({ route }: any) {
                                 navigation.navigate(`MajorDetail`, { major: majorListItem, uniItem: uniItem })
                             }}>
                             {majorListItem.icon ? majorListItem.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
-                            <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
+                            <View style={[styles.flex1, styles.flexCol, styles.gap2vw,]}>
                                 <Nunito16Bold style={{ color: clrStyle.grey3, }}>{majorListItem.majorName}</Nunito16Bold>
-                                <View style={[styles.flexRow, styles.gap1vw]}>
+                                <View style={[styles.flexRow, styles.gap1vw, styles.flexWrap]}>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main2 }]}>
                                         <Nunito12Bold key={index} style={[{ color: clrStyle.main1 }]}>{majorListItem.examGroup ? majorListItem.examGroup.map((examGroupItem: any, index: number) => { return examGroupItem.name }).join(', ') : `Recruitment`}</Nunito12Bold>
 
                                     </View>
                                     <View style={[styles.paddingV1vw, styles.paddingH2vw, { borderRadius: vw(2), backgroundColor: clrStyle.main8 }]}>
-                                        {/* TODO: check recuit */}
                                         <Nunito12Bold key={index} style={[{ color: clrStyle.main7 }]}>{majorListItem.degreeType ? majorListItem.degreeType : `College`}</Nunito12Bold>
                                     </View>
                                 </View>

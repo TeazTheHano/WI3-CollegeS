@@ -82,13 +82,12 @@ export async function removeAllUserInfo(): Promise<void> {
   await storage.remove({
     key: 'compareData',
   });
-  // TODO: re-active this when the data is ready
-  // await storage.remove({
-  //   key: 'userInfo',
-  // });
-  // await storage.remove({
-  //   key: 'recentSearch',
-  // });
+  await storage.remove({
+    key: 'userInfo',
+  });
+  await storage.remove({
+    key: 'recentSearch',
+  });
   await storage.remove({
     key: 'goalList',
   });

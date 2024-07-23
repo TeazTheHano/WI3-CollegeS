@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react'
 import { vw, vh } from '../assets/stylesheet'
-import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon, ENFJicon, ENFPicon, ENTJicon, ENTPicon, ESFJicon, ESFPicon, ESTJicon, ESTPicon, INFJicon, INFPicon, INTJicon, INTPicon, ISFJicon, ISFPicon, ISTJicon, ISTPicon } from '../assets/svgXml';
+import { bestOfEcoBu, bestOfEcoMo, bestOfEcoSo, bestOfScBiIcon, bestOfScCoIcon, bestOfScMaIcon, ENFJicon, ENFPicon, ENTJicon, ENTPicon, ESFJicon, ESFPicon, ESTJicon, ESTPicon, INFJicon, INFPicon, INTJicon, INTPicon, ISFJicon, ISFPicon, ISTJicon, ISTPicon, majorDefault } from '../assets/svgXml';
 import clrStyle from '../assets/componentStyleSheet';
+import { formatNumber } from '../assets/component';
 
 export interface UserInfo {
     userID: string;
@@ -32,8 +33,8 @@ export interface SuitableForYou {
     title: string,
     minScore: number,
     majorNum: number,
-    minFee: number,
-    maxFee: number,
+    minFee: number | string,
+    maxFee: number | string,
     unitFee: string,
     yearOrSemForFee: string,
     location: string,
@@ -122,16 +123,16 @@ export let ListFavSubject: string[] = [`Math`, `Physics`, `Language`, `Biology`,
 export let listIntersts: string[] = [`Singing`, `Movie`, `Hangout`, `Cooking`, `Board game`, `Video game`, `Sports`, `Reading`, `Writing`]
 
 export let bannerList: Banner[] = [
-    { id: 1, img: require(`../assets/photos/homeBanner1.png`), title: `Shitttt1111 asdkjhfaskdjhf askfjhasdkjfh  kjashdfkjasf aksdjfh askj askj`, naviTo: `` },
-    { id: 2, img: require(`../assets/photos/homeBanner2.png`), title: `Shitttt2222`, naviTo: `` },
-    { id: 3, img: require(`../assets/photos/homeBanner3.png`), title: `Shitttt3333`, naviTo: `` },
-    { id: 4, img: require(`../assets/photos/homeBanner4.png`), title: `Shitttt4444`, naviTo: `` },
+    { id: 1, img: require(`../assets/photos/2(1).jpg`), title: `The cost of tuition fees at Hue Law University in the school year 2023 - 2024`, naviTo: `https://mytour.vn/vi/blog/bai-viet/emstrongchi-phi-hoc-phi-dai-hoc-luat-hue-nam-hoc-2023-2024-strong-em.html` },
+    { id: 2, img: require(`../assets/photos/2.webp`), title: `Benchmark of FOREIGN TRADE UNIVERSITY 2023`, naviTo: `https://xaydungchinhsach.chinhphu.vn/truong-dai-hoc-ngoai-thuong-cong-bo-diem-chuan-2023-119230822130248234.htm` },
+    { id: 3, img: require(`../assets/photos/3.jpeg`), title: `Explore the Tuition Fees for Fine Arts University in Ho Chi Minh City for the Academic Year 2020-2021`, naviTo: `https://mytour.vn/en/blog/bai-viet/explore-the-tuition-fees-for-fine-arts-university-in-ho-chi-minh-city-for-the-academic-year-2020-2021.html` },
+    { id: 4, img: require(`../assets/photos/4.jpeg`), title: `Hanoi Medical University - Information on introduction, enrollment, training, tuition fees, scholarships...`, naviTo: `https://ielts-fighter.com/tin-tuc/dai-hoc-y-ha-noi_mt1641797363.html` },
 ]
 
 export let suitableForYou: SuitableForYou[] = [
-    { id: 1, img: require(`../assets/photos/homeBanner1.png`), title: `National 1 Economics University`, minScore: 18, majorNum: 22, minFee: 1000, maxFee: 2200, unitFee: `$`, yearOrSemForFee: `Semester`, location: `Hanoi`, capacity: 1110 },
-    { id: 2, img: require(`../assets/photos/homeBanner1.png`), title: `National 2 Economics University`, minScore: 18, majorNum: 22, minFee: 1000, maxFee: 2200, unitFee: `$`, yearOrSemForFee: `Semester`, location: `Hanoi`, capacity: 1110 },
-    { id: 3, img: require(`../assets/photos/homeBanner1.png`), title: `National 3 Economics University`, minScore: 18, majorNum: 22, minFee: 1000, maxFee: 2200, unitFee: `$`, yearOrSemForFee: `Semester`, location: `Hanoi`, capacity: 1110 },
+    { id: 1, img: { uri: `https://vinhuni.edu.vn/pages/assets/images/macdinh/anh01.png` }, title: `Vinh University`, minScore: 17, majorNum: 57, minFee: formatNumber(12900000), maxFee: formatNumber(15000000), unitFee: `đ`, yearOrSemForFee: `year`, location: `Vinh`, capacity: 5050 },
+    { id: 2, img: { uri: `https://env.vnuf.edu.vn/documents/436517/5682738/23.jpg?t=1513669084767` }, title: `Vietnam National Forestry University`, minScore: 15, majorNum: 22, minFee: formatNumber(10000000), maxFee: formatNumber(22000000), unitFee: `đ`, yearOrSemForFee: `year`, location: `Hanoi`, capacity: 2360 },
+    { id: 3, img: { uri: 'https://congchungnguyenvietcuong.com/Uploaded/Others/2023/12/26/truong-dai-hoc-my-thuat-tphcm_2612163209.webp' }, title: `HCMC University of Fine Arts`, minScore: 17.21, majorNum: 15, minFee: formatNumber(11000000), maxFee: formatNumber(15000000), unitFee: `đ`, yearOrSemForFee: `year`, location: `Hanoi`, capacity: 1110 },
 ]
 
 export let bestOfScience: BestOfSubject[] = [
@@ -538,7 +539,7 @@ export const universityList: University[] = [
         ],
         city: `Hanoi`,
         location: `No.1, Ton That Tung Street, Trung Tu Ward, Dong Da District, Hanoi`,
-        img: require(`../assets/photos/homeBanner1.png`),
+        img: { uri: `https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Hanoi_dhyk.jpg/450px-Hanoi_dhyk.jpg` },
         admission: 1720,
         lowestStandardScore: 19,
         highestStandardScore: 27.73,
@@ -558,6 +559,7 @@ export const universityList: University[] = [
         major: [
             {
                 majorName: `General Medicine`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 24.25,
@@ -567,6 +569,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Traditional Medicine`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 24.77,
@@ -576,6 +579,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Dentistry`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 25.5,
@@ -586,6 +590,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Preventive Medicine`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 22.3,
@@ -595,6 +600,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Nutrition`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 23.19,
@@ -604,6 +610,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Optometry`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 25.4,
@@ -613,6 +620,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Medical Laboratory Technology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 24.85,
@@ -622,6 +630,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Rehabilitation Techniques`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 22.7,
@@ -630,6 +639,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Nursing (Advanced Program)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 21,
@@ -640,6 +650,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Public Health`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 20.7,
@@ -649,6 +660,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Psychology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 0,
@@ -664,6 +676,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Birthing (Midwife)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 0,
@@ -673,6 +686,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Dental restoration techniques`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                 }
@@ -681,6 +695,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `General Medical (at Thanh Hoa Branch)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                 }, {
@@ -691,6 +706,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Nursing (at Thanh Hoa Branch)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                 }
@@ -699,6 +715,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Rehabilitation Techniques (at Thanh Hoa Branch)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                 }
@@ -707,6 +724,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Medical Laboratory Technology (at Thanh Hoa Branch)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                 }
@@ -736,7 +754,7 @@ export const universityList: University[] = [
         ],
         city: `Vinh`,
         location: `182 Le Duan Street, Ben Thuy Ward, Vinh City, Nghe An Province`,
-        img: require(`../assets/photos/homeBanner1.png`),
+        img: { uri: `https://vinhuni.edu.vn/pages/assets/images/macdinh/anh01.png` },
         admission: 5050,
         lowestStandardScore: 17,
         highestStandardScore: 28.12,
@@ -745,13 +763,14 @@ export const universityList: University[] = [
         unitFee: `VND`,
         yearOrSemForFee: `Year`,
         refURL: [
-            `https://vinhuni.edu.vn/pages/assets/images/macdinh/anh01.png`,
+            `https://www.facebook.com/daihocvinh182leduan/?locale=vi_VN`,
             `https://www.thongtintuyensinh.vn/Truong-Dai-hoc-Vinh_C93_D688.htm`
         ],
         mainMajor: [],
         major: [
             {
                 majorName: `Social Studies Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 0,
@@ -770,6 +789,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Natural Sciences Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 0,
@@ -786,6 +806,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Educational Psychology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 0,
@@ -805,6 +826,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Architecture`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `V00`,
                     lowestStandardScore: 0,
@@ -824,6 +846,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Digital Economics`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 0,
@@ -842,6 +865,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `International Relations`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `D01`,
                     lowestStandardScore: 0,
@@ -860,6 +884,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Crop Sciences`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 0,
@@ -878,6 +903,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Veterinary Science`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 0,
@@ -896,6 +922,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Early Childhood Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `M00`,
                     lowestStandardScore: 21,
@@ -914,6 +941,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Primary Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 25.65,
@@ -932,6 +960,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Education Management`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 23.25,
@@ -950,6 +979,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Math Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 25,
@@ -967,7 +997,8 @@ export const universityList: University[] = [
                 addmission: 100,
             },
             {
-                majorName: `Math Education(advanced)`,
+                majorName: `Math Education (advanced)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 25.5,
@@ -986,6 +1017,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Informational Technology Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 22.25,
@@ -1004,6 +1036,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Physics Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 24.4,
@@ -1022,6 +1055,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Chemistry Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 24.8,
@@ -1040,6 +1074,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Biology Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 23.55,
@@ -1058,6 +1093,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Vietnamese Language Arts Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 26.7,
@@ -1076,6 +1112,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `History Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 28.12,
@@ -1094,6 +1131,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Geography Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 26.55,
@@ -1112,6 +1150,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Political Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 26.5,
@@ -1130,6 +1169,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Physical Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `T00`,
                     lowestStandardScore: 24.75,
@@ -1148,6 +1188,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Defense and Security Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 25.7,
@@ -1165,7 +1206,8 @@ export const universityList: University[] = [
                 addmission: 20,
             },
             {
-                majorName: `English Education(advanced)`,
+                majorName: `English Education (advanced)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `D01`,
                     lowestStandardScore: 27,
@@ -1184,6 +1226,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `English Education`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `D01`,
                     lowestStandardScore: 25.3,
@@ -1202,6 +1245,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `English as a Language`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `D01`,
                     lowestStandardScore: 23.75,
@@ -1220,6 +1264,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Accounting`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1238,6 +1283,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Business Administration`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1255,7 +1301,8 @@ export const universityList: University[] = [
                 addmission: 270,
             },
             {
-                majorName: `Business Administration(advanced)`,
+                majorName: `Business Administration (advanced)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 20,
@@ -1274,6 +1321,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Finance and Banking`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1292,6 +1340,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Economics`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1310,6 +1359,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Law`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1328,6 +1378,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Economic Law`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1346,6 +1397,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Government Management`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1364,6 +1416,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Cultural Management`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1382,6 +1435,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Political Science`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1400,6 +1454,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Public Relations`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 18,
@@ -1418,6 +1473,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Vietnamese Studies`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `C00`,
                     lowestStandardScore: 19,
@@ -1436,6 +1492,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Biotechnology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 18,
@@ -1454,6 +1511,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Food and Technology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 18,
@@ -1472,6 +1530,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Nursing`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `B00`,
                     lowestStandardScore: 20,
@@ -1490,6 +1549,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Construction Economics`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1508,6 +1568,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Construction Technology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1526,6 +1587,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Transportation Engineering`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1544,6 +1606,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Electrical engineering technology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1562,6 +1625,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Thermal Engineering`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 26,
@@ -1580,6 +1644,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Automobile Engineering`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1598,6 +1663,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Electronics and Telecommunication`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1616,6 +1682,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Control and Automation Engineering`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 19,
@@ -1634,6 +1701,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Information Technology`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 20,
@@ -1651,7 +1719,8 @@ export const universityList: University[] = [
                 addmission: 270,
             },
             {
-                majorName: `Information Technology(advanced)`,
+                majorName: `Information Technology (advanced)`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 21,
@@ -1670,6 +1739,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Computer Science`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 18,
@@ -1688,6 +1758,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Farming`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1706,6 +1777,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Agriculture`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1724,6 +1796,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Aquaculture`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 18,
@@ -1742,6 +1815,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Land Management`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1760,6 +1834,7 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Natural Resource Management`,
+                icon: majorDefault,
                 examGroup: [{
                     name: `A00`,
                     lowestStandardScore: 17,
@@ -1778,266 +1853,316 @@ export const universityList: University[] = [
             },
             {
                 majorName: `Doctorate - Calculus`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Algebra and Number Theory`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: null,
             },
             {
                 majorName: `Doctorate - Topology`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: null,
             },
             {
                 majorName: `Doctorate - Mathematics Education`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - The Theory of Probability and Mathematical Statistics`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Optics`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Physics Education`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Organic Chemistry`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Chemistry Education`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Botany`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Vietnamese as a Language`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: null,
             },
             {
                 majorName: `Doctorate - Vietnamese Literature`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: null,
             },
             {
                 majorName: `Doctorate - World History`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Vietnamese History`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 2,
             },
             {
                 majorName: `Doctorate - Education Management`,
+                icon: majorDefault,
                 degreeType: `Doctor`,
                 examGroup: null,
                 addmission: 6,
             },
             {
                 majorName: `Master - Calculus`,
+                icon: majorDefault,
                 addmission: 15,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Algebra and Number Theory`,
+                icon: majorDefault,
                 addmission: 17,
                 degreeType: `Master`,
             },
             {
                 majorName: `Vietnamese`,
+                icon: majorDefault,
                 addmission: 19,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Mathematics Education`,
+                icon: majorDefault,
                 addmission: 5,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - The Theory of Probability and Mathematical Statistics`,
+                icon: majorDefault,
                 addmission: 16,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Optics`,
+                icon: majorDefault,
                 addmission: 15,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Physics Education`,
+                icon: majorDefault,
                 addmission: 9,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Organic Chemistry`,
+                icon: majorDefault,
                 addmission: 29,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Inorganic Chemistry`,
+                icon: majorDefault,
                 addmission: 19,
                 degreeType: `Master`,
             },
             {
                 majorName: `Analytical Chemistry`,
+                icon: majorDefault,
                 addmission: 11,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Chemistry Education`,
+                icon: majorDefault,
                 addmission: 25,
                 degreeType: `Master`,
             },
             {
                 majorName: `Zoology`,
+                icon: majorDefault,
                 addmission: 30,
                 degreeType: `Master`,
             },
             {
                 majorName: `Botany`,
+                icon: majorDefault,
                 addmission: 20,
                 degreeType: `Master`,
             },
             {
                 majorName: `Experimental Biology`,
+                icon: majorDefault,
                 addmission: 30,
                 degreeType: `Master`,
             },
             {
                 majorName: `Biology Education`,
+                icon: majorDefault,
                 addmission: 25,
                 degreeType: `Master`,
             },
             {
                 majorName: `Information Technology`,
+                icon: majorDefault,
                 addmission: 8,
                 degreeType: `Master`,
             },
             {
                 majorName: `Poltical Economy`,
+                icon: majorDefault,
                 addmission: 30,
                 degreeType: `Master`,
             },
             {
                 majorName: `Aquaculture`,
+                icon: majorDefault,
                 addmission: null,
                 degreeType: `Master`,
             },
             {
                 majorName: `Crop Sciences`,
+                icon: majorDefault,
                 addmission: 55,
                 degreeType: `Master`,
             },
             {
                 majorName: `Finance Management`,
+                icon: majorDefault,
                 addmission: 32,
                 degreeType: `Master`,
             },
             {
                 majorName: `Literature Education`,
+                icon: majorDefault,
                 addmission: null,
                 degreeType: `Master`,
             },
             {
                 majorName: `Vietnamese Language of Arts`,
+                icon: majorDefault,
                 addmission: null,
                 degreeType: `Master`,
             },
             {
                 majorName: `Construction Engineering`,
+                icon: majorDefault,
                 addmission: 57,
                 degreeType: `Master`,
             },
             {
                 majorName: `World History`,
+                icon: majorDefault,
                 addmission: 18,
                 degreeType: `Master`,
             },
             {
                 majorName: `Vietnamese History`,
+                icon: majorDefault,
                 addmission: 20,
                 degreeType: `Master`,
             },
             {
                 majorName: `Business Management`,
+                icon: majorDefault,
                 addmission: 5,
                 degreeType: `Master`,
             },
             {
                 majorName: `Geography`,
+                icon: majorDefault,
                 addmission: 15,
                 degreeType: `Master`,
             },
             {
                 majorName: `Political Science`,
+                icon: majorDefault,
                 addmission: 24,
                 degreeType: `Master`,
             },
             {
                 majorName: `Politics Education`,
+                icon: majorDefault,
                 addmission: 25,
                 degreeType: `Master`,
             },
             {
                 majorName: `English Education`,
+                icon: majorDefault,
                 addmission: null,
                 degreeType: `Master`,
             },
             {
                 majorName: `Government and Law History Education`,
+                icon: majorDefault,
                 addmission: 93,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Primary Education`,
+                icon: majorDefault,
                 addmission: 34,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Early Childhood Education`,
+                icon: majorDefault,
                 addmission: 18,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Education Management`,
+                icon: majorDefault,
                 addmission: 41,
                 degreeType: `Master`,
             },
             {
                 majorName: `Master - Physical Education`,
+                icon: majorDefault,
                 addmission: 9,
                 degreeType: `Master`,
 
@@ -2053,7 +2178,7 @@ export const universityList: University[] = [
         ],
         city: `Hanoi`,
         location: `No. 87, Nguyen Chi Thanh Street, Lang Thuong Ward, Dong Da District, Ha Noi`,
-        img: require(`../assets/photos/homeBanner1.png`),
+        img: { uri: `https://xdcs.cdnchinhphu.vn/446259493575335936/2024/3/19/hlu-1710805405392702001628.jpg` },
         admission: 2500,
         lowestStandardScore: 24,
         highestStandardScore: 27.36,
@@ -2074,6 +2199,1615 @@ export const universityList: University[] = [
             `English language major`,
             `Commercial Law`
         ],
-        major: [],
+        major: [
+            {
+                majorName: `Law`,
+                icon: majorDefault,
+                examGroup: [
+                    {
+                        name: `A00`,
+                        lowestStandardScore: 24
+                    },
+                    {
+                        name: `A01`,
+                        lowestStandardScore: 24
+                    },
+                    {
+                        name: `C00`,
+                        lowestStandardScore: 26.5
+                    },
+                    {
+                        name: `D01`,
+                        lowestStandardScore: 25.75
+                    },
+                    {
+                        name: `D06`,
+                        lowestStandardScore: 25.75
+                    },
+                ],
+                afterGraduation: true
+            },
+            {
+                majorName: `Commercial Law`,
+                icon: majorDefault,
+                examGroup: [
+                    {
+                        name: `A01`,
+                        lowestStandardScore: 24.8
+                    },
+                    {
+                        name: `D01`,
+                        lowestStandardScore: 25.75
+                    },
+                ]
+            },
+            {
+                majorName: `Economic Law`,
+                icon: majorDefault,
+                examGroup: [
+                    {
+                        name: `A00`,
+                        lowestStandardScore: 25.5
+                    },
+                    {
+                        name: `A01`,
+                        lowestStandardScore: 25.5
+                    },
+                    {
+                        name: `C00`,
+                        lowestStandardScore: 27.36
+                    },
+                    {
+                        name: `D01`,
+                        lowestStandardScore: 26.5
+                    },
+                    {
+                        name: `D06`,
+                        lowestStandardScore: 26.5
+                    },
+                ]
+            },
+            {
+                majorName: `English Language`,
+                icon: majorDefault,
+                examGroup: [
+                    {
+                        name: `A01`,
+                        lowestStandardScore: 24
+                    },
+                    {
+                        name: `D01`,
+                        lowestStandardScore: 24.5
+                    },
+                ]
+            },
+            {
+                majorName: `Constitutional law and administrative law in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `Civil law and civil procedure in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `Criminal law and criminal procedure in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `Criminology and crime prevention in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `Theory and history of state and law in the research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `Economic law in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+            {
+                majorName: `International law in the applied research direction`,
+                icon: majorDefault,
+                afterGraduation: true
+            },
+        ],
+    },
+    {
+        id: 4,
+        name: `Hanoi Open University`,
+        shortName: `HOU`,
+        description: [
+            `On November 3, 1993, the Prime Minister signed Decision No. 535/TTg to establish Hanoi Open University on the basis of Open Training Institute 1 (a unit of the Ministry of Education and Training), with The function and mission is to be a public university that provides undergraduate training and research in various types of open training, distance learning, and on-the-job training to meet the diverse needs of society, contributing to increasing the potential of society. scientific and technical staff for the country. Hanoi Open University has been renamed Hanoi Open University according to Decision No. 960/QD-TTg dated August 6, 2018 of the Prime Minister on issuance of a list of public service units under the Ministry of Education and Training.`
+        ],
+        city: `Hanoi`,
+        location: `B101, Nguyen Hien Ward, Bach Khoa, Hai Ba Trung, Hanoi`,
+        img: { uri: `https://xdcs.cdnchinhphu.vn/446259493575335936/2023/8/22/dai-hoc-mo-ha-noi-1-1690030006276458638690-0-0-600-960-crop-1690030012831554965422-16927060768562092355521.jpg` },
+        admission: 3500,
+        lowestStandardScore: 16.5,
+        highestStandardScore: 31.77,
+        scoreRefYear: 2023,
+        avgFee: 20000000,
+        unitFee: `VND`,
+        yearOrSemForFee: `Year`,
+        refURL: [
+            `https://vuihoc.vn/tin/thpt-diem-chuan-truong-dai-hoc-mo-ha-noi-2084.html`,
+            `https://mytour.vn/en/blog/bai-viet/admission-quotas-for-hanoi-open-university-2022.html`,
+            `https://muaban.net/blog/hoc-phi-dai-hoc-mo-ha-noi-355730/`,
+        ],
+        mainMajor: [
+            `E-commerce`,
+            `Chinese Language`,
+            `English Language`,
+            `Hotel Management`,
+            `Law`,
+        ],
+        major: [
+            {
+                majorName: `Industrial Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A1`, lowestStandardScore: 17.5 }
+                ]
+            },
+            {
+                majorName: `Accounting`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 23.8 },
+                    { name: `A01`, lowestStandardScore: 23.8 },
+                    { name: `D01`, lowestStandardScore: 23.8 },
+                ]
+            },
+            {
+                majorName: `Finance-Banking`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 23.6 },
+                    { name: `A01`, lowestStandardScore: 23.6 },
+                    { name: `D01`, lowestStandardScore: 23.6 }
+                ]
+            },
+            {
+                majorName: `Business Administration`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 23.9 },
+                    { name: `A01`, lowestStandardScore: 23.9 },
+                    { name: `D01`, lowestStandardScore: 23.9 }
+                ]
+            },
+            {
+                majorName: `E-commerce`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 25.25 },
+                    { name: `A01`, lowestStandardScore: 25.25 },
+                    { name: `D01`, lowestStandardScore: 25.25 }
+                ]
+            },
+            {
+                majorName: `Law`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 26.25 }, { name: `A01`, lowestStandardScore: 26.25 }, { name: `D01`, lowestStandardScore: 26.25 }
+                ]
+            },
+            {
+                majorName: `Finance Law`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 26.75 }, { name: `A01`, lowestStandardScore: 26.75 }, { name: `D01`, lowestStandardScore: 26.75 }
+                ]
+            },
+            {
+                majorName: `Biotechnology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A01`, lowestStandardScore: 16.5 }
+                ]
+            },
+            {
+                majorName: `Food technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A01`, lowestStandardScore: 16.6 }
+                ]
+            },
+            {
+                majorName: `Information Technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 24.55 }, { name: `A01`, lowestStandardScore: 24.55 }, { name: `D01`, lowestStandardScore: 24.55 }
+                ]
+            },
+            {
+                majorName: `Electronics and Telecommunication`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.5 }, { name: `A01`, lowestStandardScore: 22.5 }, { name: `D01`, lowestStandardScore: 22.5 }, { name: `C01`, lowestStandardScore: 22.5 }
+                ]
+            },
+            {
+                majorName: `Control Technology and Automatic Engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.65 }, { name: `A01`, lowestStandardScore: 22.65 }, { name: `D01`, lowestStandardScore: 22.65 }, { name: `C01`, lowestStandardScore: 22.65 }
+                ]
+            },
+            {
+                majorName: `Architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A01`, lowestStandardScore: 24 }
+                ]
+            },
+            {
+                majorName: `Tourism and Hospitality Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 30.35 }
+                ]
+            },
+            {
+                majorName: `Hotel Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 27.05 }
+                ]
+            },
+            {
+                majorName: `English Language`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 31 }
+                ]
+            },
+            {
+                majorName: `Chinese Language`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 31.77 }, { name: `D04`, lowestStandardScore: 31.77 }
+                ]
+            },
+        ]
+    },
+    {
+        id: 5,
+        name: `Vietnam National Forestry University`,
+        shortName: `VNFU`,
+        description: [
+            `Vietnam National University of Forestry is a multi-disciplinary and multi-field public university offering 32 undergraduate majors, 12 master's majors, and 6 doctoral majors. The university provides education in various fields such as Economics, Finance, Logistics, Landscape and Interior Design, Automotive Industry, Information Technology, Forest Product Processing, Forest Resource Management and Environment, and Rural Development. It has two campuses located in Dong Nai and Gia Lai, and one high school in Hanoi and Dong Nai.`
+        ],
+        city: `Hanoi`,
+        location: `QL21, TT. Xuân Mai, Chương Mỹ, Hà Nội`,
+        img: { uri: `https://env.vnuf.edu.vn/documents/436517/5682738/23.jpg?t=1513669084767` },
+        admission: 2360,
+        lowestStandardScore: 15,
+        scoreRefYear: 2023,
+        minFee: 10000000,
+        maxFee: 22000000,
+        unitFee: `VND`,
+        yearOrSemForFee: `Year`,
+        refURL: [
+            `https://xaydungchinhsach.chinhphu.vn/diem-chuan-truong-dai-hoc-lam-nghiep-nam-2023-119230823174659534.htm`,
+            `https://vnuf.edu.vn/dao-tao/dao-tao-thac-si`,
+            `https://tapchicongthuong.vn/truong-dai-hoc-lam-nghiep--du-kien-tuyen-sinh-2-360-chi-tieu-nam-2023-107251.htm#:~:text=Tr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20L%C3%A2m%20nghi%E1%BB%87p,2.360%20ch%E1%BB%89%20ti%C3%AAu%20n%C4%83m%202023`,
+        ],
+        mainMajor: [
+            `Breeding`,
+            `Veterinary`,
+            `Crop Science`,
+            `Plant Protection`,
+        ],
+        major: [
+            {
+                majorName: `Natural Resources Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `B08`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                    { name: `D07`, lowestStandardScore: 15 },
+                    { name: `D10`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Silviculture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Forest Resources Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Management of Resources and Environment`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Ecotourism`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `C00`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Interior Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                    { name: `H00`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Forest Products Technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                    { name: `D07`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Information System`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A01`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Accounting`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Business Administration`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Economics`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Finance-banking`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Logistics and Supply Chain Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Real estate`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Land Administrative Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Community service`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `C00`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Tourism and Hospitality Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `C00`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Landscape architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                    { name: `C15`, lowestStandardScore: 15 },
+                    { name: `V01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `construction engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A01`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Crop Science`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Automotive Engineering Technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A01`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Mechatronics`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A01`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+            },
+            {
+                majorName: `Mechanical engineer`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A01`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `D01`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Biotechnology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `B08`, lowestStandardScore: 15 },
+                ],
+                afterGraduation: true,
+            },
+            {
+                majorName: `Veterinary Medicine`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 15 },
+                    { name: `A16`, lowestStandardScore: 15 },
+                    { name: `B00`, lowestStandardScore: 15 },
+                    { name: `B08`, lowestStandardScore: 15 },
+                ],
+            },
+        ]
+    },
+    {
+        id: 6,
+        name: `University of Industrial Arts`,
+        shortName: `UAD`,
+        description: [
+            `The Industrial Fine Arts University was established in 1949, originally known as the National School of Fine Arts. In 1984, the school was renamed the Industrial Fine Arts University. Currently, the university offers three main training systems: regular undergraduate programs, bridging undergraduate programs, and postgraduate programs.`
+        ],
+        city: `Hanoi`,
+        location: `360 Đ. La Thành, Chợ Dừa, Đống Đa, Hà Nội`,
+        img: { uri: `https://weart.vn/wp-content/uploads/2021/10/unnamed-1-1.jpg` },
+        admission: 2000,
+        lowestStandardScore: 21.15,
+        highestStandardScore: 23.75,
+        scoreRefYear: 2023,
+        avgFee: 10000000,
+        unitFee: `VND`,
+        yearOrSemForFee: `Year`,
+        refURL: [
+            `https://vov.vn/xa-hoi/dai-hoc-my-thuat-cong-nghiep-cong-bo-diem-chuan-post1041184.vov`,
+            `https://jobtest.vn/hrblog/dai-hoc-my-thuat-cong-nghep-hoc-phi#:~:text=IV.-,H%E1%BB%8Dc%20ph%C3%AD%20%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20M%E1%BB%B9%20thu%E1%BA%ADt%20C%C3%B4ng%20nghi%E1%BB%87p%20(UIFA)%20n%C4%83m,d%C3%A0nh%20cho%20t%E1%BB%ABng%20sinh%20vi%C3%AAn.`,
+            `https://giaoduc.net.vn/da-so-gv-trinh-do-cao-cua-truong-dh-my-thuat-cong-nghiep-deu-la-thinh-giang-post237881.gd#:~:text=Theo%20B%C3%A1o%20c%C3%A1o%203%20c%C3%B4ng%20khai%20n%C4%83m%20h%E1%BB%8Dc%202021%2D2022,V%20l%C3%A0%20523%20sinh%20vi%C3%AAn.`,
+        ],
+        mainMajor: [
+            `Art`,
+            `Sculpture`,
+            `Pottery`,
+        ],
+        major: [
+            {
+                majorName: `Monumental`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 22.3 },
+                    { name: `H07`, lowestStandardScore: 22.3 },
+                ]
+            },
+            {
+                majorName: `Lacquer`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 22.3 },
+                    { name: `H07`, lowestStandardScore: 22.3 },
+                ]
+            },
+            {
+                majorName: `Sculpture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.15 },
+                    { name: `H07`, lowestStandardScore: 21.15 },
+                ]
+            },
+            {
+                majorName: `Ceramic`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.4 },
+                    { name: `H07`, lowestStandardScore: 21.4 },
+                ]
+            },
+            {
+                majorName: `Industrial Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Decorative Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Metal Decoration Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Glass Decoration Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Weaving Decoration Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Toy Design & Sport Development`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Art Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 23.75 },
+                    { name: `H07`, lowestStandardScore: 23.75 },
+                ]
+            },
+            {
+                majorName: `Fashion Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 21.65 },
+                    { name: `H07`, lowestStandardScore: 21.65 },
+                ]
+            },
+            {
+                majorName: `Interior Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 22.25 },
+                    { name: `H07`, lowestStandardScore: 22.25 },
+                ]
+            },
+        ]
+    },
+    {
+        id: 7,
+        name: `Hanoi University of Civil Engineering`,
+        shortName: `HUCE`,
+        description: [
+            `The Hanoi University of Civil Engineering (HUCE; Vietnamese: Trường Đại học Xây dựng Hà Nội), formerly known as the National University of Civil Engineering (NUCE), is a public higher education institution in Vietnam. The university is one of the leading universities and among the top seven engineering universities in Vietnam. HUCE is one of four universities participating in educating high-qualified engineers of Vietnamese–French courses. The university also has French-language civil engineering courses supported by AUPELF – a global network of French-speaking higher-education and research institutions.`
+        ],
+        city: `Hanoi`,
+        location: `55 Giai Phong, Dong Tam, Hai Ba Trung, Hanoi`,
+        img: { uri: `https://en.huce.edu.vn/images57/Files/%E1%BA%A2nh%20Chung/254687890_4570777726339377_8724442524879063050_n.jpg` },
+        admission: 3000,
+        lowestStandardScore: 17,
+        highestStandardScore: 25,
+        scoreRefYear: 2023,
+        minFee: 15000000,
+        maxFee: 22000000,
+        unitFee: `VND`,
+        yearOrSemForFee: `Year`,
+        refURL: [
+            `https://en.wikipedia.org/wiki/Hanoi_University_of_Civil_Engineering`,
+            `https://xaydungchinhsach.chinhphu.vn/diem-chuan-truong-dai-hoc-xay-dung-ha-noi-2923-119230823073118738.htm`,
+            `https://tuyensinh.huce.edu.vn/thong-bao-tuyen-sinh-dao-tao-trinh-do-thac-si-dot-thang-12-2023-thong-1--1`,
+            `https://tuyensinh.huce.edu.vn/thong-bao-tuyen-sinh-dao-tao-trinh-do-tien-si-dot-thang-6-nam-2023-thong-bao-so-1-`,
+            `https://huce.edu.vn/khoa-kinh-te-quan-ly-xay-dung#:~:text=S%E1%BB%91%20l%C6%B0%E1%BB%A3ng%20sinh%20vi%C3%AAn%20tuy%E1%BB%83n,sinh%20vi%C3%AAn%20c%E1%BB%A7a%20to%C3%A0n%20tr%C6%B0%E1%BB%9Dng.`,
+        ],
+        mainMajor: [
+            `Architecture`,
+            `Interior Architecture`,
+            `Environmental Architecture`,
+        ],
+        major: [
+            {
+                majorName: `Architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `V00`, lowestStandardScore: 21.05 },
+                    { name: `V02`, lowestStandardScore: 21.05 },
+                    { name: `V10`, lowestStandardScore: 21.05 },
+                ]
+            },
+            {
+                majorName: `Technology Architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `V00`, lowestStandardScore: 20.64 },
+                    { name: `V02`, lowestStandardScore: 20.64 },
+                    { name: `V06`, lowestStandardScore: 20.64 },
+                ]
+            },
+            {
+                majorName: `Interior Architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `V00`, lowestStandardScore: 21.53 },
+                    { name: `V02`, lowestStandardScore: 21.53 },
+                    { name: `V06`, lowestStandardScore: 21.53 },
+                ]
+            },
+            {
+                majorName: `Landscape Architecture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `V00`, lowestStandardScore: 19.23 },
+                    { name: `V02`, lowestStandardScore: 19.23 },
+                    { name: `V06`, lowestStandardScore: 19.23 },
+                ]
+            },
+            {
+                majorName: `Regional and Urban Planning`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `V00`, lowestStandardScore: 17 },
+                    { name: `V01`, lowestStandardScore: 17 },
+                    { name: `V02`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Construction Engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `D01`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Civil and industrial of Construction Engineering.`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 20 },
+                    { name: `A01`, lowestStandardScore: 20 },
+                    { name: `D07`, lowestStandardScore: 20 },
+                    { name: `D24`, lowestStandardScore: 20 },
+                    { name: `D29`, lowestStandardScore: 20 }
+                    ,]
+            },
+            {
+                majorName: `Technical System`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 20 },
+                    { name: `A01`, lowestStandardScore: 20 },
+                    { name: `D07`, lowestStandardScore: 20 },
+                ]
+            },
+            {
+                majorName: `Construction informatics`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 21.2 },
+                    { name: `A01`, lowestStandardScore: 21.2 },
+                    { name: `D01`, lowestStandardScore: 21.2 },
+                    { name: `D07`, lowestStandardScore: 21.2 },
+                ]
+            },
+            {
+                majorName: `Transportation Construction Engineerin`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 18 },
+                    { name: `A01`, lowestStandardScore: 18 },
+                    { name: `D01`, lowestStandardScore: 18 },
+                    { name: `D07`, lowestStandardScore: 18 },
+                ]
+            },
+            {
+                majorName: `water supply and drainage engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `B00`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Environmental Engineer`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `B00`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Material Engineer`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `B00`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Construction materials engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `B00`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Information Technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 24.25 },
+                    { name: `A01`, lowestStandardScore: 24.25 },
+                    { name: `B00`, lowestStandardScore: 24.25 },
+                    { name: `D07`, lowestStandardScore: 24.25 },
+                ]
+            },
+            {
+                majorName: `Computer Science`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 23.91 },
+                    { name: `A01`, lowestStandardScore: 23.91 },
+                    { name: `D01`, lowestStandardScore: 23.91 },
+                    { name: `D07`, lowestStandardScore: 23.91 },
+                ]
+            },
+            {
+                majorName: `Mechanical engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.65 },
+                    { name: `A01`, lowestStandardScore: 22.65 },
+                    { name: `D07`, lowestStandardScore: 22.65 },
+                ]
+            },
+            {
+                majorName: `Tractor engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Mechatronics`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.4 },
+                    { name: `A01`, lowestStandardScore: 22.4 },
+                    { name: `D07`, lowestStandardScore: 22.4 },
+                ]
+            },
+            {
+                majorName: `Automobile engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 23.37 },
+                    { name: `A01`, lowestStandardScore: 23.37 },
+                    { name: `D07`, lowestStandardScore: 23.37 },
+                ]
+            },
+            {
+                majorName: `Electric engineering`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 19.2 },
+                    { name: `A01`, lowestStandardScore: 19.2 },
+                    { name: `D07`, lowestStandardScore: 19.2 }
+                ]
+            },
+            {
+                majorName: `Construction Economics`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.4 },
+                    { name: `A01`, lowestStandardScore: 22.4 },
+                    { name: `D01`, lowestStandardScore: 22.4 },
+                    { name: `D07`, lowestStandardScore: 22.4 },
+                ]
+            },
+            {
+                majorName: `Economics and Urban Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 21.25 },
+                    { name: `A01`, lowestStandardScore: 21.25 },
+                    { name: `D01`, lowestStandardScore: 21.25 },
+                    { name: `D07`, lowestStandardScore: 21.25 },
+                ]
+            },
+            {
+                majorName: `Economics and Property Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 21.5 },
+                    { name: `A01`, lowestStandardScore: 21.5 },
+                    { name: `D01`, lowestStandardScore: 21.5 },
+                    { name: `D07`, lowestStandardScore: 21.5 },
+                ]
+            },
+            {
+                majorName: `Land Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 19.4 },
+                    { name: `A01`, lowestStandardScore: 19.4 },
+                    { name: `D01`, lowestStandardScore: 19.4 },
+                    { name: `D07`, lowestStandardScore: 19.4 },
+                ]
+            },
+            {
+                majorName: `Logistics and Supply chain Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 24.49 },
+                    { name: `A01`, lowestStandardScore: 24.49 },
+                    { name: `D01`, lowestStandardScore: 24.49 },
+                    { name: `D07`, lowestStandardScore: 24.49 },
+                ]
+            },
+            {
+                majorName: `Construction Engineering (with Mississipi University)`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 17 },
+                    { name: `A01`, lowestStandardScore: 17 },
+                    { name: `D01`, lowestStandardScore: 17 },
+                    { name: `D07`, lowestStandardScore: 17 },
+                ]
+            },
+            {
+                majorName: `Computer Science (with Mississipi University)`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `A00`, lowestStandardScore: 22.9 },
+                    { name: `A01`, lowestStandardScore: 22.9 },
+                    { name: `D01`, lowestStandardScore: 22.9 },
+                    { name: `D07`, lowestStandardScore: 22.9 },
+                ]
+            }
+        ]
+    },
+    {
+        id: 8,
+        name: 'HCMC University of Fine Arts',
+        shortName: 'UFA',
+        description: [
+            `Ho Chi Minh City University of Fine Arts is a university in Bình Thạnh District, Ho Chi Minh City, Vietnam. The predecessor of this school was the École des Dessins, founded by André Joyeux in 1913, which became the École des Arts appliqués de Gia Đinh from 1940 to 1971`
+        ],
+        city: 'Ho Chi Minh City',
+        location: '5 Phan Đăng Lưu St, Phường 3, Bình Thạnh, Hồ Chí Minh city',
+        img: { uri: 'https://congchungnguyenvietcuong.com/Uploaded/Others/2023/12/26/truong-dai-hoc-my-thuat-tphcm_2612163209.webp' },
+        admission: 300,
+        lowestStandardScore: 17.21,
+        highestStandardScore: 21.38,
+        scoreRefYear: 2023,
+        avgFee: 11000000,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            "https://www.vietjack.com/diem-chuan-dai-hoc/dai-hoc-my-thuat-tp-ho-chi-minh.jsp",
+            "https://mytour.vn/en/blog/bai-viet/explore-the-tuition-fees-for-fine-arts-university-in-ho-chi-minh-city-for-the-academic-year-2020-2021.html"
+        ],
+        mainMajor: [
+            'Art Design',
+            'Fashion Design',
+            'Interior Design',
+        ],
+        major: [
+            {
+                majorName: `Monumental`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 18.17 },
+                    { name: 'H07', lowestStandardScore: 18.17 }
+                ]
+            },
+            {
+                majorName: `Lacquer`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 17.5 },
+                    { name: 'H07', lowestStandardScore: 17.5 }
+                ]
+            },
+            {
+                majorName: `Sculpture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 17.1 },
+                    { name: 'H07', lowestStandardScore: 17.1 }
+                ]
+            },
+            {
+                majorName: `Ceramic`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 17 },
+                    { name: 'H07', lowestStandardScore: 17 }
+                ]
+            },
+            {
+                majorName: `Industrial Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 17 },
+                    { name: 'H07', lowestStandardScore: 17 }
+                ]
+            },
+            {
+                majorName: `Decorative Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 18 },
+                    { name: 'H07', lowestStandardScore: 18 }
+                ]
+            },
+            {
+                majorName: `Art Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 21.38 },
+                    { name: 'H07', lowestStandardScore: 21.38 }
+                ]
+            },
+            {
+                majorName: `Fashion Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 20 },
+                    { name: 'H07', lowestStandardScore: 20 }
+                ]
+            },
+            {
+                majorName: `Interior Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'H00', lowestStandardScore: 19.32 },
+                    { name: 'H07', lowestStandardScore: 19.32 }
+                ]
+            },
+        ]
+    },
+    {
+        id: 9,
+        name: 'National University of Art Education',
+        shortName: 'NUAE',
+        description: [
+            `The Central University of Art Education (CUAE) is an institution dedicated to training and fostering human resources at the undergraduate and postgraduate levels, conducting scientific research, and transferring technology in the fields of Culture and Art Education. The university aims to meet the developmental needs of the country's socio-economic landscape and facilitate international integration.`
+        ],
+        city: 'Hanoi',
+        location: '18 Ng. 55 Đ. Trần Phú, Trần Phú, Hà Đông, Hà Nội',
+        img: { uri: 'https://dean1665.vn/uploads/school/avt-spnttw.jpg' },
+        admission: 1800,
+        lowestStandardScore: 18,
+        highestStandardScore: 33,
+        scoreRefYear: 2023,
+        minFee: 24000000,
+        maxFee: 32000000,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            'http://www.spnttw.edu.vn/',
+            'https://tuyensinhso.vn/school/dai-hoc-su-pham-nghe-thuat-trung-uong-ha-noi.html',
+            'http://tuyensinh.spnttw.edu.vn/content.aspx?sitepageid=1730',
+            'http://www.spnttw.edu.vn/articledetail.aspx?articleid=47847&sitepageid=699',
+        ],
+        mainMajor: [
+            'Music Education',
+            'Piano',
+            'Fashion Design',
+        ],
+        major: [
+            {
+                majorName: `Music production`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 32 }
+                ]
+            },
+            {
+                majorName: `Kindergarten music production`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 32 }
+                ]
+            },
+            {
+                majorName: `Art production`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 33 }
+                ]
+            },
+            {
+                majorName: `Kindergarten art production`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 33 }
+                ]
+            },
+            {
+                majorName: `Culture Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `N00`, lowestStandardScore: 30 }, { name: `H00`, lowestStandardScore: 30 }, { name: `C00`, lowestStandardScore: 18 }
+                ]
+            },
+            {
+                majorName: `Fashion Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 35.5 }
+                ]
+            },
+            {
+                majorName: `Knitting technology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `H00`, lowestStandardScore: 30 }, { name: `A01`, lowestStandardScore: 18 }, { name: `D01`, lowestStandardScore: 18 }
+                ]
+            },
+            {
+                majorName: `Graphic Design`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 38 }
+                ]
+            },
+            {
+                majorName: `Art `,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 36 }
+                ]
+            },
+            {
+                majorName: `Music `,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 36 }
+                ]
+            },
+            {
+                majorName: `Piano`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 37 }
+                ]
+            },
+            {
+                majorName: `Acting`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 28 }
+                ]
+            },
+            {
+                majorName: `Community service`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'A01', lowestStandardScore: 18 }
+                ]
+            },
+        ]
+    },
+    {
+        id: 10,
+        name: 'Hanoi University of Physical Education and Sports',
+        shortName: 'HUPES',
+        description: [
+            `Hanoi University of Physical Education and Sports is a public university established in 1961, originally known as the School of Physical Education and Sports, under the Ministry of Education and Training. It is the first institution in Vietnam tasked with training physical education teachers at the undergraduate and postgraduate levels. The university also focuses on professional development for physical education teachers, conducting research and applying physical education science, and providing national defense and security education for students of universities, colleges, and vocational schools in the Hanoi area.`
+        ],
+        city: 'Hanoi',
+        location: 'WPP6+PJJ, Phượng Bãi, Chương Mỹ, Hà Nội',
+        img: { uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6-52Ok7NEGN32qzxea6P_1YxUURkEPbdUMQ&s' },
+        admission: 400,
+        lowestStandardScore: 26,
+        highestStandardScore: 28,
+        scoreRefYear: 2023,
+        avgFee: 0,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            'https://hupes.edu.vn/danh-muc-tin/gioi-thieu.html',
+            'https://hupes.edu.vn/thong-bao-ve-viec-cong-bo-diem-chuan-trung-tuyen-dai-hoc-chinh-quy-dot-1-nam-2022.html',
+            'https://hupes.edu.vn/tan-sinh-vien-hupes-hao-hung-phan-khoi-trong-ngay-nhap-hoc.html',
+            'https://hupes.edu.vn/co-hoi-duoc-hoc-tap-va-nhan-ho-tro-chi-phi-sinh-hoat-cho-thi-sinh-dang-ky-nguyen-vong-1-vao-truong-dhsp-tdtt-ha-noi.html#:~:text=Theo%20Ngh%E1%BB%8B%20%C4%91%E1%BB%8Bnh%20s%E1%BB%91%20116,kh%C3%B4ng%20ph%E1%BA%A3i%20%C4%91%C3%B3ng%20h%E1%BB%8Dc%20ph%C3%AD.',
+            'https://vietjack.com/thong-tin-tuyen-sinh/truong-dai-hoc-su-pham-the-duc-the-thao-ha-noi.jsp',
+        ],
+        mainMajor: [
+            'Physical Education',
+        ],
+        major: [
+            {
+                majorName: `Physical Education`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'T00', lowestStandardScore: 26 }, { name: 'T02', lowestStandardScore: 26 }, { name: 'T05', lowestStandardScore: 26 }, { name: 'T08', lowestStandardScore: 26 }
+                ]
+            },
+            {
+                majorName: `Defense and security education`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: 'C00', lowestStandardScore: 28 }, { name: 'C19', lowestStandardScore: 28 }, { name: 'C20', lowestStandardScore: 28 }, { name: 'D66', lowestStandardScore: 28 }
+                ]
+            },
+        ]
+    },
+    {
+        id: 11,
+        name: 'Hanoi University of Culture',
+        shortName: 'HUC',
+        description: [
+            `Hanoi University of Culture (VHHHN), formerly known as the School of Cultural Officers, was established on March 26, 1959 under Decision No. 134/VH-QD of the Ministry of Culture (now the Ministry of Culture and Sports). and travel). During the process of development over the past 60 years, Hanoi University of Science and Technology has received many Certificates of Merit and Labor Medals from the Party, State and Government: Third-class Labor Medal (1984); Second Class Labor Medal (1989); First Class Labor Medal (1994); Third-class Independence Medal (2004) and Second-class Independence Medal (2014), the University has gradually asserted its brand as an academic center as well as a prestigious undergraduate and postgraduate training facility. leading in Vietnam in the field of culture`
+        ],
+        city: 'Hanoi',
+        location: '418 Đ. La Thành, Chợ Dừa, Đống Đa, Hà Nội',
+        img: { uri: 'https://i3.connections.vn/huc.edu.vn/userfiles/assets/HUC%207.jpg' },
+        admission: 1550,
+        lowestStandardScore: 20.7,
+        highestStandardScore: 32.93,
+        scoreRefYear: 2023,
+        avgFee: 12000000,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            'https://xaydungchinhsach.chinhphu.vn/diem-chuan-truong-dai-hoc-van-hoa-ha-noi-2023-119230822231741975.htm',
+            'https://edureview.vn/hoc-phi-truong-dai-hoc-van-hoa-ha-noi#:~:text=%C4%91%E1%BB%93ng%2Fn%C4%83m).-,H%E1%BB%8Dc%20ph%C3%AD%20n%C4%83m%202021%20%E2%80%93%202022%20c%E1%BB%A7a%20Tr%C6%B0%E1%BB%9Dng,H%E1%BB%8Dc%20V%C4%83n%20H%C3%B3a%20H%C3%A0%20N%E1%BB%99i&text=C%E1%BB%A5%20th%E1%BB%83%2C%20h%E1%BB%8Dc%20ph%C3%AD%20HUC,ph%E1%BA%A3i%20%C4%91%C3%B3ng%2010.000.000%20VN%C4%90.',
+            'https://xaydungchinhsach.chinhphu.vn/truong-dai-hoc-van-hoa-ha-noi-tuyen-sinh-dai-hoc-nam-2023-119230308231916383.htm',
+        ],
+        mainMajor: [
+            'English language',
+            'International Tourism',
+            'Journalism',
+            'Cultural Study',
+        ],
+        major: [
+            {
+                majorName: `Cultural organization and management of ethnic minority areas`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 20.7 }, { name: `D78`, lowestStandardScore: 20.7 }, { name: `D96`, lowestStandardScore: 20.7 }, { name: `A16`, lowestStandardScore: 20.7 }, { name: `A00`, lowestStandardScore: 20.7 },
+                ]
+            },
+            {
+                majorName: `Tourism organization and management of ethnic minority areas`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 21.9 }, { name: `D78`, lowestStandardScore: 21.9 }, { name: `D96`, lowestStandardScore: 21.9 }, { name: `A16`, lowestStandardScore: 21.9 }, { name: `A00`, lowestStandardScore: 21.9 },
+                ]
+            },
+            {
+                majorName: `English language`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 32.93 }, { name: `D78`, lowestStandardScore: 32.93 }, { name: `D96`, lowestStandardScore: 32.93 }, { name: `A16`, lowestStandardScore: 32.93 }, { name: `A00`, lowestStandardScore: 32.93 },
+                ]
+            },
+            {
+                majorName: `Cultural study`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 23.63 }, { name: `D78`, lowestStandardScore: 23.63 }, { name: `D96`, lowestStandardScore: 23.63 }, { name: `A16`, lowestStandardScore: 23.63 }, { name: `A00`, lowestStandardScore: 23.63 },
+                ],
+                afterGraduation: true
+            },
+            {
+                majorName: `Traditional culture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 25.18 }, { name: `D78`, lowestStandardScore: 25.18 }, { name: `D96`, lowestStandardScore: 25.18 }, { name: `A16`, lowestStandardScore: 25.18 }, { name: `A00`, lowestStandardScore: 25.18 },
+                ]
+            },
+            {
+                majorName: `Overseas culture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 23.68 }, { name: `D78`, lowestStandardScore: 23.68 }, { name: `D96`, lowestStandardScore: 23.68 }, { name: `A16`, lowestStandardScore: 23.68 }, { name: `A00`, lowestStandardScore: 23.68 },
+                ]
+            },
+            {
+                majorName: `Cultural policy and arts management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 22.96 }, { name: `D78`, lowestStandardScore: 22.96 }, { name: `D96`, lowestStandardScore: 22.96 }, { name: `A16`, lowestStandardScore: 22.96 }, { name: `A00`, lowestStandardScore: 22.96 },
+                ]
+            },
+            {
+                majorName: `Cultural heritage management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 22.23 }, { name: `D78`, lowestStandardScore: 22.23 }, { name: `D96`, lowestStandardScore: 22.23 }, { name: `A16`, lowestStandardScore: 22.23 }, { name: `A00`, lowestStandardScore: 22.23 },
+                ],
+                afterGraduation: true
+            },
+            {
+                majorName: `Organize cultural events`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 25.13 }, { name: `D78`, lowestStandardScore: 25.13 }, { name: `D96`, lowestStandardScore: 25.13 }, { name: `A16`, lowestStandardScore: 25.13 }, { name: `A00`, lowestStandardScore: 25.13 },
+                ]
+            },
+            {
+                majorName: `Journalism`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 25.85 }, { name: `D78`, lowestStandardScore: 25.85 }, { name: `D96`, lowestStandardScore: 25.85 }, { name: `A16`, lowestStandardScore: 25.85 }, { name: `A00`, lowestStandardScore: 25.85 },
+                ]
+            },
+            {
+                majorName: `Information-Library`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 20.75 }, { name: `D78`, lowestStandardScore: 20.75 }, { name: `D96`, lowestStandardScore: 20.75 }, { name: `A16`, lowestStandardScore: 20.75 }, { name: `A00`, lowestStandardScore: 20.75 },
+                ]
+            },
+            {
+                majorName: `Information Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 22.4 }, { name: `D78`, lowestStandardScore: 22.4 }, { name: `D96`, lowestStandardScore: 22.4 }, { name: `A16`, lowestStandardScore: 22.4 }, { name: `A00`, lowestStandardScore: 22.4 },
+                ],
+                afterGraduation: true
+            },
+            {
+                majorName: `Museology`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 21.83 }, { name: `D78`, lowestStandardScore: 21.83 }, { name: `D96`, lowestStandardScore: 21.83 }, { name: `A16`, lowestStandardScore: 21.83 }, { name: `A00`, lowestStandardScore: 21.83 },
+                ]
+            },
+            {
+                majorName: `Publication business`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 22 }, { name: `D78`, lowestStandardScore: 22 }, { name: `D96`, lowestStandardScore: 22 }, { name: `A16`, lowestStandardScore: 22 }, { name: `A00`, lowestStandardScore: 22 },
+                ]
+            },
+            {
+                majorName: `Law`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 24.17 }, { name: `D78`, lowestStandardScore: 24.17 }, { name: `D96`, lowestStandardScore: 24.17 }, { name: `A16`, lowestStandardScore: 24.17 }, { name: `A00`, lowestStandardScore: 24.17 },
+                ]
+            },
+            {
+                majorName: `Tourism culture`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 24.41 }, { name: `D78`, lowestStandardScore: 24.41 }, { name: `D96`, lowestStandardScore: 24.41 }, { name: `A16`, lowestStandardScore: 24.41 }, { name: `A00`, lowestStandardScore: 24.41 },
+                ]
+            },
+            {
+                majorName: `Tourism guide`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 24.8 }, { name: `D78`, lowestStandardScore: 24.8 }, { name: `D96`, lowestStandardScore: 24.8 }, { name: `A16`, lowestStandardScore: 24.8 }, { name: `A00`, lowestStandardScore: 24.8 },
+                ]
+            },
+            {
+                majorName: `International Tourism guide`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 31.4 }, { name: `D78`, lowestStandardScore: 31.4 }, { name: `D96`, lowestStandardScore: 31.4 }, { name: `A16`, lowestStandardScore: 31.4 }, { name: `A00`, lowestStandardScore: 31.4 },
+                ]
+            },
+            {
+                majorName: `Tourism Management`,
+                icon: majorDefault,
+                examGroup: [
+                    { name: `D01`, lowestStandardScore: 25.5 }, { name: `D78`, lowestStandardScore: 25.5 }, { name: `D96`, lowestStandardScore: 25.5 }, { name: `A16`, lowestStandardScore: 25.5 }, { name: `A00`, lowestStandardScore: 25.5 },
+                ]
+            },
+        ]
+    },
+    {
+        id: 12,
+        name: 'Electric Power University',
+        shortName: 'EPU',
+        description: [
+            `The predecessor of the University of Electricity was the School of Practical Engineering established in 1898. Then the School was separated into Technical School I and Technical School II. In August 1962, Technical School I changed its name to Electromechanical High School and on February 8, 1966, the Ministry of Heavy Industry decided to separate Electromechanical High School into Electrical Technical High School and Mechanical High School. gas. In July 1997, the Ministry of Industry decided to change its name to Electric High School 1. In April 2000, the Ministry of Industry decided to merge Electric High School 1 and In-Service Training School into Electric High School 1 under Vietnam Electricity Corporation (now Vietnam Electricity Group). On October 26, 2001, the Minister of Education and Training signed a decision to establish Electricity College on the basis of Electricity High School 1; After 5 years of construction and development, on May 19, 2006, the Prime Minister signed a decision to establish Electricity University on the basis of Electricity College. Implement Resolution 77 NQ-CP of the Government on innovating training mechanisms, based on many years of continuous financial autonomy in the School's activities; On September 1, 2015, the Prime Minister signed Decision No. 1508/QD-TTg approving the pilot project to innovate the operating mechanism of Electricity University for the period 2015 - 2017; On September 24, 2015, the Minister of Industry and Trade signed Decision No. 10268/QD-BCT on transferring Electricity University under Vietnam Electricity Group to the Ministry of Industry and Trade. Electricity University is a multi-level, multi-disciplinary public university whose main mission is to train high-quality human resources to supply the Industry and serve socio-economic needs and at the same time be a center The industry's leading scientific and technological research center.`
+        ],
+        city: 'Hanoi',
+        location: '235 Hoang Quoc Viet, Co Nhue, Bac Tu Liem, Hanoi',
+        img: { uri: 'https://media.licdn.com/dms/image/C511BAQFyZ2KYGtwniQ/company-background_1536_768/0/1584301319628?e=2147483647&v=beta&t=kcjJWCPFPe3HRZEPGxWL4PtZqROK_Ay8wERoYlg1b0s' },
+        admission: 3930,
+        lowestStandardScore: 18,
+        highestStandardScore: 24,
+        scoreRefYear: 2023,
+        minFee: 16000000,
+        maxFee: 20000000,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            'https://xaydungchinhsach.chinhphu.vn/diem-chuan-truong-dai-hoc-dien-luc-nam-2023-119230822175351904.html',
+            'https://epu.edu.vn/trang/thac-si-2225.html',
+            'https://laodong.vn/tuyen-sinh/hoc-phi-cac-truong-dai-hoc-tren-ca-nuoc-nam-hoc-2023-2024-1200827.ldo#:~:text=N%C4%83m%20h%E1%BB%8Dc%202023%20%2D%202024%2C%20Tr%C6%B0%E1%BB%9Dng,t%E1%BA%BF%20353.300%20%C4%91%E1%BB%93ng%2Ft%C3%ADn%20ch%E1%BB%89.',
+            'https://xaydungchinhsach.chinhphu.vn/tuyen-sinh-2024-chi-tieu-phuong-thuc-tuyen-sinh-truong-dai-hoc-dien-luc-119240228063312779.htm',
+        ],
+        mainMajor: [
+            'Electricity',
+            'Electronics',
+            'Telecommunication',
+        ],
+        major: [
+            {
+                majorName: 'Business administration',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.5 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'E-commerce',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 24 }],
+            },
+            {
+                majorName: 'Finance-banking',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.5 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Accounting',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.35 }],
+            },
+            {
+                majorName: 'Audit',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.5 }],
+            },
+            {
+                majorName: 'Information Technology',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 23.25 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'construction engineering',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 20.5 }],
+            },
+            {
+                majorName: 'Mechanical engineering ',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.3 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Mechatronics',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 23.25 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Electrical engineering',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.75 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Electronics and Telecommunication',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22.75 }],
+            },
+            {
+                majorName: 'Automation',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 23 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Energy engineering',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 20 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Environmental engineering',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 18 }],
+            },
+            {
+                majorName: 'Industrial management',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 23.5 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Energy management',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 22 }],
+                afterGraduation: true
+            },
+            {
+                majorName: 'Logistics and supply chain management',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 23.25 }],
+            },
+            {
+                majorName: 'Heat engineering',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 21.3 }],
+            },
+            {
+                majorName: 'Tourism management',
+                icon: majorDefault,
+                examGroup: [{ name: 'A01', lowestStandardScore: 21.5 }],
+            },
+        ]
+    },
+    {
+        id: 13,
+        name: 'Foreign Trade University',
+        shortName: 'FTU',
+        description: [
+            `Foreign Trade University (FTU; Vietnamese: Trường Đại học Ngoại thương) is a public university established in 1960, located in Hanoi, Vietnam, with satellite campuses in Ho Chi Minh City and Quảng Ninh.`,
+            `FTU is regarded as one of the most prestigious universities in Vietnam,[1] offering a wide range of business courses - from economics, business administration, and finance to economic law and business languages. The annual admission to FTU is the most competitive in Vietnam and applicants are required to have very high test scores. The core major of the university is International Business Economics, which attracts the most elite students in the country.`
+        ],
+        city: 'Hanoi',
+        location: '91 Chua Lang, Dong Da, Hanoi',
+        img: { uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/FTU_2011.jpg/1200px-FTU_2011.jpg' },
+        admission: 4130,
+        lowestStandardScore: 26.2,
+        highestStandardScore: 28.5,
+        scoreRefYear: 2023,
+        avgFee: 22000000,
+        unitFee: 'VND',
+        yearOrSemForFee: 'Year',
+        refURL: [
+            'https://xaydungchinhsach.chinhphu.vn/truong-dai-hoc-ngoai-thuong-cong-bo-diem-chuan-2023-119230822130248234.htm',
+            'https://mytour.vn/en/blog/bai-viet/foreign-trade-university-2022-admission-scores.html',
+        ],
+        mainMajor: [
+            'Economics',
+            'Law',
+            'Business Management',
+            'Marketing',
+            'Finance and Accounting',
+            'Language',
+        ],
+        major: [
+            
+        ]
     }
 ]

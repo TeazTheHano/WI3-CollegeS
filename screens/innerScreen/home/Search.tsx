@@ -394,7 +394,7 @@ export default function Search() {
         <View style={[styles.padding4vw, componentStyle.upperShadow, styles.w100vw, styles.positionAbsolute, { bottom: 0, left: 0, backgroundColor: clrStyle.white }]}>
           <LowBtn
             title='Apply Filter'
-            onPress={() => setResult(filterUniFnc(result, minScore, maxScore, minFee, maxFee))}
+            onPress={() => setResult(filterUniFnc(result, minScore, maxScore, minFee, maxFee, selectComb, selectField))}
             round={vw(2)}
             CustomStyle={[styles.w100]}
           />
@@ -413,16 +413,29 @@ export const searchUniFnc = (searchText: string) => {
   return filteredData
 }
 
-export const filterUniFnc = (data: any[], minScore: number, maxScore: number, minFee: number, maxFee: number) => {
+export const filterUniFnc = (data: any[], minScore: number, maxScore: number, minFee: number, maxFee: number, selectComb: string[], selectField: string[]) => {
   const filteredData = data.filter((item) => {
     if (item.lowestStandardScore) {
-      if (item.lowestStandardScore >= minScore && item.lowestStandardScore <= maxScore) {
+      if (item.lowestStandardScore >= minScore && item.lowestStandardScore <= maxScore && item.fee >= minFee && item.fee <= maxFee) {
         return true
       }
       else { return false }
     }
     else { return false }
   })
+
+  // if (selectComb.length > 0) {
+  //   return filteredData.filter((item) => {
+  //     if (item.field) {
+  //       if (selectComb.includes(item.field)) {
+  //         return true
+  //       }
+  //       else { return false }
+  //     }
+  //     else { return false }
+  //   })
+  // }
+
   return filteredData
 }
 

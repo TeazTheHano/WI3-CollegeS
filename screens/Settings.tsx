@@ -6,7 +6,7 @@ import styles, { vw } from '../assets/stylesheet'
 import { getUserInfo, removeAllUserInfo, resetPersonalData } from '../data/storageFunc'
 import { SvgXml } from 'react-native-svg'
 import { sharpRightArrow } from '../assets/svgXml'
-import { marginBottomForScrollView } from '../assets/component'
+import { avatarComponet, marginBottomForScrollView } from '../assets/component'
 import { useNavigation } from '@react-navigation/native'
 
 // import * as ImagePicker from 'expo-image-picker';
@@ -147,9 +147,7 @@ export default function Settings() {
               // open the image picker
               pickImage()
             }}>
-            <View style={[styles.borderRadius100, styles.marginHorizontal2vw, { width: vw(28), height: vw(28), backgroundColor: 'black' }]}>
-              {/* TODO: img goes here */}
-            </View>
+            {avatarComponet(vw(20), vw(20))}
           </TouchableOpacity>
           <Nunito18Bold style={[{ color: clrStyle.black }]}>Hello, {userInfo?.name}</Nunito18Bold>
           <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Welcome back!</Nunito14Reg>

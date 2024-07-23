@@ -7,7 +7,7 @@ import styles, { vh, vw } from '../../../assets/stylesheet'
 import { SvgXml } from 'react-native-svg'
 import { marginBottomForScrollView } from '../../../assets/component'
 import { CompareMajorItem, examGroupList } from '../../../data/data'
-import { getCompareData, getWishlist, saveCompareData, saveCompareDataWithAlert, saveWishlist, updateWishlist } from '../../../data/storageFunc'
+import { getCompareData, getWishlist, saveCompareData, saveCompareDataWithAlert, saveGoalMajor, saveWishlist, updateWishlist } from '../../../data/storageFunc'
 
 export default function MajorDetail({ route }: any) {
     const { major, uniItem } = route.params
@@ -42,7 +42,7 @@ export default function MajorDetail({ route }: any) {
                 contentContainerStyle={[styles.flexCol, styles.gap4vw]}
                 style={[styles.flex1, styles.padding4vw]}>
                 {/* banner */}
-                <View style={[styles.flexRowEvenlyCenter, styles.padding4vw, styles.gap4vw, styles.flex1]}>
+                <View style={[styles.flexRowEvenlyCenter, styles.paddingV4vw, styles.gap4vw, styles.flex1]}>
                     {major.icon ? major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(31), height: vw(35), borderRadius: vw(1) }} />}
                     <View style={[styles.flexColBetweenCenter, styles.flex1, styles.h100, styles.gap2vw]}>
                         {/* major */}
@@ -52,7 +52,7 @@ export default function MajorDetail({ route }: any) {
                                 <Nunito14Reg style={[{ color: clrStyle.grey2 }]}>Major</Nunito14Reg>
                             </View>
                             {/* TODO: chuyen nganh */}
-                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.majorName}</Nunito14Bold>
+                            <Nunito14Bold style={[styles.flex1, { color: clrStyle.grey3 }]}>{major.field ? major.field : `N/A`}</Nunito14Bold>
                         </View>
                         {/* exam group */}
                         <View style={[styles.flexRowBetweenCenter, styles.gap1vw, styles.flex1, styles.w100]}>
@@ -153,8 +153,20 @@ export default function MajorDetail({ route }: any) {
                     }) :
                         <Nunito14Bold style={[styles.paddingH4vw, { color: clrStyle.grey3 }]}>Recruitment</Nunito14Bold>
                     }
+                    <View style={[styles.padding4vw]}>
+                        <LowBtn
+                            CustomStyle={{ backgroundColor: clrStyle.main9 }}
+                            title='Add to your GOAL'
+                            onPress={() => {
+                                saveGoalMajor(uniItem.name, major).then((res) => {
+                                    if (res) {
+                                        Alert.alert('Success', 'Add to your GOAL successfully')
+                                    }
+                                })
+                            }}
+                        />
+                    </View>
                 </View>
-
                 {marginBottomForScrollView(2)}
             </ScrollView>
             <View style={[styles.padding4vw, componentStyle.upperShadow, { backgroundColor: clrStyle.white }]}>

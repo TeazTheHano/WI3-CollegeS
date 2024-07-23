@@ -7,7 +7,7 @@ import { SvgXml } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
 import { getCompareData } from '../data/storageFunc'
 import { CompareMajorItem } from '../data/data'
-import { editIcon, infoIcon, xIcon } from '../assets/svgXml'
+import { editIcon, infoIcon, majorDefault, xIcon } from '../assets/svgXml'
 import { formatNumber, marginBottomForScrollView } from '../assets/component'
 
 import * as Progress from 'react-native-progress';
@@ -44,12 +44,11 @@ export default function Compare() {
               <TouchableOpacity
                 style={[styles.flexRowBetweenCenter, styles.padding10, styles.paddingV4vw, styles.w100, styles.borderRadius3vw, styles.shadowW0H2Black, { backgroundColor: clrStyle.white, borderBottomWidth: 1, borderBottomColor: clrStyle.grey1 }]}
                 onPress={() => {
-                  // TODO: fix the uniItem to fit the MajorDetail screen requirement
                   navigation.navigate(`MajorDetail`, { major: compareItem.major, uniItem: compareItem.uniItem })
                 }}>
 
                 <View style={[styles.flexRowBetweenCenter, styles.gap2vw, styles.flex1]}>
-                  {compareItem.major.icon ? compareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
+                  {compareItem.major.icon ? compareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }}>{majorDefault(vw(16.5), vw(16.5))}</View>}
                   <View style={[styles.flex1, styles.flexCol, styles.gap2vw]}>
                     <Nunito20Bold style={{ color: clrStyle.grey3, }}>{compareItem.major.majorName}</Nunito20Bold>
                     <Nunito16Reg style={{ color: clrStyle.grey2, }}>{compareItem.uniItem.name} {compareItem.major.field ? `- ${compareItem.major.field}` : null}</Nunito16Reg>
@@ -133,7 +132,7 @@ export default function Compare() {
                 {/* icon */}
                 <View style={[styles.shadowW0H05Black, styles.flexColCenter, styles.gap2vw, { borderRadius: vw(2), backgroundColor: clrStyle.white }]}>
                   <View style={[styles.flexColCenter, styles.gap1vw, styles.paddingTop2vw, styles.paddingH1vw, { borderTopLeftRadius: vw(2), borderTopRightRadius: vw(2) }]}>
-                    {inCompareItem.major.icon ? inCompareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ backgroundColor: clrStyle.grey2, width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }} />}
+                    {inCompareItem.major.icon ? inCompareItem.major.icon(vw(16.5), vw(16.5)) : <View style={{ width: vw(16.5), height: vw(16.5), borderRadius: vw(1) }}>{majorDefault(vw(16.5), vw(16.5))}</View>}
                     <Nunito12Reg lineNumber={2} style={[styles.textCenter, { color: clrStyle.grey2 }]}>{inCompareItem.uniItem.name}</Nunito12Reg>
                     <Nunito14Med lineNumber={2} style={[styles.textCenter, { color: clrStyle.grey3 }]}>{inCompareItem.major.majorName}</Nunito14Med>
                   </View>

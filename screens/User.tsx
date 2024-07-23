@@ -2,7 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { BottomBar, Nunito14Bold, Nunito16Bold, Nunito16Reg, Nunito18Bold, Nunito20Bold, SaveViewWithColorStatusBar, TopNav } from '../assets/Class'
 import clrStyle from '../assets/componentStyleSheet'
-import { getUserInfo, getWishlist } from '../data/storageFunc'
+import { getGoalMajor, getUserInfo, getWishlist } from '../data/storageFunc'
 import styles, { vw } from '../assets/stylesheet'
 import { bestOfScCoIcon, curveRightArrow, ENTJicon, MBTIIcon, wishListIcon } from '../assets/svgXml'
 import { useNavigation } from '@react-navigation/native'
@@ -30,6 +30,11 @@ export default function User() {
         setWishList(res)
       }
     })
+    getGoalMajor().then((res) => {
+      if (res) {
+        setGoalItem(res)
+      }
+    })
   }, [userInfo])
 
   const [mbtiIcon, setMbtiIcon] = useState<any>(null)
@@ -44,7 +49,7 @@ export default function User() {
     {
       title: 'MBTI', icon: mbtiIcon, data: userInfo?.data?.persona, navTo: 'Persona'
     },
-    { title: 'Goal', icon: bestOfScCoIcon(), data: userInfo?.data?.goal, navTo: 'Persona' },
+    { title: 'Goal', icon: bestOfScCoIcon(), data: goalItem ? goalItem.major.majorName : userInfo?.data?.goal, navTo: '' },
     { title: 'Wishlist', icon: wishListIcon(), data: `${wishList.length} major(s)`, navTo: 'Wishlist' },
   ]
 
